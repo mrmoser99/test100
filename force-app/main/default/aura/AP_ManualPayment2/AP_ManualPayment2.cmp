@@ -4,7 +4,7 @@
     <aura:attribute name="processing" type="Boolean" default="false"/>        
     <aura:attribute name="recordId" type="String" />  
     <aura:attribute name="InvoiceId" type="String"/>
-    <aura:attribute name="isInvalid" type="Boolean" default="false"/>
+    <aura:attribute name="isInvalid" type="Boolean" default="false"/> 
  
     
     <lightning:notificationsLibrary aura:id="notifLib"/>
