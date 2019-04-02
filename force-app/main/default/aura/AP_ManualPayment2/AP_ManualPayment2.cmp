@@ -22,7 +22,7 @@
                 <lightning:input aura:id="paymentDate" type="date" label="Payment Date" required="true"
                                 messageWhenValueMissing="Payment Date is Required!"  messageWhenBadInput="Payment Date is invalid!"/>
                 <lightning:input aura:id="checkNumber" type="text" label="Check Number" required="true"
-                                messageWhenValueMissing="Check is Required!"/>
+                                messageWhenValueMissing="Check is Required!"/>    
                 <lightning:input aura:id="checkAmount" type="number" label="Check Amount" required="true" formatter="currency" step="0.01"
                                 messageWhenValueMissing="Check Amount is Required!" messageWhenBadInput="Check Amount is invalid!"/>
 
