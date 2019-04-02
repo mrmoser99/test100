@@ -9,7 +9,7 @@
     
     <lightning:notificationsLibrary aura:id="notifLib"/>
 
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>  
      
     <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Invoice__c" >
             
@@ -18,7 +18,7 @@
                 <lightning:messages /> 
               
                 <lightning:outputField fieldName="Name" />  
-                
+
                 <lightning:outputField fieldName="Balance_Due_Amount__c" />
                 <lightning:input aura:id="paymentDate" type="date" label="Payment Date" required="true"
                                 messageWhenValueMissing="Payment Date is Required!"  messageWhenBadInput="Payment Date is invalid!"/>
