@@ -1,0 +1,8 @@
+<aura:component description="New Customer Button" implements="forceCommunity:availableForAllPageTypes" access="global">
+
+    <lightning:navigation aura:id="nav"/>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:button name="modal" iconName="utility:add" label="New Customer" onclick="{!c.handleShowModal}"/>
+
+</aura:component>

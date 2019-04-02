@@ -1,0 +1,21 @@
+<apex:page standardController="Account">
+  <script>
+ var profileName = '{!$Profile.Name}';
+ var recordType = '{!$CurrentPage.parameters.RecordType}';
+ var retURL = '{!$CurrentPage.parameters.retURL}';
+      if(profileName!='Newco Dealer'){
+          var retrunURL= '/001/e?retURL='+retURL+'&ent=Account&nooverride=1';
+          if(recordType!= '' && recordType!=null){
+            retrunURL = retrunURL+'&RecordType='+recordType;
+          }
+         
+          window.location.href = retrunURL;
+
+      }
+      else{
+        alert("You don't have access to create Application from Application Page.");
+        window.location.href = '/001/o';
+      
+      }   
+</script>
+</apex:page>

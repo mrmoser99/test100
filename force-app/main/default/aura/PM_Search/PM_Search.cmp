@@ -1,0 +1,26 @@
+<aura:component >
+     <aura:attribute name="options" type="List" default="[
+   				 {'label': 'Active', 'value': 'option1'},
+    			 {'label': 'All', 'value': 'option2'}]"/>
+            
+    <aura:attribute name="value" type="String" default="option1"/>
+ 
+	 <lightning:card title="Search" iconName="standard:search" >
+        <div >
+            
+            <lightning:formattedUrl aura:id="lease" type="text" label="Lease Number" required="false" />
+            <lightning:input aura:id="name" type="text" label="Customer Name" required="false"/>
+            <lightning:input aura:id="acct" type="text" label="Customer Account Number" required="false"/>
+            <lightning:input aura:id="serial" type="text" label="Equipment Serial Number" required="false"/>
+            
+           
+    		<lightning:radioGroup name="radioGroup"
+                          label="Radio Group"
+                          options="{! v.options }"
+                          value="{! v.value }"
+                          type="radio"/>
+            
+            <lightning:button class="slds-m-top_large" label="Search" />
+        </div>
+    </lightning:card>
+</aura:component>

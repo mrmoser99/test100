@@ -1,0 +1,25 @@
+.THIS .slds-resizable__divider{
+    display: none;
+}
+.THIS .slds-resizable__handle{
+    display: none;
+}
+.THIS .slds-th__action-button{
+    display: none;
+}
+.THIS .title-center{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+@media (max-width: 767px){
+    .THIS .small-full-width{
+        width: 100%;
+    }
+    .THIS .overflow-scroll{
+        width: 100%;
+        overflow: scroll !important;
+    }
+    .THIS .slds-path{
+        min-width: 40rem;
+    }
+}

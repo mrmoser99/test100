@@ -1,0 +1,89 @@
+<!--
+ - Created by samuelmeyers on 11/8/18.
+ -->
+
+<aura:component description="FMZ_CallToAction" implements="forceCommunity:availableForAllPageTypes"
+                controller="FMZ_QuickActionController" access="global">
+
+    <aura:attribute name="sections" type="List" />
+    <aura:attribute name="selectedSection" type="String"/>
+    <aura:attribute name="processing" type="Boolean" default="true"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
+    <div>
+        <lightning:layout horizontalAlign="space" multipleRows="true">
+            <!--aura:iteration var="section" items="{!v.sections}"-->
+                <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="{!(v.sections[0].name == v.selectedSection) ? 'card-style-selected' : 'card-style'}" onclick="{!c.selectSection}" data-value="{!v.sections[0].name}">
+                        <div style="height:10rem; overflow:hidden" class="slds-align_absolute-center">
+                            <img src="{!$Resource.FMZ_CTA_Fund_Image }" style="height:100%; max-width:none"/>
+                        </div>
+                        <div >
+                            <div class="slds-grid slds-grid_align-center slds-text-heading_medium slds-m-around_small">
+                                <span class="slds-truncate">{!v.sections[0].label}</span>
+                                <span class="slds-no-flex">{!' - ' + v.sections[0].items.length}</span>
+                            </div>
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="{!(v.sections[1].name == v.selectedSection) ? 'card-style-selected' : 'card-style'}" onclick="{!c.selectSection}" data-value="{!v.sections[1].name}">
+                        <div style="height:10rem; overflow:hidden" class="slds-align_absolute-center">
+                            <img src="{!$Resource.FMZ_CTA_EditApp_Image}" style="height:100%; max-width:none"/>
+                        </div>
+                        <div >
+                            <div class="slds-grid slds-grid_align-center slds-text-heading_medium slds-m-around_small">
+                                <span class="slds-truncate">{!v.sections[1].label}</span>
+                                <span class="slds-no-flex">{!' - ' + v.sections[1].items.length}</span>
+                            </div>
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                    <div class="{!(v.sections[2].name == v.selectedSection) ? 'card-style-selected' : 'card-style'}" onclick="{!c.selectSection}" data-value="{!v.sections[2].name}">
+                        <div style="height:10rem; overflow:hidden" class="slds-align_absolute-center">
+                            <img src="{!$Resource.FMZ_CTA_ConvertCA_Image}" style="height:100%; max-width:none"/>
+                        </div>
+                        <div >
+                            <div class="slds-grid slds-grid_align-center slds-text-heading_medium slds-m-around_small">
+                                <span class="slds-truncate">{!v.sections[2].label}</span>
+                                <span class="slds-no-flex">{!' - ' + v.sections[2].items.length}</span>
+                            </div>
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            <!--/aura:iteration-->
+        </lightning:layout>
+
+        <aura:iteration var="section" items="{!v.sections}">
+            <aura:if isTrue="{!section.name == v.selectedSection}">
+                <lightning:card class="slds-m-around_small">
+                    <aura:set attribute="title">
+                        {!section.items.length > 0 ? section.title : section.emptyListMessage}
+                    </aura:set>
+                    <aura:if isTrue="{! section.items.length > 0}" >
+                        <div class="slds-m-around_medium height-scroll">
+                            <lightning:datatable
+                            data="{!section.items}"
+                            columns="{! section.columns}"
+                            keyField="id"
+                            hideCheckboxColumn="true"
+                            onrowaction="{! c.handleRowAction }"/>
+                        </div>
+                    </aura:if>
+                </lightning:card>
+            </aura:if>
+        </aura:iteration>
+
+
+        <aura:if isTrue="{!v.processing}">
+            <div class="slds-is-relative" style="height:175px;">
+                <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

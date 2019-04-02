@@ -1,0 +1,147 @@
+<aura:component controller="FMZ_ApplicationSummaryController">
+
+    <aura:attribute name="applicationId" type="Id" required="true"/>
+    <aura:attribute name="recalculating" type="Boolean" default="false"/>
+    <aura:attribute name="pricingMessage" type="String"/>
+
+    <aura:attribute name="application" type="Object" access="private"/>
+    <aura:attribute name="billing" type="Object" access="private"/>
+    <aura:attribute name="locations" type="List" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <aura:method name="updateView"/>
+
+    <div class="slds-card slds-p-around_small">
+
+        <table class="slds-m-top_small slds-table">
+            <tr>
+                <td colspan="2">
+                    <div class="slds-text-heading--small slds-text-color_success">ORDER SUMMARY</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold" style="width:10rem;vertical-align:top;">Customer</td>
+                <td>
+                    <p class="slds-truncate slds-cell-wrap" title="{!v.application.genesis__Account__r.Name}">{!v.application.genesis__Account__r.Name}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold slds-align-top">Bill To</td>
+                <td>
+                    <div>{!v.billing.Address_Line_1__c}</div>
+                    <div class="slds-p-bottom_x-small">{!v.billing.City__c},{!' '}{!v.billing.State__c}{!' '}{!v.billing.Zip_Code__c}</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold slds-align-top">Install Locations</td>
+                <td>
+                    <aura:iteration items="{!v.locations}" var="l">
+                        <div>{!l.Address_Line_1__c}</div>
+                        <div class="slds-p-bottom_x-small">{!l.City__c},{!' '}{!l.State__c}{!' '}{!l.Zip_Code__c}</div>
+                    </aura:iteration>
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold">Equipment</td>
+                <td>
+                    {!v.application.No_of_Equipments__c}&nbsp;Units
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold">Lease Term</td>
+                <td>
+                    {!v.application.genesis__Term__c}&nbsp;
+					{!v.application.genesis__Payment_Frequency__c == 'MONTHLY' ? ' Months' :
+					v.application.genesis__Payment_Frequency__c == 'QUARTERLY' ? ' Quarters' :
+					v.application.genesis__Payment_Frequency__c == 'ANNUAL' ? ' Years' : ''}
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold">Rate Factor</td>
+                <td>
+                    <lightning:formattedNumber value="{!v.application.Pricing_Rate_Factor__c}"
+                                               minimumIntegerDigits="1" minimumFractionDigits="8"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold">First Payment Due</td>
+                <td>
+                    <lightning:formattedDateTime value="{!v.application.genesis__Expected_First_Payment_Date__c}"
+                                                 year="numeric" month="2-digit" day="2-digit"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="slds-text-heading--small slds-text-color_success slds-m-top_medium">
+						{!(empty(v.application.genesis__Payment_Frequency__c) ? '' : v.application.genesis__Payment_Frequency__c + ' ') + 'PRICE'}
+					</div>
+                </td>
+            </tr>
+            <!--<tr>-->
+                <!--<td class="slds-text-title_bold new-highlight" style="width:10rem;">Equipment</td>-->
+                <!--<td class="new-highlight">-->
+                    <!--<lightning:formattedNumber value="{!v.application.Pre_Upfront_Tax_Payment_Amount1__c}"-->
+                                               <!--style="currency" currencyCode="USD"/>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <tr>
+                <td class="slds-text-title_bold new-highlight">Services</td>
+                <td class="new-highlight">
+                    <lightning:formattedNumber value="{!v.application.Service_Fee__c}"
+                                               style="currency" currencyCode="USD"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold slds-text-color_success new-highlight">Lease Payment</td>
+                <td class="slds-text-title_bold slds-text-color_success new-highlight">
+                    <lightning:formattedNumber value="{!v.application.Total_Lease_Payment__c}"
+                                               style="currency" currencyCode="USD"/><!-- include v.application.Pre_Upfront_Tax_Payment_Amount1__c +  -->
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold new-highlight">Estimated Property Tax</td>
+                <td class="new-highlight">
+                    <lightning:formattedNumber value="{!v.application.Total_Estimated_Property_Tax__c}"
+                                               style="currency" currencyCode="USD"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="slds-text-title_bold new-highlight">Insurance</td>
+                <td class="new-highlight">
+                    <lightning:formattedNumber value="{!v.application.Total_Insurance_Fees__c}"
+                                               style="currency" currencyCode="USD"/>
+                </td>
+            </tr>
+            <!--<tr>-->
+                <!--<td class="slds-text-title_bold new-highlight">Financed Sales Tax</td>-->
+                <!--<td class="new-highlight">-->
+                    <!--<lightning:formattedNumber value="{!sub(v.application.Pre_Upfront_Tax_Payment_Amount__c,v.application.Pre_Upfront_Tax_Payment_Amount1__c)}"-->
+                                               <!--style="currency" currencyCode="USD"/>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <tr>
+                <td class="slds-text-title_bold slds-text-color_success new-highlight">Invoice Total</td>
+                <td class="slds-text-title_bold slds-text-color_success new-highlight">
+                    <lightning:formattedNumber value="{!v.application.Total_Insurance_Fees__c+v.application.Service_Fee__c+v.application.Total_Estimated_Property_Tax__c}"
+                                               style="currency" currencyCode="USD"/><!-- include v.application.Pre_Upfront_Tax_Payment_Amount__c -->
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="slds-is-relative">
+                    <aura:if isTrue="{!v.recalculating}">
+                        Recalculating...
+                        <lightning:spinner alternativeText="Recalculating" variant="brand" size="small"/>
+                    </aura:if>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="slds-text-title slds-text-title_bold slds-text-color_error" style="white-space:normal;">{!v.pricingMessage}</div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</aura:component>

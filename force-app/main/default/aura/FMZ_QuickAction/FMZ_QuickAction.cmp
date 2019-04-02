@@ -1,0 +1,46 @@
+<!--
+ - Created by samuelmeyers on 11/8/18.
+ -->
+
+<aura:component description="FMZ_QuickAction" implements="forceCommunity:availableForAllPageTypes"
+                controller="FMZ_QuickActionController" access="global">
+
+    <aura:attribute name="sections" type="List" />
+    <aura:attribute name="processing" type="Boolean" default="true"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
+    <lightning:accordion aura:id="accordion" activeSectionName="{!v.sections[0].name}" allowMultipleSectionsOpen="true">
+        <aura:iteration var="section" items="{!v.sections}">
+            <lightning:accordionSection name="{!section.name}" label="{!section.label + ' - ' + section.items.length}">
+                <aura:set attribute="body">
+                    <lightning:card>
+                        <aura:set attribute="title">
+                            <aura:if isTrue="{!not(empty(section.imageSource))}">
+                                <img src="{!section.imageSource}" class="rounded-corners slds-m-right_medium"/>
+                            </aura:if>
+                            {!section.items.length > 0 ? section.title : section.emptyListMessage}
+                        </aura:set>
+                        <aura:if isTrue="{! section.items.length > 0}" >
+                            <div class="slds-m-around_medium height-scroll">
+                                <lightning:datatable
+                                        data="{!section.items}"
+                                        columns="{! section.columns}"
+                                        keyField="id"
+                                        hideCheckboxColumn="true"
+                                        onrowaction="{! c.handleRowAction }"/>
+                            </div>
+                        </aura:if>
+                    </lightning:card>
+                </aura:set>
+            </lightning:accordionSection>
+        </aura:iteration>
+        <aura:if isTrue="{!v.processing}">
+            <div class="slds-is-relative" style="height:175px;">
+                <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+            </div>
+        </aura:if>
+    </lightning:accordion>
+</aura:component>

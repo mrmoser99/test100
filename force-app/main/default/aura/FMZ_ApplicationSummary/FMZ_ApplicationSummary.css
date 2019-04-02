@@ -1,0 +1,12 @@
+.THIS {
+}
+
+.THIS.new-item .new-highlight {
+    animation-name: yellowfade;
+    animation-duration: 4s;
+}
+
+@keyframes yellowfade {
+    from { background: yellow }
+    to { background: transparent; }
+}

@@ -1,0 +1,14 @@
+.THIS {
+}
+.THIS .slds-file-selector__dropzone {
+    border: none;
+    padding: 0;
+    height: 30px;
+}
+.THIS .slds-file-selector__text {
+    display: none;
+}
+.THIS .slds-file-selector__button {
+    max-height: 32px;
+    height: 32px;
+}

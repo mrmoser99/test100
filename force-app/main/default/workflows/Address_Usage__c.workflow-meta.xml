@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Address_Bill_To_Update</fullName>
+        <field>Bill_To_Usage__c</field>
+        <literalValue>1</literalValue>
+        <name>Address Bill To Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <targetObject>Address__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Bill_To</fullName>
+        <field>Bill_To_Usage__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Bill To</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <targetObject>Address__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Address_Install_At</fullName>
+        <field>Install_At__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Address Install At</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <targetObject>Address__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Address_Marketing</fullName>
+        <field>Marketing__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Address Marketing</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <targetObject>Address__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Address_Paid_To</fullName>
+        <field>Pay_To__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Address Paid To</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <targetObject>Address__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Address_Ship_To</fullName>
+        <field>Ship_To__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Address Ship To</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <targetObject>Address__c</targetObject>
+    </fieldUpdates>
+    <rules>
+        <fullName>Update Address Bill To</fullName>
+        <actions>
+            <name>Address_Bill_To_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Address_Usage__c.Usage__c</field>
+            <operation>equals</operation>
+            <value>Bill To</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Address Install At</fullName>
+        <actions>
+            <name>Update_Address_Install_At</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Address_Usage__c.Usage__c</field>
+            <operation>equals</operation>
+            <value>Install At</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Address Marketing</fullName>
+        <actions>
+            <name>Update_Address_Marketing</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Address_Usage__c.Usage__c</field>
+            <operation>equals</operation>
+            <value>Marketing</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Address Paid To</fullName>
+        <actions>
+            <name>Update_Address_Paid_To</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Address_Usage__c.Usage__c</field>
+            <operation>equals</operation>
+            <value>Paid To</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Address Ship To</fullName>
+        <actions>
+            <name>Update_Address_Ship_To</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Address_Usage__c.Usage__c</field>
+            <operation>equals</operation>
+            <value>Ship To</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

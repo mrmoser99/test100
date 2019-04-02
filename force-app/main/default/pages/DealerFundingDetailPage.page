@@ -1,0 +1,21 @@
+<apex:page standardController="cllease__Dealer_Funding_Detail__c" extensions="DealerFundingDetailController">
+	<apex:sectionHeader title="New Dealer Funding Detail" subtitle="Dealer Funding Detail Edit"/>
+	<apex:form >
+		<apex:pageBlock title="Dealer Funding Details Edit" >
+			<apex:pageMessages id="msgId"/>
+			<apex:pageBlockSection title="Information" collapsible="false">
+				<apex:inputField value="{!dealerFundDetailsObj.cllease__Contract__c}"/>
+				<apex:outputField value="{!contractEquipment.Name}"/>
+				<apex:outputField value="{!contractEquipment.Net_Trade_Up_Amount__c}"/>
+				<!--<apex:inputField value="{!eqObj.Balance_Net_Trade_Up_Amount__c}"/>-->
+				<apex:inputField value="{!dealerFundDetailsObj.cllease__Dealer__c}"/>
+				<apex:inputField value="{!dealerFundDetailsObj.cllease__dealer_funded__c}"/>
+				<apex:outputField value="{!dealerFundDetailsObj.cllease__Dealer_Charges__c}"/>
+			</apex:pageBlockSection>
+			<apex:pageBlockButtons >
+ 				<apex:commandButton action="{!save}" value="Save" rerender="msgId"/>
+ 				<apex:commandButton action="{!cancel}" value="Cancel"/>
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page standardController="cllease__Lease_Account__c" extensions="EXExposureController" action="{!showExposure}">
+<style>
+.msgError { color:red; font-weight: strong;}  
+</style> 
+	<apex:messages styleClass="msgError"/>
+</apex:page>

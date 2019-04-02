@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <tabs>standard-Chatter</tabs>
+    <tabs>standard-UserProfile</tabs>
+    <tabs>standard-CollaborationGroup</tabs>
+    <tabs>standard-File</tabs>
+    <tabs>standard-Lead</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-Opportunity</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-Product2</tabs>
+    <tabs>standard-Forecasting3</tabs>
+    <tabs>clcommon__Address__c</tabs>
+    <tabs>clcommon__Delivery_Detail__c</tabs>
+    <tabs>Int_Facility__c</tabs>
+    <tabs>Int_Delivery_Control__c</tabs>
+    <tabs>clcommon__NavigationStructure__c</tabs>
+    <tabs>collect__Source_System__c</tabs>
+    <tabs>clcommon__Expression_Assignment__c</tabs>
+    <tabs>clcommon__ComponentStructure__c</tabs>
+    <tabs>standard-WaveHome</tabs>
+    <tabs>ints__Equipment__c</tabs>
+    <tabs>genesis__Application_Pricing_Detail__c</tabs>
+</CustomApplication>

@@ -1,0 +1,7 @@
+<apex:page standardController="ICS_Application__c" extensions="ICSApplicationExtension" action="{!declinelos}">
+<style>
+.msgError { color:red; font-weight: strong;}
+</style> 
+	<apex:messages styleClass="msgError"/>
+	<apex:detail subject="{!ICS_Application__c.id}" relatedList="true"/>
+</apex:page>

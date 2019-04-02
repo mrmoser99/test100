@@ -1,0 +1,86 @@
+.THIS {
+
+}
+.THIS.main-bg {
+
+    background: #b8e1fc; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+}
+
+.THIS.steps {
+    list-style-type: none;
+    padding: 0;
+}
+.THIS.steps li {
+    display: inline-block;
+    margin-bottom: 3px;
+}
+.THIS.steps li a,
+.THIS.steps li p {
+    background: #e5f4fd;
+    padding: 8px 20px;
+    color: #0077bf;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    text-indent: 12px;
+}
+.THIS.steps li a:hover,
+.THIS.steps li p:hover {
+    text-decoration: none;
+}
+.THIS.steps li a:before,
+.THIS.steps li p:before {
+    border-bottom: 18px solid transparent;
+    border-left: 12px solid #fff;
+    border-top: 18px solid transparent;
+    content: "";
+    height: 0;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    margin-top: -18px;
+}
+.THIS.steps li a:after,
+.THIS.steps li p:after {
+    border-bottom: 18px solid transparent;
+    border-left: 12px solid #e5f4fd;
+    border-top: 18px solid transparent;
+    content: "";
+    height: 0;
+    position: absolute;
+    /*right: -12px;*/
+    left:100%;
+    top: 50%;
+    width: 0;
+    margin-top: -18px;
+    z-index: 1;
+}
+.THIS.steps li.active a,
+.THIS.steps li.active p {
+    background: #0077bf;
+    color: #fff;
+}
+.THIS.steps li.active a:after,
+.THIS.steps li.active p:after {
+    border-left: 12px solid #0077bf;
+}
+.THIS.steps li.undone a,
+.THIS.steps li.undone p {
+    background: #eee;
+    color: #333;
+}
+.THIS.steps li.undone a:after,
+.THIS.steps li.undone p:after {
+    border-left: 12px solid #eee;
+}
+.THIS.steps li.undone p {
+    color: #aaa;
+}

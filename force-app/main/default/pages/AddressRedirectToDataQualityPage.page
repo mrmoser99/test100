@@ -1,0 +1,7 @@
+<apex:page showHeader="false" sidebar="false"
+ standardController="Address__c"
+extensions="EDQ.RedirectToDataQualityPageController"
+ action="{!Execute}">
+<EDQ:RedirectToDataQualityPage RedirectToDataQualityPage="{!RedirectToDataQualityPage}"
+ DataQualityPageUrl="{!DataQualityPageUrl}" />
+</apex:page>

@@ -1,0 +1,13 @@
+/**
+ * Created by samuelmeyers on 11/20/18.
+ */
+.THIS .container {
+    border-radius: 5px;
+    border: 1px solid #d8dde6;
+    margin: 2px;
+}
+
+.THIS .container-selected {
+    border-radius: 5px;
+    border: 3px solid #2bcaff;
+}

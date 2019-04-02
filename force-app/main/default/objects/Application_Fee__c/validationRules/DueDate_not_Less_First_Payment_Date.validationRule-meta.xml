@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DueDate_not_Less_First_Payment_Date</fullName>
+    <active>false</active>
+    <errorConditionFormula>Start_Date__c  &lt;  Application__r.genesis__Expected_First_Payment_Date__c</errorConditionFormula>
+    <errorMessage>Due Date Cannot be Less than First Payment Date AND Cannot be Greater than Maturity Date</errorMessage>
+</ValidationRule>

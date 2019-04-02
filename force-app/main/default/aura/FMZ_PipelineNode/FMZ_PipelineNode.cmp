@@ -1,0 +1,30 @@
+<aura:component>
+    <aura:attribute name="value" type="String" required="true" />
+    <aura:attribute name="label" type="String" required="true" />
+    <aura:attribute name="variant" type="String" default="default" description="Options: default, weak, success, error" />
+    <aura:attribute name="isFirst" type="Boolean" default="false" />
+            <div class="slds-grid slds-grid_align-space full-width">
+                <div class="slds-grid slds-grid_align-space slds-has-flexi-truncate">
+                    <div class="slds-col slds-size_1-of-6">
+                        <div class="divider">
+                            <div class="divider-4"></div>
+                            <div class="divider-1"></div>
+                            <div class="divider-2"></div>
+                            <div class="divider-3"></div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-6 slds-align_absolute-center">
+                        <p class="{!'slds-truncate slds-text-heading_small slds-text-color_' + v.variant}">
+                            {!v.label}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6 slds-align_absolute-center">
+                        <p class="{!'slds-text-heading_small slds-text-color_' + v.variant}">
+                            {!v.value}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <!--/lightning:layoutItem>
+    </lightning:layout-->
+</aura:component>

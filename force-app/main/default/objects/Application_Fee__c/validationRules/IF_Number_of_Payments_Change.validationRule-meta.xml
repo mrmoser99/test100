@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IF_Number_of_Payments_Change</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(AND(ISPICKVAL(Service_Escalate__c, &#39;YES&#39;), ISPICKVAL(Frequency__c, &#39;ONE Time&#39;)),
+   AND(ISPICKVAL(Service_Escalate__c, &#39;YES&#39;),ISBLANK(TEXT(Escalation_Frequency__c)),NOT(ISNEW()))
+  )</errorConditionFormula>
+    <errorMessage>Changes Not Allowed on those Fields please Delete the Fee and Create New Fee</errorMessage>
+</ValidationRule>

@@ -1,0 +1,3 @@
+<apex:page title="PDF Generator" controller="FMZ_PDFGeneratorController">
+    {!content}
+</apex:page>

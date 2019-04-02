@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ICV_Contract_Performance_Party__c</fullName>
+    <externalId>false</externalId>
+    <label>ICV Contract Performance Party</label>
+    <referenceTo>ICV_Contract_Performance_Party__c</referenceTo>
+    <relationshipName>ICV_Contract_Peformance_Party_Commitment</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

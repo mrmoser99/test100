@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>More_than_15_Percent_on_Escalation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPICKVAL(Escalation_Type__c, &#39;Percent %&#39;), Escalation_Value__c &gt; 15)</errorConditionFormula>
+    <errorMessage>Escalation Value cannot be greater than 15%</errorMessage>
+</ValidationRule>

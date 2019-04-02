@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Composer_Invoice</fullName>
+    <availability>online</availability>
+    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://apxtconga4.cs66.visual.force.com/a2k1I000000Bz7fQAC
+25-Jul-2018 04:00:28 AM</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>false</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>660</height>
+    <isResizable>false</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Invoice</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/apex/APXTConga4__Conga_Composer?SolMgr=1
+&amp;serverUrl={!API.Partner_Server_URL_370}
+&amp;Id={!Invoice__c.Id}
+
+&amp;QueryId=[INV]a2e1I000000Qam7,
+[DueDetailsLines]a2e1I000000Qam4,
+[AD]a2e1I000000Qam2,
+[INSFEE]a2e1I000000Qam9,
+[OrigFee]a2e1I000000Qam8,
+[InterimRent]a2e1I000000Qam5,
+[LateFee]a2e1I000000QamA,
+[FinanceFee]a2e1I000000Qam6,
+[EC]a2e1I000000Qalp
+
+&amp;TemplateId=a2m1I000000hEEP</url>
+    <width>900</width>
+</WebLink>

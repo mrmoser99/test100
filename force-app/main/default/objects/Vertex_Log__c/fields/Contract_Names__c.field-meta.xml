@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Names__c</fullName>
+    <description>Contract Names on which Vertex calls</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Contract Names on which Vertex calls</inlineHelpText>
+    <label>Contract Names</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

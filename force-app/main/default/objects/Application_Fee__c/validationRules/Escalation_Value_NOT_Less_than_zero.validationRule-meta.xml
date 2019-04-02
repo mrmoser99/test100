@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Escalation_Value_NOT_Less_than_zero</fullName>
+    <active>true</active>
+    <errorConditionFormula>Escalation_Value__c &lt;= 0</errorConditionFormula>
+    <errorMessage>Escalation Value Cannot be Less Than or Equal to Zero</errorMessage>
+</ValidationRule>

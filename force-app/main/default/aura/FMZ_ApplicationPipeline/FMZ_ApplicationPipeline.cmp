@@ -1,0 +1,70 @@
+<aura:component description="Application Pipeline" controller="FMZ_APP_PipelineController" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="listMaxCount" type="Integer" default="5"/>
+    <aura:attribute name="stages" type="List" />
+    <aura:attribute name="showValues" type="Boolean" default="false" />
+    <aura:attribute name="selectedStage" type="Object" />
+    <aura:attribute name="current" type="Integer" />
+    <aura:attribute name="allData" type="Object" />
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="stageSelect" event="c:FMZ_PipelineSelection"
+                  action="{!c.handleStageSelect}"/>
+
+    <lightning:layout horizontalAlign="spread" multipleRows="true">
+        <lightning:layoutItem class="slds-p-left_small title-center"
+                              size="12" largeDeviceSize="2" mediumDeviceSize="12" smallDeviceSize="12">
+            <p class="slds-text-heading_small slds-truncate" style="color: #039aff">
+                {!v.label}
+            </p>
+        </lightning:layoutItem>
+        <!--<lightning:layoutItem class="slds-align_absolute-center" padding="around-small" alignmentBump="left"-->
+                              <!--size="12" largeDeviceSize="2" mediumDeviceSize="8" smallDeviceSize="12">-->
+            <!--<c:FMZ_CreditApproval_NewButton />-->
+        <!--</lightning:layoutItem>-->
+        <lightning:layoutItem class="slds-p-left_small slds-p-right_small" flexibility="grow"
+                              size="12" largeDeviceSize="10" mediumDeviceSize="12" smallDeviceSize="12">
+            <div class="overflow-scroll slds-grid slds-wrap">
+                <c:FMZ_Path label="{!v.label}" stages="{!v.stages}" />
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <!--<c:FMZ_Pipeline label="{!v.label}" stages="{!v.stages}" />-->
+
+    <aura:if isTrue="{!v.showValues}">
+        <lightning:card title="{!v.selectedStage.label + ' ' + v.label}" iconName="{!v.selectedStage.iconName}" class="slds-m-top_medium">
+            <aura:set attribute="actions">
+                <lightning:buttonIcon iconName="utility:close" variant="bare" onclick="{! c.handleClose }" alternativeText="Close" />
+            </aura:set>
+            <aura:if isTrue="{! v.data.length > 0}" >
+                <div class="slds-m-around_medium">
+                    <lightning:datatable
+                            data="{! v.data}"
+                            columns="{! v.columns}"
+                            keyField="id"
+                            hideCheckboxColumn="true"/>
+                </div>
+                <aura:set attribute="else">
+                    <div class="slds-m-around_medium">
+                        There are no {!v.selectedStage.label + ' ' + v.label} to display.
+                    </div>
+                </aura:set>
+            </aura:if>
+
+            <aura:set attribute="footer">
+                <aura:if isTrue="{!v.allData.length > 0}">
+                    <div class="slds-float_left">
+                        <p>{!(v.current > v.allData.length ? ( (v.allData.length-(v.data.length-1)) == v.allData.length ? (v.allData.length) : ((v.allData.length-(v.data.length-1))+'-'+v.allData.length)) : ((v.current-(v.listMaxCount-1)) +'-'+ v.current)) +' of '+ v.allData.length}</p>
+                    </div>
+                    <lightning:button variant="base" label="First" onclick="{! c.handleFirstPage }"/>&nbsp;&nbsp;|
+                    <lightning:button variant="base" label="Previous" onclick="{! c.handlePreviousPage }"/>&nbsp;&nbsp;|
+                    <lightning:button variant="base" label="Next" onclick="{! c.handleNextPage }"/>&nbsp;&nbsp;|
+                    <lightning:button variant="base" label="Last" onclick="{! c.handleLastPage }"/>
+                </aura:if>
+            </aura:set>
+
+        </lightning:card>
+    </aura:if>
+</aura:component>

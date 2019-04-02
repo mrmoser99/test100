@@ -1,0 +1,43 @@
+<aura:component controller="FMZ_ApplicationTermsController">
+
+    <aura:attribute name="applicationId" type="Id"/>
+    <aura:attribute name="onchange" type="Aura.Action" description="Handle any data changes"/>
+
+    <aura:attribute name="application" type="Object" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:method name="saveAndValidate" access="public"/>
+
+    <lightning:layout>
+        <lightning:layoutItem size="12" mediumDeviceSize="8" largeDeviceSize="6">
+            <lightning:input aura:id="term" type="number" formatter="number"
+                             label="Lease Term"
+                             value="{!v.application.genesis__Term__c}"
+                             placeholder="Enter Lease Term (months)"
+                             required="true"
+                             messageWhenValueMissing="Lease Term is required."
+                             class="slds-m-bottom_x-small"
+                             onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+    <lightning:layout>
+        <lightning:layoutItem size="12" mediumDeviceSize="8" largeDeviceSize="6">
+            <lightning:input type="text" tabIndex="-1"
+                             label="Payment Frequency" required="false"
+                             value="{!v.application.genesis__Payment_Frequency__c}"
+                             readonly="true" class="slds-form-element_readonly"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+    <lightning:layout>
+        <lightning:layoutItem size="12" mediumDeviceSize="8" largeDeviceSize="6">
+            <lightning:input type="text" tabIndex="-1"
+                             label="Rate Card" required="false"
+                             value="{!v.application.Rate_Card_Selection__c}"
+                             readonly="true" class="slds-form-element_readonly"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+</aura:component>

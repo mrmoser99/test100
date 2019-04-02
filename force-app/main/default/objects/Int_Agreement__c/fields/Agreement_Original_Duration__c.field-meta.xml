@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agreement_Original_Duration__c</fullName>
+    <description>Agreement Original Duration</description>
+    <externalId>false</externalId>
+    <label>Agreement Original Duration</label>
+    <length>19</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

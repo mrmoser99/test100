@@ -1,0 +1,10 @@
+<aura:component description="New Quick Quote Button" implements="forceCommunity:availableForAllPageTypes" access="global">
+
+    <aura:attribute name="accountId" type="String"/>
+
+    <lightning:navigation aura:id="nav"/>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:button name="modal" iconName="utility:quotation_marks" label="Quick Quote" variant="brand" class="slds-size_full qq-button" onclick="{!c.handleShowModal}"/>
+
+</aura:component>

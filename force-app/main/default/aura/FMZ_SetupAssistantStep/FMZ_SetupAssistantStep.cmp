@@ -1,0 +1,66 @@
+<aura:component>
+
+    <aura:attribute name="stepTitle" type="String" required="true" description="Title of step"/>
+    <aura:attribute name="stepNumber" type="Integer" required="true" description="Number from 1 to 9"/>
+    <aura:attribute name="complete" type="Boolean" default="false" description="Whether the step is complete"/>
+    <aura:attribute name="collapsed" type="Boolean" default="true" description="Whether the step is collapes"/>
+    <aura:attribute name="nextButtonLabel" type="String" default="Next" description="What should appear on the next button"/>
+    <aura:attribute name="onnext" type="Aura.Action" description="The action that will be run when the next button is clicked"/>
+
+    <li class="slds-setup-assistant__item slds-p-vertical_small">
+        <article class="slds-setup-assistant__step">
+            <div class="{!'slds-summary-detail '+(v.collapsed?'':'slds-is-open')}">
+                <lightning:buttonIcon class="slds-m-right_x-small slds-m-top_x-small"
+                                      iconName="{!v.collapsed?'utility:chevronright':'utility:chevrondown'}"
+                                      alternativeText="Toggle" variant="bare"
+                                      ariaExpanded="{!v.collapsed?'false':'true'}"
+                                      ariaControls="{# globalId + '_summary_action'}"
+                                      onclick="{!c.toggleCollapsed}"/>
+                <div class="slds-size_1-of-1">
+                    <div class="slds-summary-detail__title">
+                        <div class="slds-setup-assistant__step-summary">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <div class="{! 'slds-progress-ring slds-progress-ring_large ' + (v.complete ? 'slds-progress-ring_complete' : 'slds-progress-ring_active-step')}">
+                                        <div class="slds-progress-ring__progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+                                        </div>
+                                        <div class="slds-progress-ring__content">
+                                            <aura:if isTrue="{!v.complete}">
+                                                <lightning:icon iconName="utility:check" alternativeText="Complete"/>
+                                            </aura:if>
+                                            <aura:if isTrue="{!!v.complete}">{!v.stepNumber}</aura:if>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-media__body slds-m-top_x-small">
+                                    <div class="slds-media">
+                                        <div class="slds-setup-assistant__step-summary-content slds-media__body">
+                                            <h3 class="slds-setup-assistant__step-summary-title slds-text-heading_small">
+                                                <button class="slds-button slds-button_reset"
+                                                        aria-controls="{# globalId + '_summary_action'}"
+                                                        aria-expanded="false"
+                                                        onclick="{!c.toggleCollapsed}">{!v.stepTitle}</button>
+                                            </h3>
+                                        </div>
+                                        <div class="slds-media__figure slds-media__figure_reverse slds-hide">
+                                            <p class="slds-text-align_right slds-text-color_weak">4 mins</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-hidden="{!v.collapsed?'true':'false'}" class="slds-summary-detail__content" id="{# globalId + '_summary_action'}">
+                        <div class="slds-setup-assistant__step-detail slds-p-left_none slds-p-right_large">
+                            {!v.body}
+                        </div>
+                        <div class="slds-text-align_right slds-p-left_none slds-p-right_large slds-p-top_x-small">
+                            <lightning:button label="{!v.nextButtonLabel}" onclick="{!v.onnext}" variant="brand"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </li>
+
+</aura:component>

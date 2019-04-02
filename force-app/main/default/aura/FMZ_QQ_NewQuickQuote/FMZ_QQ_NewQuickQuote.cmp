@@ -1,0 +1,62 @@
+<aura:component description="New Quick Quote" controller="FMZ_QQ_NewQuickQuoteController"
+                implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="accountId" type="Id" />
+    <aura:attribute name="account" type="Account"/>
+    <aura:attribute name="dealerId" type="String" />
+    <aura:attribute name="fields" type="List"/>
+    <aura:attribute name="processing" type="Boolean" default="false"/>
+    <aura:attribute name="isInvalid" type="Boolean" default="false"/>
+    <aura:attribute name="pollingIntervalId" type="Integer"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:FMZ_NewCustomer" action="{!c.handleNewCustomer}"/>
+
+        <lightning:card title="Quick Quote" iconName="action:script">
+            <aura:set attribute="actions">
+                <aura:if isTrue="{!v.recordId==null}">
+                    <c:FMZ_Customer_NewButton />
+                </aura:if>
+            </aura:set>
+            <div class="slds-p-around_medium">
+                <lightning:recordEditForm aura:id="qqForm" objectApiName="genesis__Quick_Quotes__c" class="slds-is-relative"
+                                          onload="{!c.handleLoad}"
+                                          onsubmit="{!c.handleSubmit}"
+                                          onsuccess="{!c.handleSuccess}"
+                                          onerror="{!c.handleError}">
+
+                    <lightning:messages aura:id="messages"/>
+
+                    <div class="{!'slds-notify_container slds-is-relative slds-m-left_x-small ' + (v.isInvalid ? '' : 'slds-hide')}">
+                        <div role="alert" class="slds-notify slds-notify_toast slds-theme_error">
+                            <div class="slds-notify_content">
+                                <h2 class="slds-text-heading_small">Please complete required fields.</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+                    <aura:iteration items="{!v.fields}" var="f">
+                        <aura:if isTrue="{!(v.recordId==null&amp;&amp;f.fieldPath=='genesis__Business_Name__c')}">
+                            <lightning:inputField fieldName="genesis__Account__c" aura:id="inputField" class="input-is-required"
+                                                          onchange="{!c.lookupChange}" value="{!v.accountId}"/>
+                        </aura:if>
+                        <aura:if isTrue="{!v.recordId!=null||(v.recordId==null&amp;&amp;f.fieldPath!='genesis__Business_Name__c')}">
+                            <lightning:inputField fieldName="{!f.fieldPath}" aura:id="inputField" class="{!f.required?'input-is-required':''}"/>
+                        </aura:if>
+                    </aura:iteration>
+
+                    <lightning:button class="slds-m-top_small" variant="brand" type="submit" label="Create" />
+                    <lightning:button class="slds-m-top_small" label="Cancel" onclick="{!c.handleCancel}"/>
+
+                    <aura:if isTrue="{!v.processing}">
+                        <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+                    </aura:if>
+
+                </lightning:recordEditForm>
+            </div>
+        </lightning:card>
+
+</aura:component>

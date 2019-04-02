@@ -1,0 +1,17 @@
+/**
+ * Created by samuelmeyers on 11/12/18.
+ */
+.THIS .match_overlay{
+    border: 1px solid;
+    border-color: rgb(212, 212, 212);
+    z-index: 1000;
+    background-color: rgb(255, 255, 255);
+    width: inherit;
+    height: inherit;
+}
+.THIS .hover_color:hover{
+    background-color: rgb(220, 220, 220);
+}
+.THIS .no-display{
+    display: none;
+}

@@ -1,0 +1,142 @@
+<apex:page standardController="genesis__Quick_Quotes__c" tabStyle="genesis__Quick_Quotes__c" extensions="FMZ_TinoTestController" applybodytag="false" showheader="false" sidebar="false">
+	<!--<apex:page standardController="genesis__Quick_Quotes__c" tabStyle="genesis__Quick_Quotes__c" extensions="FMZ_TinoTestController" action="{!PageRenderer.RedirectToStandardPageInCaseOfAnError}" applybodytag="false" showheader="false" sidebar="false">-->
+	<body id="lightningStyle">
+	<apex:stylesheet value="{!URLFOR($Resource.EDQ__DynamicPageCss)}" />
+	<apex:stylesheet value="{!urlfor($Resource.EDQ__EDQAssets, 'styles/LightningCss.css')}" />
+
+
+	<apex:form styleClass="edq-{!PageRenderer.SObjectName}" id="experianForm" style="padding: 0; margin: 0;">
+
+	<apex:repeat value="{!components}" var="c">
+		<div>{!c}</div>
+	</apex:repeat>
+	<div>TEST</div>
+
+
+		<apex:pageMessages id="messages" />
+		<apex:sectionheader title="{!$ObjectType.genesis__Quick_Quotes__c.label} Edit" subtitle="{!IF(ISNULL(genesis__Quick_Quotes__c.Name), 'New Credit Approval', genesis__Quick_Quotes__c.Name)}"/>
+
+		<EDQ:DuplicatesTable duplicates="{!PageRenderer.Duplicates}" pagerenderer="{!PageRenderer}" />
+
+		<div style="display:none">  <apex:inputField value="{!genesis__Quick_Quotes__c.Id}" /> </div>
+
+		<apex:dynamicComponent componentValue="{!PageBody}" />
+		<apex:outputPanel id="experianDataQuality">
+			<EDQ:DataQualityDynamic PageRenderer="{!PageRenderer}" />
+		</apex:outputPanel>
+
+		<EDQ:DataQualityDynamicScripts PageRenderer="{!PageRenderer}" />
+		<div id="CreditApprovalDisplay"/>
+	</apex:form>
+	</body>
+
+	<script>
+		window.$Label = window.$Label || {};
+		$Label.customLabel= '{!($Label.FMZ_LightningExp_Host)}';
+		var lexOrigin = $Label.customLabel;
+		window.addEventListener("message", function(event) {
+			if (event.origin !== lexOrigin) {
+				// Not the expected origin: reject message!
+				console.log('REJECTED MESSAGE!');
+				return;
+			}
+			// Handle message
+			if(event.data.message == 'CREATE'){
+				console.log('Create Message Received');
+				sendData();
+			}else if(event.data.message == 'ADDRESS_DATA'){
+				console.log('Address Data: '+event.data.address.addressLine1);
+				setData(event.data.address);
+			}else{
+				console.log('UNHANDLED MESSAGE: '+event.data.message);
+			}
+		}, false);
+
+		function sendData(){
+			var message = {
+				'message':'ADDRESS_DATA',
+				'address':{
+					'addressLine1':document.getElementById('genesis__Address_Line_1__c').value,
+					'city':document.getElementById('genesis__City__c').value,
+					'state':document.getElementById('genesis__State__c').value,
+					'county':document.getElementById('County__c').value,
+					'zipCode':document.getElementById('genesis__Postal_Code__c').value,
+					'country':document.getElementById('genesis__Country__c').value,
+					'status':document.getElementById('Validation_Status__c').value
+				}
+			};
+			parent.postMessage(message, lexOrigin);
+		}
+
+		function setData(address){
+			document.getElementById('genesis__Address_Line_1__c').value = address.addressLine1;
+			document.getElementById('genesis__City__c').value = address.city;
+			document.getElementById('genesis__State__c').value = address.state;
+			document.getElementById('County__c').value = address.county;
+			document.getElementById('genesis__Postal_Code__c').value = address.zipCode;
+			document.getElementById('genesis__Country__c').value = address.country;
+			document.getElementById('Validation_Status__c').value = address.status;
+		}
+	</script>
+
+
+	<style>
+		#lightningStyle {
+			background: #fff;
+		}
+
+		#lightningStyle .bPageTitle {
+			display: none;
+		}
+
+		#lightningStyle .pbHeader {
+			display: none;
+		}
+
+		#lightningStyle .bPageBlock {
+			margin: 0;
+			border: 0;
+		}
+
+		#lightningStyle .pbSubheader {
+			display: none;
+		}
+
+		#lightningStyle .pbBody{
+			padding: 0 !important;
+		}
+
+		#lightningStyle .apexp .bPageBlock .pbBody .dataCol .labelCol,
+		#lightningStyle .apexp .bPageBlock .pbBody .data2Col .labelCol{
+			padding-top: 4px !important;
+			margin-bottom: 2px !important;
+		}
+
+		#lightningStyle .data2Col {
+			height: 32px !important;
+		}
+
+		#lightningStyle input {
+			height: 100%;
+			font-size: 13px !important;
+			padding-top: 0 !important;
+			padding-bottom: 0 !important;
+			padding-left: 12px !important;
+			padding-right: 16px !important;
+		}
+
+		#lightningStyle .helpOrb{
+			display: none;
+		}
+
+		#lightningStyle .pbBottomButtons {
+			display: none;
+		}
+
+		#lightningStyle .bPageBlock .pbBody .dataCol .labelCol,
+		#lightningStyle .bPageBlock .pbBody .data2Col .labelCol,
+		#lightningStyle .print .topics-label{
+			color: rgba(0, 0, 0, 0.6) !important;
+		}
+	</style>
+</apex:page>

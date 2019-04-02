@@ -1,0 +1,265 @@
+<apex:page controller="DealerCheckListController" sidebar="false" standardStylesheets="false" showHeader="false">
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="print" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+progress, progress[role] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background-size: auto;
+  height: 15px;
+  width: 100%;
+}
+
+.skill-list {
+  list-style: none;
+  margin: 0;
+  padding: 1em;
+}
+
+.skill {
+  margin-bottom: 1em;
+  position: relative;
+}
+.skill h3 {
+  color: #fff;
+  left: 1em;
+  line-height: 1;
+  position: absolute;
+  top: 1em;
+}
+.skill ::-webkit-progress-value {
+  -webkit-animation: bar-fill 2s;
+  width: 0px;
+}
+
+.skill-1::-webkit-progress-value {
+  background: #1797c0;
+}
+
+.skill-1::-webkit-progress-bar {
+  background: #ccc;
+}
+
+.skill-2::-webkit-progress-value {
+  background: #1797c0;
+}
+
+.skill-2::-webkit-progress-bar {
+  background: #ccc;
+}
+
+.skill-3::-webkit-progress-value {
+  background: #1797c0;
+}
+
+.skill-3::-webkit-progress-bar {
+  background: #ccc;
+}
+
+@-webkit-keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+@keyframes bar-fill {
+  0% {
+    width: 0;
+  }
+}
+.my-small-btn {
+    width:191px;
+    padding:5px;
+}
+.ui-button.iconic-button-save-dept {
+                border: 2px solid #48ce94;
+                width: 33px;
+                height: 33px;
+                border-radius: 50%;
+                line-height: 14px;
+                cursor: pointer;
+            }
+             .ccfluid{
+                padding-left:0px !important;
+                background-color: white;
+                margin-top: -16px;
+            }
+            .bs-example{
+          margin: 20px;
+      }
+      .progress-bar {
+  background-color: whiteSmoke;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25) inset;
+
+  width: 250px;
+  height: 20px;
+  
+  position: relative;
+  display: block;
+}
+.ui-button1
+{
+background-color: #FFA21D;
+display: block;
+font-family: 'Lato';
+content: attr(execVal);
+    font-size: 24px;
+}
+.ui-button2
+{
+background-color: #2D5074;
+display: block;
+font-family: 'Lato';
+content: attr(execVal);
+    font-size: 24px;
+}
+.ui-button3
+{
+background-color: 48ce94;
+display: block;
+font-family: 'Lato';
+content: attr(execVal);
+    font-size: 24px;
+}
+.square {
+    height: 103px;
+    width: 130px;
+    border-radius: 0;
+    margin-right: 6px;
+}
+.avoid-clicks {
+  pointer-events: none;
+  }
+.ccursor
+{
+cursor: not-allowed;
+}
+}
+</style>
+
+
+</head>   
+
+<div class="container" id="redirectPanel">
+
+<div class="row panelpadding">
+            <div class="col-xs-12 col-md-12 borderClass">
+<div class="customac" >
+<div class="btn-group" style="width:125%">
+<button type="button" class="btn btn-warning my-small-btn ui-button1 square" style="width:27%">D-Dealer<br/>CheckList<br/> <span class="badge">{!openCount}/{!Count}</span></button>
+<button type="button" class="btn btn-primary my-small-btn ui-button2 square" style="width:27%">NewCo <br/>CheckList<br/><span class="badge">{!nopenCount}/{!nCount}</span></button>
+<button type="button" class="btn btn-success my-small-btn ui-button3 square" style="width:25%">Exception <br/>CheckList<br/> <span class="badge">{!eopenCount}/{!eCount}</span></button><br/><br/><br/>
+</div>
+<div class="well well-sm" style="width:100%">Stages and Tasks <progress class="skill-1" max="{!Count}" value="{!openCount}" style="height:24px;width:70%"> </progress>
+                         
+</div>
+</div>
+</div><!-------First customac end--->
+<div class="customac">
+
+<div class="bs-example">
+<div class="panel-group" id="accordion">
+
+<div class="panel panel-default ccursor"  >
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-th-list"></span>&nbsp;NewCo Check List</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse out">
+                <div class="panel-body avoid-clicks "  >
+                    <apex:form >
+                    <apex:pageBlock >
+                       <span class="pull-right" id="btnpanel">   <apex:commandButton value="SAVE" styleClass="btn btn-success " action="{!nprocessSelected}" rerender="redirectPanel" /> </span>
+                         <apex:pageBlockTable value="{!nwrapTaskList}" var="a" id="table"  styleClass="table table-striped">
+                                    <apex:column >
+                                    <apex:facet name="header">
+                                            <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')" />
+                                    </apex:facet>
+                                    <apex:inputCheckbox value="{!a.nselected}" id="inputId" rendered="{!a.ntas.status != 'Completed'}" />
+                                    <apex:outputPanel rendered="{!a.ntas.status == 'Completed'}">
+                                     <div ><span class="glyphicon glyphicon-check"></span></div>
+                                    </apex:outputPanel>
+                                   
+                                 <!---  <apex:outputLabel value="Completed" rendered="{!a.tas.status == 'Completed'}" style="font-family:Courier; color:Green; font-size: 15px;"></apex:outputLabel>--->
+                                    </apex:column>
+                         <apex:column value="{!a.ntas.Description}" headerValue="Task Description"/>
+                         </apex:pageBlockTable>
+                    </apex:pageBlock>
+                    </apex:form>
+                </div>
+            </div>
+        </div>
+        
+<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Dealer Check List</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <apex:form >
+                    <apex:pageBlock >
+                       <span class="pull-right" id="btnpanel">   <apex:commandButton value="SAVE" styleClass="btn btn-success" action="{!processSelected}" rerender="redirectPanel" /> </span>
+                         <apex:pageBlockTable value="{!wrapTaskList}" var="a" id="table"  styleClass="table table-striped">
+                                    <apex:column >
+                                    <apex:facet name="header">
+                                            <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')"/>
+                                    </apex:facet>
+                                    <apex:inputCheckbox value="{!a.selected}" id="inputId" rendered="{!a.tas.status != 'Completed'}" />
+                                    <apex:outputPanel rendered="{!a.tas.status == 'Completed'}">
+                                     <div ><span class="glyphicon glyphicon-check"></span></div>
+                                    </apex:outputPanel>
+                                   
+                                 <!---  <apex:outputLabel value="Completed" rendered="{!a.tas.status == 'Completed'}" style="font-family:Courier; color:Green; font-size: 15px;"></apex:outputLabel>--->
+                                    </apex:column>
+                         <apex:column value="{!a.tas.Description}" headerValue="Task Description"/>
+                         </apex:pageBlockTable>
+                    </apex:pageBlock>
+                    </apex:form>
+                </div>
+            </div>
+        </div>
+<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Exception Check List</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse out">
+                <div class="panel-body">
+                    <apex:form >
+                    <apex:pageBlock >
+                       <span class="pull-right" id="btnpanel">   <apex:commandButton value="SAVE" styleClass="btn btn-success" action="{!eprocessSelected}" rerender="redirectPanel" /> </span>
+                         <apex:pageBlockTable value="{!ewrapTaskList}" var="a" id="table"  styleClass="table table-striped">
+                                    <apex:column >
+                                    <apex:facet name="header">
+                                            <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')"/>
+                                    </apex:facet>
+                                    <apex:inputCheckbox value="{!a.eselected}" id="inputId" rendered="{!a.etas.status != 'Completed'}" />
+                                    <apex:outputPanel rendered="{!a.etas.status == 'Completed'}">
+                                     <div ><span class="glyphicon glyphicon-check"></span></div>
+                                    </apex:outputPanel>
+                                   
+                                 <!---  <apex:outputLabel value="Completed" rendered="{!a.tas.status == 'Completed'}" style="font-family:Courier; color:Green; font-size: 15px;"></apex:outputLabel>--->
+                                    </apex:column>
+                         <apex:column value="{!a.etas.Subject}" headerValue="Task Description"/>
+                         </apex:pageBlockTable>
+                    </apex:pageBlock>
+                    </apex:form>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+</div><!--------second customac end--->
+</div>
+</div>
+</apex:page>

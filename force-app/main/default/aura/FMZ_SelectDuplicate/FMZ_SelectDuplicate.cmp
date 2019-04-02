@@ -1,0 +1,27 @@
+<!--
+ - Created by samuelmeyers on 11/20/18.
+ -->
+
+<aura:component description="FMZ_SelectDuplicate">
+    <aura:attribute name="message" type="String" default="Select a Duplicate" access="public"/>
+    <aura:attribute name="selectedId" type="String" access="public"/>
+    <aura:attribute name="duplicates" type="List" access="public" />
+
+    <lightning:card iconName="standard:merge" title="{!v.message}">
+        <div class="slds-m-around_medium">
+            <lightning:layout horizontalAlign="space" multipleRows="true">
+                <aura:iteration items="{!v.duplicates}" var="dup">
+                    <lightning:layoutItem padding="around-small">
+                        <div class="{!'slds-p-around_small container' + (v.selectedId == dup.id ? '-selected' : '')}" data-value="{!dup.id}" onclick="{!c.handleSelect}">
+                            {!dup.info}
+                        </div>
+                    </lightning:layoutItem>
+                </aura:iteration>
+            </lightning:layout>
+            <div class="slds-m-top_medium">
+                <lightning:button label="Select" variant="brand" onclick="{!c.handleSelectButton}"/>
+                <lightning:button label="Cancel" variant="neutral" onclick="{!c.handleCancelButton}"/>
+            </div>
+        </div>
+    </lightning:card> 
+</aura:component>

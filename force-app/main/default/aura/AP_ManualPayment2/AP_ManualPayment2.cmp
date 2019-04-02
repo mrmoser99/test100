@@ -1,0 +1,36 @@
+<aura:component description="Manually Approve Credit App" controller="AP_ManualPayment" 
+        implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global">  
+
+    <aura:attribute name="processing" type="Boolean" default="false"/>        
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="InvoiceId" type="String"/>
+    <aura:attribute name="isInvalid" type="Boolean" default="false"/>
+ 
+    
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Invoice__c" >
+            
+            <lightning:card title="Manual Payment" iconName="utility:moneybag" >
+     
+                <lightning:messages /> 
+              
+                <lightning:outputField fieldName="Name" />
+                <lightning:outputField fieldName="Balance_Due_Amount__c" />
+                <lightning:input aura:id="paymentDate" type="date" label="Payment Date" required="true"
+                                messageWhenValueMissing="Payment Date is Required!"  messageWhenBadInput="Payment Date is invalid!"/>
+                <lightning:input aura:id="checkNumber" type="text" label="Check Number" required="true"
+                                messageWhenValueMissing="Check is Required!"/>
+                <lightning:input aura:id="checkAmount" type="number" label="Check Amount" required="true" formatter="currency" step="0.01"
+                                messageWhenValueMissing="Check Amount is Required!" messageWhenBadInput="Check Amount is invalid!"/>
+
+                <lightning:button class="slds-m-top_large" variant="brand" type="submit" label="Submit" onclick="{!c.handleSubmit}" />
+                <lightning:button class="slds-m-top_large" label="Cancel" onclick="{!c.handleCancel}"/>
+               
+            </lightning:card>
+
+
+    </lightning:recordViewForm>
+</aura:component>

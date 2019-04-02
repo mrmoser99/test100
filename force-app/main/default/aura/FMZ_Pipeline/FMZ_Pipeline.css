@@ -1,0 +1,27 @@
+.THIS .full-width{
+    width: 100%
+}
+.THIS .pipeline-node{
+    width: 200px;
+}
+.THIS .no-margins{
+    margin: 0 !important;
+}
+.THIS .pipeline{
+    background: #FFF;
+}
+
+@media (max-width: 479px) {
+   .THIS .full-width{
+       width: 100%
+   }
+   .THIS .pipeline-node{
+       width: inherit;
+   }
+   .THIS .no-margins{
+       margin: 0 !important;
+   }
+   .THIS .pipeline{
+       background: #FFF;
+   }
+}

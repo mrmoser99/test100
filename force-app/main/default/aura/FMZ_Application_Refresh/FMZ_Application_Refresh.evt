@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Indicates the Application data has updated">
+    <aura:attribute name="source" type="String" description="Component which triggered the refresh" />
+    <aura:attribute name="data" type="Object[]" description="A list of newest data" />
+</aura:event>

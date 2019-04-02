@@ -1,0 +1,8 @@
+<aura:component description="New Credit Approval Button" implements="forceCommunity:availableForAllPageTypes" access="global">
+
+    <lightning:navigation aura:id="nav"/>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:button class="slds-size_full address-button" iconName="utility:check" name="modal" variant="brand" label="New Approval" onclick="{!c.handleShowModal}"/>
+
+</aura:component>

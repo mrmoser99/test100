@@ -1,0 +1,117 @@
+<aura:component controller="FMZ_ApplicationDocumentsController">
+
+	<aura:attribute name="applicationId" type="Id"/>
+	<aura:attribute name="onchange" type="Aura.Action" description="Handle any data changes"/>
+
+	<aura:attribute name="application" type="genesis__Applications__c"
+					default="{ sobjectType: 'genesis__Applications__c' }"
+					access="private"/>
+	<aura:attribute name="documents" type="List" access="private"/>
+	<aura:attribute name="processing" type="Boolean" default="false" access="private"/>
+	<aura:attribute name="error" type="String" access="private"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<aura:method name="saveAndValidate" access="public"/>
+
+	<lightning:layout multipleRows="true">
+
+		<lightning:layoutItem size="12" mediumDeviceSize="6" largeDeviceSize="6" padding="horizontal-small">
+			<lightning:input aura:id="docInput"
+							 value="{!v.application.Contract_Signer__c}"
+							 label="Contract Signer First Name"
+							 required="true"
+							 messageWhenValueMissing="Contract Signer First Name is required."/>
+			<lightning:input aura:id="docInput"
+							 value="{!v.application.Contract_Signer_Last_Name__c}"
+							 label="Contract Signer Last Name"
+							 required="true"
+							 messageWhenValueMissing="Contract Signer Last Name is required."/>
+			<lightning:input aura:id="docInput"
+							 value="{!v.application.Contract_Signer_Title__c}"
+							 label="Contract Signer Title"
+							 required="true"
+							 messageWhenValueMissing="Contract Signer Title is required."/>
+		</lightning:layoutItem>
+
+		<lightning:layoutItem size="12" mediumDeviceSize="6" largeDeviceSize="6" padding="horizontal-small">
+			<lightning:layout multipleRows="true">
+				<lightning:layoutItem size="12">
+					<lightning:input aura:id="docInput"
+									 value="{!v.application.Dealer_Invoice_Number__c}"
+									 label="Invoice #"
+									 messageWhenValueMissing="Invoice # is required."/>
+				</lightning:layoutItem>
+				<lightning:layoutItem size="12">
+					<lightning:input aura:id="docInput" type="date"
+									 value="{!v.application.Dealer_Invoice_Date__c}"
+									 label="Invoice Date"
+									 messageWhenValueMissing="Invoice Date is required."/>
+				</lightning:layoutItem>
+			</lightning:layout>
+			<lightning:layout horizontalAlign="end" class="slds-m-top_medium">
+				<lightning:layoutItem class="slds-m-top_x-small slds-m-right_x-small">
+					<lightning:button label="Generate Agreement" onclick="{!c.handleGenerate}"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem class="slds-m-top_x-small slds-m-left_x-small">
+					<lightning:input aura:id="fileUpload" type="file" label=" " onchange="{!c.handleUpload}"  variant="label-hidden"/>
+				</lightning:layoutItem>
+			</lightning:layout>
+		</lightning:layoutItem>
+
+	</lightning:layout>
+
+	<aura:if isTrue="{!!empty(v.error)}">
+		<div class="slds-has-error slds-m-top_medium">
+			<div class="slds-form-element__help">{!v.error}</div>
+		</div>
+	</aura:if>
+
+	<table class="slds-table slds-table_bordered slds-table_striped slds-max-medium-table_stacked-horizontal slds-m-top_medium ssslds-border_left ssslds-border_right">
+		<thead>
+		<tr class="slds-line-height_reset">
+			<th scope="col" style="width:2rem;">
+				&nbsp;
+			</th>
+			<th class="slds-text-title_caps" scope="col">
+				<div class="slds-truncate" title="Document Name">Document Name</div>
+			</th>
+			<th class="slds-text-title_caps" scope="col">
+				<div class="slds-truncate" title="Document Name">Category</div>
+			</th>
+			<th class="slds-text-title_caps" scope="col">
+				<div class="slds-truncate" title="Document Date">Upload Date</div>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		<aura:iteration items="{!v.documents}" var="d">
+			<tr class="slds-hint-parent">
+				<td><lightning:icon iconName="doctype:attachment" size="small"/></td>
+				<td>
+					<a href="{!'../servlet/servlet.FileDownload?file='+d.Id}" target="_blank">{!d.Name}</a>
+				</td>
+				<td>
+					{!d.Description}
+				</td>
+				<td>
+					<lightning:formattedDateTime value="{!d.CreatedDate}"
+												 year="numeric" month="2-digit" day="2-digit"
+												 hour="numeric" minute="2-digit"/>
+				</td>
+			</tr>
+		</aura:iteration>
+		<aura:if isTrue="{!empty(v.documents)}">
+			<tr>
+				<td>&nbsp;</td>
+				<td colspan="3">No documents found.</td>
+			</tr>
+		</aura:if>
+		</tbody>
+	</table>
+
+	<aura:if isTrue="{!v.processing}">
+		<lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+	</aura:if>
+
+</aura:component>

@@ -1,0 +1,56 @@
+<aura:component description="New Address" controller="FMZ_NewAddressController">
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
+    <aura:attribute name="accountId" type="String" default="" access="public"/>
+
+    <aura:attribute name="processing" type="Boolean" default="true" access="private"/>
+    <aura:attribute name="isInvalid" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="matches" type="List" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="addressEvent" type="c:FMZ_NewCustomerAddress"/>
+
+    <lightning:card title="New Address" iconName="standard:address" >
+        <div class="slds-p-around--medium">
+            <div class="{!'slds-notify_container slds-is-relative slds-m-left_x-small ' + (v.isInvalid ? '' : 'slds-hide')}">
+                <div role="alert" class="slds-notify slds-notify_toast slds-theme_error">
+                    <div class="slds-notify_content">
+                        <h2 class="slds-text-heading_small">Please complete required fields.</h2>
+                    </div>
+                </div>
+            </div>
+            <lightning:input aura:id="addressLine1"
+                             type="text"
+                             label="Street Address"
+                             placeholder="Search Address with Experian"
+                             onchange="{!c.findMatchingAddresses}"
+                             required="true"
+                             messageWhenValueMissing="Street Address is Required"/>
+            <div aura:id="matchesOverlay" class="no-display match_overlay">
+                <aura:iteration items="{!v.matches}" var="match" >
+                    <div class="hover_color slds-p-around_x-small" data-value="{!match.format}" onclick="{!c.selectMatch}">
+                        {!match.suggestion}
+                    </div>
+                </aura:iteration>
+            </div>
+            <lightning:input aura:id="city" type="text" label="City" required="true"
+                             messageWhenValueMissing="City is Required"/>
+            <lightning:input aura:id="county" type="text" label="County" required="true"
+                             messageWhenValueMissing="County is Required"/>
+            <lightning:input aura:id="state" type="text" label="State" required="true"
+                             messageWhenValueMissing="State is Required"/>
+            <lightning:input aura:id="postalCode" type="text" label="Postal Code" required="true"
+                             messageWhenValueMissing="Postal Code is Required"/>
+            <lightning:input aura:id="validStatus" type="text" label="Validation Status"/>
+            <lightning:input aura:id="validTime" type="datetime-local" label="Validation Timestamp"/>
+
+            <lightning:button class="slds-m-top_large" variant="brand" onclick="{!c.handleCreate}"
+                              disabled="{!v.processing}" label="Create" />
+            <lightning:button class="slds-m-top_large" label="Cancel" onclick="{!c.handleCancel}"/>
+        </div>
+        <aura:if isTrue="{!v.processing}">
+            <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+        </aura:if>
+
+    </lightning:card>
+</aura:component>

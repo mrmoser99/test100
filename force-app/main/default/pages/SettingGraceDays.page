@@ -1,0 +1,17 @@
+<apex:page controller="UpdateGraceDaysController">
+ <apex:form > 
+     <apex:pagemessages > </apex:pagemessages>
+         <apex:pageblock title="Edit Contract" mode="edit">
+         <apex:pageblockbuttons > 
+            <apex:commandbutton action="{!saveItem}" value="Save"> </apex:commandbutton> 
+            <apex:commandbutton action="{!cancelAction}" value="Cancel"> </apex:commandbutton> 
+         </apex:pageblockbuttons> 
+         <apex:pageblocksection title="Contract Fields" columns="2"> 
+             <apex:outputfield label="Contract Name " value="{!contractItem.Name}"></apex:outputfield>
+             <apex:inputfield label="Late Charge Grace Days " value="{!contractItem.Custom_Late_Charge_Grace_Days__c}"></apex:inputfield>
+             <apex:inputField label="Finance Charge Grace Days " value="{!contractItem.Custom_Finance_Charge_Grace_Days__c}"></apex:inputfield>
+             <apex:inputField label="Dealer" value="{!contractItem.cllease__Dealer__c}"/>
+          </apex:pageblocksection>
+     </apex:pageblock> 
+  </apex:form> 
+</apex:page>

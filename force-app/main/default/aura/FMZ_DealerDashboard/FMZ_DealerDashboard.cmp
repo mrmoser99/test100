@@ -1,0 +1,32 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+
+    <div class="main-bg">
+
+        <lightning:layout horizontalAlign="space">
+
+            <lightning:layoutItem size="4">
+                <div>67%</div>
+                <div>Conversion Rate</div>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="4">
+                <div>12</div>
+                <div>Fundings</div>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="4">
+                <div>$21.6K</div>
+                <div>Total Value</div>
+            </lightning:layoutItem>
+
+        </lightning:layout>
+
+    </div>
+
+    <ul class="steps">
+        <li class="done"><a href="">Step 1</a></li>
+        <li class="active"><p>Step 2</p></li>
+        <li class="undone"><a href="">Step 3</a></li>
+        <li class="undone"><a href="">Step 4</a></li>
+        <li class="undone"><p>Disabled step</p></li>
+    </ul>
+
+</aura:component>

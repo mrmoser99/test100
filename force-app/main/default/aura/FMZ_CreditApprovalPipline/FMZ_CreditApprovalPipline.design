@@ -1,0 +1,4 @@
+<design:component>
+	<design:attribute name="label" label="Label" required="true"/>
+	<design:attribute name="listMaxCount" label="Max Count Displayed in List" />
+</design:component>

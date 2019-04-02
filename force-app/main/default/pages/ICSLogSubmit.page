@@ -1,0 +1,7 @@
+<apex:page standardController="ICS_Log__c" extensions="ICSLogExtension" action="{!submit}">
+<style>
+.msgError { color:red; font-weight: strong;}
+</style> 
+	<apex:messages styleClass="msgError"/> 
+	<apex:detail subject="{!ICS_Log__c.id}" relatedList="true"/>
+</apex:page>

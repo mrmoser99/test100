@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event fired when a new Customer is created">
+    <aura:attribute name="id" type="String"/>
+    <aura:attribute name="name" type="String"/>
+</aura:event>

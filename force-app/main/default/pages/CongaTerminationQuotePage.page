@@ -1,0 +1,91 @@
+<apex:page controller="CongaTerminationQuote" showHeader="false" sidebar="false">
+ <style type="text/css">
+    .bPageBlock .pbTitle {
+        width: 100%;    
+        text-align: center;
+    }
+</style>
+
+ 
+<script type="text/javascript">
+        function selectAllCheckboxes(obj,receivedInputID){
+            var inputCheckBox = document.getElementsByTagName("input");
+            for(var i=0; i<inputCheckBox.length; i++){
+                if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){
+                    inputCheckBox[i].checked = obj.checked;
+                }
+            }
+        }
+    </script>
+<script>
+ 
+
+function closeWindow(msg){ 
+if(msg=='Success'){
+   alert('Document generated sucessfully');
+}
+    else if(msg=='fail') {
+ alert('Document generated Failed');
+ }  
+ }
+    
+</script>
+ <apex:form id="frmid">
+ 
+
+ <div align="center" draggable="false">
+<div style="overflow: scroll;  height:1000px;">
+ <apex:pageblock title="Termination Quotes" id="pgBlckId" tabStyle="cllease__Termination_Quote_Header__c" >
+ <apex:pageMessages id="showmsg"></apex:pageMessages>
+<apex:pageBlockSection columns="1">
+   
+
+ <apex:pageblocktable value="{!wrapQuoteList}" var="v" align="center" id="pbtableid">
+
+  
+                     <apex:column >
+                      <!--<apex:facet name="header">
+                            <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')"/>
+                        </apex:facet>-->
+                      <apex:outputPanel id="panelid">  
+                      <apex:inputCheckbox value="{!v.selected}" id="checkid" > <!-- id="inputId" , inputCheckbox --->
+                      <apex:actionSupport event="onclick" action="{!renderedTerminationbuttons}" reRender="Quoteid" >
+                      <!--<apex:param value="{!v.acc.id}" name="Terminationid" assignTo="{!Terminationid}"/>-->
+                      </apex:actionSupport>
+                       </apex:inputCheckbox>
+                       </apex:outputPanel>
+                    </apex:column>
+                    
+                    
+     <apex:column value="{!v.acc.name}"/>
+     <apex:column value="{!v.acc.cllease__Quote_Amount__c}"/>
+     <apex:column value="{!v.acc.cllease__Effective_From__c}"/>
+     <apex:column value="{!v.acc.cllease__Effective_To__c}"/>
+     <apex:column value="{!v.acc.cllease__Quote_Reason__c}"/>
+     <apex:column value="{!v.acc.cllease__Quote_Type__c}"/>
+      <apex:column value="{!v.acc.cllease__Status__c}"/>
+ </apex:pageblocktable> 
+ 
+ <apex:actionStatus id="pageStatus">
+    <apex:facet name="start">
+        <apex:outputPanel style="margin-left:250px;">
+            <apex:image id="theImage" value="{!$Resource.Spinner}" width="20" height="20" alt="Description of image here"/>
+            <apex:outputLabel value="Please wait document generating..."/>
+        </apex:outputPanel>            
+    </apex:facet>
+</apex:actionStatus>
+ 
+  </apex:pageblocksection>
+   <apex:outputPanel id="Quoteid">
+ <apex:commandButton action="{!summaryWithPurchase}" value="Summary With Purchase " onComplete="closeWindow('{!Message}');" rerender="showmsg" disabled="{!If(TerminationType == 'TERMINATION WITHOUT PURCHASE' || TerminationType == 'ROLL-OVER WITHOUT PURCHASE', true, false)}"  status="pageStatus"/>
+
+ <apex:commandButton action="{!detailWithPurchase}" value="Detail With Purchase" onComplete="closeWindow('{!Message}');" rerender="showmsg" disabled="{!If(TerminationType == 'TERMINATION WITHOUT PURCHASE' || TerminationType == 'ROLL-OVER WITHOUT PURCHASE', true, false)}" status="pageStatus"/>
+  <apex:commandButton action="{!summaryWithOutPurchase}" value="Summary Without Purchase" onComplete="closeWindow('{!Message}');" rerender="showmsg" disabled="{!If(TerminationType == 'TERMINATION WITH PURCHASE' || TerminationType == 'ROLL-OVER WITH PURCHASE', true, false)}"  status="pageStatus"/>
+ <apex:commandButton action="{!detailWithOutPurchase}" value="Detail Without Purchase" onComplete="closeWindow('{!Message}');" rerender="showmsg" disabled="{!If(TerminationType == 'TERMINATION WITH PURCHASE' || TerminationType == 'ROLL-OVER WITH PURCHASE', true, false)}"  status="pageStatus"/>   
+  </apex:outputPanel>     
+ </apex:pageblock> 
+</div>   
+ </div>
+ 
+ </apex:form>
+</apex:page>

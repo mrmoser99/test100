@@ -1,0 +1,38 @@
+.THIS .divider {
+    display: flex;
+}
+.THIS .divider-blank {
+    height: 50px;
+    width: 32px;
+}
+.THIS .divider-4 {
+    transform: translateX(10px);
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #EEE;
+}
+.THIS .divider-3 {
+    transform: translateX(-12px);
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-left: 10px solid #FFF;
+    border-bottom: 25px solid transparent;
+}
+.THIS .divider-2 {
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-left: 10px solid #EEE;
+    border-bottom: 25px solid transparent;
+}
+.THIS .divider-1 {
+    transform: translateX(9px);
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-left: 10px solid #CCC;
+    border-bottom: 25px solid transparent;
+}
+.THIS .full-width{
+    width: 100%
+}

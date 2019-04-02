@@ -1,0 +1,7 @@
+<apex:page standardController="ICS_External_Legal_Entity__c" extensions="ICSExternalLEExtension" action="{!choose}">
+<style>
+.msgError { color:red; font-weight: strong;}
+</style>
+	<apex:messages styleClass="msgError"/>
+	<apex:detail subject="{!ICS_External_Legal_Entity__c.id}" relatedList="true"/>
+</apex:page>

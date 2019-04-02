@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Collateral_Name__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Collateral Name</description>
+    <externalId>false</externalId>
+    <label>Collateral Name</label>
+    <referenceTo>Int_Collateral__c</referenceTo>
+    <relationshipLabel>Int Collaterals Agreements</relationshipLabel>
+    <relationshipName>Int_Collaterals_Agreements</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

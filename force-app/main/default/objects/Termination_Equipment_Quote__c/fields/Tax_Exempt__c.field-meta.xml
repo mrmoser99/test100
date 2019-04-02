@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tax_Exempt__c</fullName>
+    <externalId>false</externalId>
+    <formula>/* Check for account level tax Exemption and then Equipment level Tax Exemption*/
+IF(Termination_Quote__r.cllease__Contract__r.cllease__Account__r.Tax_Exempt__c == false, 
+      IF(Termination_Quote_Equipment__r.cllease__Contract_Equipment__r.cllease__Tax_exemption__c == true, true, false), 
+      true
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tax Exempt</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

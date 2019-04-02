@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Making_Escalate_Fields_Mandatory</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(AND(ISPICKVAL(Service_Escalate__c,&#39;YES&#39;),OR(ISPICKVAL(Escalate_Service_On__c,&#39;&#39;),ISPICKVAL(Escalation_Type__c,&#39;&#39;),ISBLANK(Escalation_Value__c))),true,false)</errorConditionFormula>
+    <errorMessage>IF Service Escalate is &#39;YES&#39; - Then  &quot;Escalate Service On&quot;, &quot; Escalation Type&quot;, &quot;Escalation Value&quot;  Fields are Required</errorMessage>
+</ValidationRule>

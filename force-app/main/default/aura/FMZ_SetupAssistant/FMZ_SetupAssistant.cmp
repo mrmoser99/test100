@@ -1,0 +1,30 @@
+<aura:component>
+
+    <aura:attribute name="progressText" type="String" description="Text to display above the progress bar"/>
+    <aura:attribute name="progressValue" type="Integer" description="Progress amount percentage"/>
+
+    <div class="slds-card">
+
+        <header class="slds-theme_shade slds-p-around_medium">
+            <div>
+                <lightning:layout horizontalAlign="spread" class="slds-p-bottom_x-small">
+                    <lightning:layoutItem>
+                        <span>{!v.progressText}</span>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem>
+                            <span aria-hidden="true">
+                                <strong>{!v.progressValue}% Complete</strong>
+                            </span>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:progressBar variant="circular" value="{!v.progressValue}" class="progress-success"/>
+            </div>
+        </header>
+
+        <ol class="slds-setup-assistant slds-p-top_x-small">
+            {!v.body}
+        </ol>
+
+    </div>
+
+</aura:component>

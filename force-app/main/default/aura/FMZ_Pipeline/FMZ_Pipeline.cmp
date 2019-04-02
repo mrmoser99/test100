@@ -1,0 +1,28 @@
+<aura:component>
+<aura:attribute name="stages" type="List" required="true"/>
+<aura:attribute name="label" type="String" required="true"/>
+
+<aura:registerEvent name="stageSelect" type="c:FMZ_PipelineSelection"/>
+
+<div class="slds-theme_default slds-border_top slds-border_bottom">
+	<div class="slds-grid slds-grid_align-space full-width">
+		<div class="slds-grid slds-grid_align-space slds-has-flexi-truncate">
+			<div class="slds-col slds-align_absolute-center slds-m-left_medium" style="width: inherit;">
+				<p class="slds-text-heading_small slds-truncate" style="color: #039aff">
+					{!v.label}
+				</p>
+			</div>
+			<div class="slds-col">
+				<div class="slds-grid slds-wrap slds-grid_align-space full-width">
+					<aura:iteration items="{!v.stages}" var="stage">
+						<div class="slds-col slds-align_absolute-center no-margins pipeline-node" onclick="{!c.stageSelected}" data-value="{!stage.label}">
+							<c:FMZ_PipelineNode label="{!stage.label}" value="{!stage.values.length}" isFirst="{!stage.isFirst}" variant="{!stage.variant}"/>
+						</div>
+					</aura:iteration>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</aura:component>

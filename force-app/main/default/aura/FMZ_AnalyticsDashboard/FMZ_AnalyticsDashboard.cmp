@@ -1,0 +1,8 @@
+<aura:component description="Credit Approval Pipeline" controller="FMZ_CA_PipelineController" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="label" type="String" />
+    <aura:attribute name="stages" type="List" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <c:FMZ_Pipeline label="{!v.label}" stages="{!v.stages}" />
+
+</aura:component>

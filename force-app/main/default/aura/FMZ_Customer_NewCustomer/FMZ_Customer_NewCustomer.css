@@ -1,0 +1,19 @@
+/**
+ * Created by tino on 10/8/18.
+ */
+.THIS {
+}
+
+.THIS.is-loaded .input-is-required {
+    font-weight: 400;
+}
+.THIS.is-loaded .input-is-required:before {
+    content: "*";
+    margin: 0 0.125rem 0 0.125rem;
+    color: rgb(194, 57, 52);
+    float: left;
+}
+.THIS .new-customer-btn {
+    right: 0;
+    bottom: 0;
+}

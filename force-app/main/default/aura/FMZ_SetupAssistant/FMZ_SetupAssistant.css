@@ -1,0 +1,5 @@
+.THIS {
+}
+.THIS .progress-success .slds-progress-bar__value {
+    background: rgb(75, 202, 129);
+}

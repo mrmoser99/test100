@@ -1,0 +1,65 @@
+<aura:component description="New Cutomer" controller="FMZ_Customer_NewCustomerController"
+                implements="force:lightningQuickActionWithoutHeader">
+
+    <aura:attribute name="account" type="Account" />
+    <aura:attribute name="address" type="Address__c" />
+    <aura:attribute name="formattedAddress" type="String" />
+    <aura:attribute name="fields" type="List"/>
+    <aura:attribute name="processing" type="Boolean" default="false"/>
+    <aura:attribute name="isInvalid" type="Boolean" default="false"/>
+    <aura:attribute name="pollingIntervalId" type="Integer"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:FMZ_NewCustomerAddress" action="{!c.handleNewAddress}"/>
+
+    <aura:registerEvent name="newCustomer" type="c:FMZ_NewCustomer"/>
+
+    <lightning:card title="Customer" iconName="action:new_account">
+        <aura:set attribute="actions">
+            <aura:if isTrue="{!v.address == null}">
+                <c:FMZ_Address_NewButton />
+            </aura:if>
+        </aura:set>
+        <div class="slds-p-around_medium">
+            <lightning:recordEditForm aura:id="accountForm" objectApiName="Account" class="slds-is-relative"
+                                      onload="{!c.handleLoad}"
+                                      onsubmit="{!c.handleSubmit}"
+                                      onsuccess="{!c.handleSuccess}"
+                                      onerror="{!c.handleError}">
+
+                <lightning:messages aura:id="messages"/>
+
+                <div class="{!'slds-notify_container slds-is-relative slds-m-left_x-small ' + (v.isInvalid ? '' : 'slds-hide')}">
+                    <div role="alert" class="slds-notify slds-notify_toast slds-theme_error">
+                        <div class="slds-notify_content">
+                            <h2 class="slds-text-heading_small">Please complete required fields.</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <lightning:notificationsLibrary aura:id="notifLib"/>
+
+                <aura:iteration items="{!v.fields}" var="f">
+                    <lightning:inputField fieldName="{!f.fieldPath}" aura:id="inputField" class="{!f.required?'input-is-required':''}"/>
+                </aura:iteration>
+
+                <aura:if isTrue="{!not(empty(v.formattedAddress))}">
+                    <p>
+                        <br/>Primary Address: <br/>
+                        {!v.formattedAddress}
+                    </p>
+
+                </aura:if>
+
+                <lightning:button class="slds-m-top_small" variant="brand" type="submit" label="Create" />
+                <lightning:button class="slds-m-top_small" label="Cancel" onclick="{!c.handleCancel}"/>
+
+                <aura:if isTrue="{!v.processing}">
+                    <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+                </aura:if>
+
+            </lightning:recordEditForm>
+        </div>
+    </lightning:card>
+
+</aura:component>

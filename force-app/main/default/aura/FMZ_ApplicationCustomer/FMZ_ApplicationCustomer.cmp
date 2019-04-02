@@ -1,0 +1,44 @@
+<aura:component controller="FMZ_ApplicationCustomerController" implements="force:appHostable,forceCommunity:availableForAllPageTypes">
+
+	<aura:attribute name="applicationId" type="Id" default="a0J0v000000WESi"/>
+	<aura:attribute name="onchange" type="Aura.Action" description="Handle any data changes"/>
+
+	<aura:attribute name="customer" type="Account" access="private"/>
+
+	<aura:attribute name="processing" type="Boolean" default="false" access="private"/>
+	<aura:attribute name="error" type="String" access="private"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<aura:method name="saveAndValidate" access="public"/>
+
+	<lightning:layout multipleRows="true">
+		<lightning:layoutItem size="12" mediumDeviceSize="8" largeDeviceSize="6" >
+			<a class=" slds-truncate slds-m-bottom_xx-small slds-text-heading_small" onclick="{!c.navToAccount}">{!v.customer.Name}</a>
+			<lightning:input aura:id="inputField" type="email"
+							 value="{!v.customer.Email_Address__c}"
+							 label="Email Address"
+							 required="true"
+							 messageWhenValueMissing="Email Address is required."
+							 messageWhenTypeMismatch="Invalid Email Address"/>
+			<lightning:input aura:id="inputFieldPhone"
+							 value="{!v.customer.Phone}"
+							 label="Phone"
+							 required="true"
+							 pattern="[0-9]{10}"
+							 messageWhenPatternMismatch="Phone should be 10 digigts (NO '-')"
+							 messageWhenValueMissing="Phone is required."/>
+			<label class="slds-form-element__label" style="margin-right:0.5rem"> <span style="color: rgb(194, 57, 52);;">*</span> EIN</label>
+			<lightning:helpText content="Employer Identification Number"/>
+			<lightning:input aura:id="inputFieldEIN"
+							 value="{!v.customer.EIN__c}"
+							 label="EIN"
+							 variant="label-hidden"
+							 required="true"
+							 pattern="[a-zA-Z0-9]{2}-[a-zA-Z0-9]{7}"
+							 messageWhenPatternMismatch="EIN should be formatted XX-XXXXXXX"
+							 messageWhenValueMissing="EIN is required."/>
+		</lightning:layoutItem>
+	</lightning:layout>
+
+</aura:component>

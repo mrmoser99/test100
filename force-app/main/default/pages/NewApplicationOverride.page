@@ -1,0 +1,20 @@
+<apex:page standardController="genesis__Applications__c">
+  <script>
+ var profileName = '{!$Profile.Name}';
+ var recordType = '{!$CurrentPage.parameters.RecordType}';
+ var retURL = '{!$CurrentPage.parameters.retURL}';
+      if(profileName!='Newco Dealer'){
+          var retrunURL= '/apex/genesisextn__NewApplication?retURL='+retURL+'&sfdc.override=1';
+          if(recordType !='' && recordType!=null){
+         retrunURL = retrunURL +'&RecordType='+recordType;;
+          }
+          window.location.href = retrunURL;
+      }
+      else{
+      var appPrefix = '{!$ObjectType.genesis__Applications__c.keyPrefix}';
+      alert("You don't have access to create Application from Application Page.");
+      window.location.href = '/'+appPrefix+'/o';
+      
+      }   
+</script>
+</apex:page>

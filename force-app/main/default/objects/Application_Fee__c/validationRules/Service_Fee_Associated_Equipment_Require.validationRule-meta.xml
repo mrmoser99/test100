@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Fee_Associated_Equipment_Require</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(AND(Fee__r.Name = &#39;Service Fees&#39;, ISBLANK(Equipment__c)) ,true,false)</errorConditionFormula>
+    <errorMessage>Associated Equipment Has to be Selected</errorMessage>
+</ValidationRule>

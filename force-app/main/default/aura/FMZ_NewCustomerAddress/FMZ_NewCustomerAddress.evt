@@ -1,0 +1,10 @@
+<aura:event type="APPLICATION" description="Event fired when a new Validated Address is created">
+    <aura:attribute name="addressLine1" type="String"/>
+    <aura:attribute name="addressLine2" type="String"/>
+    <aura:attribute name="city" type="String"/>
+    <aura:attribute name="state" type="String"/>
+    <aura:attribute name="county" type="String"/>
+    <aura:attribute name="zipcode" type="String"/>
+    <aura:attribute name="country" type="String"/>
+    <aura:attribute name="status" type="String"/>
+</aura:event>

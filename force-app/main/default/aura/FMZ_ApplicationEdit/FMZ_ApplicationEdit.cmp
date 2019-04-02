@@ -1,0 +1,41 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="FMZ_ApplicationSummaryController">
+
+    <aura:attribute name="applicationId" type="String"/>
+
+    <aura:attribute name="application" type="Object" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <aura:if isTrue="{!!empty(v.applicationId)}">
+
+        <div class="slds-page-header slds-page-header_record-home">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <div style="background-color: #004F6D">
+                                <img src="{!$Resource.ApplicationLogo}" style="width:32px;height:32px;"/>
+                            </div>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span>Application</span>
+                                        <span class="slds-page-header__title">
+                                            {!v.application.Name}
+                                        </span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <c:FMZ_ApplicationForm applicationId="{!v.applicationId}"/>
+
+    </aura:if>
+
+</aura:component>

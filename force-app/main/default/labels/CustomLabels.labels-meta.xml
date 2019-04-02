@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ANNUAL</fullName>
+        <categories>Frequency Caluclation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ANNUAL</shortDescription>
+        <value>12</value>
+    </labels>
+    <labels>
+        <fullName>Conga_Quote_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Conga Quote URL</shortDescription>
+        <value>https://c.cs66.visual.force.com</value>
+    </labels>
+    <labels>
+        <fullName>Conga_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Conga_URL</shortDescription>
+        <value>https://composer.congamerge.com/composer8/index.html?SolMgr=1&amp;APIMode=1&amp;sessionId=</value>
+    </labels>
+    <labels>
+        <fullName>ContractEquipmentQueryDetails</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContractEquipmentQueryDetails</shortDescription>
+        <value>a2e0v0000001i2M</value>
+    </labels>
+    <labels>
+        <fullName>Credit_Engine</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Credit Engine</shortDescription>
+        <value>ICS</value>
+    </labels>
+    <labels>
+        <fullName>DefaultEscalationFrequency</fullName>
+        <categories>EscalationFrequency</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DefaultFrequencyName</shortDescription>
+        <value>ANNUAL</value>
+    </labels>
+    <labels>
+        <fullName>DefaultFrequencyValue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DefaultFrequencyValue</shortDescription>
+        <value>12</value>
+    </labels>
+    <labels>
+        <fullName>Email_to_Batch_Failed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email to Batch Failed</shortDescription>
+        <value>venkata.suhas@Cloudlendinginc.com</value>
+    </labels>
+    <labels>
+        <fullName>Environment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Environment</shortDescription>
+        <value>DEV</value>
+    </labels>
+    <labels>
+        <fullName>FMZ_Dealer_Community_Base_URL</fullName>
+        <categories>FMZ Dealer Community</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FMZ Dealer Community Base URL</shortDescription>
+        <value>https://dev-newcodev.cs66.force.com/dealer/</value>
+    </labels>
+    <labels>
+        <fullName>FMZ_EDQ_Auth_Token</fullName>
+        <categories>FMZ EDQ</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FMZ_EDQ_Auth_Token</shortDescription>
+        <value>8aa60900-71bf-442f-b492-cf194b1b0e88</value>
+    </labels>
+    <labels>
+        <fullName>FMZ_LightningExp_Host</fullName>
+        <categories>FMZ Dealer Community</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FMZ LightningExp Host</shortDescription>
+        <value>https://dev-newcodev.cs66.force.com</value>
+    </labels>
+    <labels>
+        <fullName>FMZ_Price_Exceeds_MSRP_Warning_Percent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FMZ Price Exceeds MSRP Warning Percent</shortDescription>
+        <value>25</value>
+    </labels>
+    <labels>
+        <fullName>FMZ_Visualforce_Host</fullName>
+        <categories>FMZ Dealer Community</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FMZ Visualforce Host</shortDescription>
+        <value>https://newcoleasing--dev--c.cs66.visual.force.com</value>
+    </labels>
+    <labels>
+        <fullName>FinalLetterCongaEmailTemplate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FinalLetterCongaEmailTemplate</shortDescription>
+        <value>a2d0v000000HFg3</value>
+    </labels>
+    <labels>
+        <fullName>FinalLetterCongaTemplate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FinalLetterCongaTemplate</shortDescription>
+        <value>a2m0v0000005vwu</value>
+    </labels>
+    <labels>
+        <fullName>FinalNoticeLetter_DeliquentDay</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FinalNoticeLetter-DeliquentDay</shortDescription>
+        <value>91</value>
+    </labels>
+    <labels>
+        <fullName>FromID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FromID</shortDescription>
+        <value>0D21I000000CdKt</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Application_Type_Code</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Application Type Code</shortDescription>
+        <value>STANDARD</value>
+    </labels>
+    <labels>
+        <fullName>ICS_AutoApproval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS AutoApproval</shortDescription>
+        <value>MANUAL</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Endpoint</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Endpoint</shortDescription>
+        <value>https://apiacc.dllgroup.com/Submit-ICS</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Environment_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Environment Id</shortDescription>
+        <value>ACC01</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Financial_Product_Type_Code</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Financial Product Type Code</shortDescription>
+        <value>LEASING</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Hyperion_Based_Entity</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Hyperion Based Entity</shortDescription>
+        <value>BEQUS</value>
+    </labels>
+    <labels>
+        <fullName>ICS_LGD_Lookup_Type</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS LGD Lookup Type</shortDescription>
+        <value>GENERIC</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Line_Of_Business</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Line Of Business</shortDescription>
+        <value>OT</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Reply_To</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Reply To</shortDescription>
+        <value>https://cs66.salesforce.com/services/Soap/class/ICSResponse</value>
+    </labels>
+    <labels>
+        <fullName>ICS_Source_System</fullName>
+        <categories>ICS</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS Source System</shortDescription>
+        <value>CLND</value>
+    </labels>
+    <labels>
+        <fullName>ICS_System_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICS System Id</shortDescription>
+        <value>1</value>
+    </labels>
+    <labels>
+        <fullName>ICVDomain</fullName>
+        <categories>ICV</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICVDomain</shortDescription>
+        <value>apiacc</value>
+    </labels>
+    <labels>
+        <fullName>ICV_Client</fullName>
+        <categories>ICV</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICV_client</shortDescription>
+        <value>28c30838-adc9-4191-8c28-5745c8e82f05</value>
+    </labels>
+    <labels>
+        <fullName>ICV_secret</fullName>
+        <categories>ICV</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICV_secret</shortDescription>
+        <value>189e3c20-110b-4dda-a299-7615483af590</value>
+    </labels>
+    <labels>
+        <fullName>ICV_sourceSystemName</fullName>
+        <categories>ICV</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICV_sourceSystemName</shortDescription>
+        <value>CLND</value>
+    </labels>
+    <labels>
+        <fullName>ICV_tokenendpoint</fullName>
+        <categories>ICV</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICV_tokenendpoint</shortDescription>
+        <value>https://apiacc.dllgroup.com/oauth/token</value>
+    </labels>
+    <labels>
+        <fullName>ICV_userId</fullName>
+        <categories>ICV</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ICV_userId</shortDescription>
+        <value>786005</value>
+    </labels>
+    <labels>
+        <fullName>Insurance_expire_notification_date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Insurance_expire_notification_date</shortDescription>
+        <value>8</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Conga_Parms</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Conga Parms</shortDescription>
+        <value>&amp;AC0=1&amp;AC1=Invoicing&amp;LG3=1&amp;LG4=1</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Email_Template_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Email Template Id</shortDescription>
+        <value>00X1I000000ZNDQ</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Query</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Query</shortDescription>
+        <value>[GIV]a2e1I0000006AOq</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Query_2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Query 2</shortDescription>
+        <value>[DueDetailsLines]a2e1I000000Qam4</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Template_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Template Id</shortDescription>
+        <value>a2m1I000000hEEP</value>
+    </labels>
+    <labels>
+        <fullName>Invoice_Test_Contact_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invoice Test Contact Id</shortDescription>
+        <value>0031I00000JBgde</value>
+    </labels>
+    <labels>
+        <fullName>OFAC_Checking</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OFAC Checking</shortDescription>
+        <value>True</value>
+    </labels>
+    <labels>
+        <fullName>OrgUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OrgUrl</shortDescription>
+        <value>https://newcoleasing--dev.cs66.my.salesforce.com</value>
+    </labels>
+    <labels>
+        <fullName>SUCCESS_MSG</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SUCCESS_MSG</shortDescription>
+        <value>Success</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome Email</shortDescription>
+        <value>0D21I000000CdKt</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_Email_Template_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome Email Template Id</shortDescription>
+        <value>00X1I000000ZNDR</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_HTML_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome HTML Body</shortDescription>
+        <value>Hello,&lt;br/&gt;&lt;br/&gt;
+You are receiving this e-mail because you recently executed a lease agreement for new office equipment.  Please review all attached documents and contact us with any questions.
+&lt;br/&gt;&lt;br/&gt; Sincerely, &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;
+The NewCo Team&lt;br/&gt;
+(a program of De Lage Landen Financial Services)</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_Ins_Doc</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome Ins Doc</shortDescription>
+        <value>0151I000000XidX</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_Query1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome Query1</shortDescription>
+        <value>a2e1I0000006AP0</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_Query2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome Query2</shortDescription>
+        <value>a2e1I0000006AP5</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_Template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome Template</shortDescription>
+        <value>a2m1I0000002Qe3</value>
+    </labels>
+    <labels>
+        <fullName>conga_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>conga Email</shortDescription>
+        <value>anilp5454@gmail.com</value>
+    </labels>
+</CustomLabels>

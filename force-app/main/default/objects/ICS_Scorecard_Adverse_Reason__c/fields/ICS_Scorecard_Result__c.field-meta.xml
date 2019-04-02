@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ICS_Scorecard_Result__c</fullName>
+    <externalId>false</externalId>
+    <label>ICS Scorecard Result</label>
+    <referenceTo>ICS_Scorecard_Result__c</referenceTo>
+    <relationshipLabel>ICS Scorecard Adverse Reasons</relationshipLabel>
+    <relationshipName>ICS_Scorecard_Adverse_Reasons</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

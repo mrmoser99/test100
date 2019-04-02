@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Credit_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Credit</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Credit Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Failed</fullName>
+        <field>Status__c</field>
+        <formula>&#39;No Response in 5 Min&#39;</formula>
+        <name>Failed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Refer</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Credit</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Refer</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Time_for_ICS_Failure_Notice</fullName>
+        <field>Credit_Wait__c</field>
+        <formula>Now() - 38/1000</formula>
+        <name>Time for ICS Failure Notice</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Credit Wait</fullName>
+        <actions>
+            <name>Time_for_ICS_Failure_Notice</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>ICS_Application__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Waiting For Credit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ICS_Application__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Similar Chosen by CA</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Credit_Queue</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Failed</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Refer</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>ICS_Application__c.Credit_Wait__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

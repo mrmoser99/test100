@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transaction_Movement_Codes</fullName>
+    <columns>NAME</columns>
+    <columns>CL_Lease_Transaction_Type__c</columns>
+    <columns>Movement_Code__c</columns>
+    <columns>Transaction_Eligible_GL_Account_Codes__c</columns>
+    <columns>Transaction_Type_in_OLFM__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CL_Lease_Transaction_Type__c</field>
+        <operation>notEqual</operation>
+        <value>TAX</value>
+    </filters>
+    <label>Transaction Movement Codes</label>
+    <language>en_US</language>
+</ListView>

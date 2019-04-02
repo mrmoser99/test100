@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>Interface Monitor</label>
+    <tabs>Int_OLMN_Accounting_Entry__c</tabs>
+    <tabs>Int_Batch_Status__c</tabs>
+    <tabs>Int_PX_Billing__c</tabs>
+    <tabs>Int_PX_Remit__c</tabs>
+    <tabs>Int_PX_NSF__c</tabs>
+    <tabs>Int_OLMN_AP__c</tabs>
+    <tabs>Int_OLMN_GL__c</tabs>
+    <tabs>Int_OLMN_Net_Investment__c</tabs>
+    <tabs>Int_OLMN_Payment_Confirmation__c</tabs>
+    <tabs>Int_OFAC__c</tabs>
+    <tabs>Int_OFAC_FINCEN__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>clcommon__NavigationStructure__c</tabs>
+    <tabs>collect__Source_System__c</tabs>
+    <tabs>clcommon__Expression_Assignment__c</tabs>
+    <tabs>clcommon__ComponentStructure__c</tabs>
+    <tabs>ints__Equipment__c</tabs>
+    <tabs>genesis__Application_Pricing_Detail__c</tabs>
+    <tabs>Int_Exposure__c</tabs>
+    <tabs>Test_DBSync_Upsert__c</tabs>
+</CustomApplication>

@@ -1,0 +1,20 @@
+/**
+ * Created by samuelmeyers on 11/9/18.
+*/
+.THIS .slds-resizable__divider{
+    display: none;
+}
+.THIS .slds-resizable__handle{
+    display: none;
+}
+.THIS .slds-th__action-button{
+    display: none;
+}
+.THIS .height-scroll{
+    height: 12.5rem;
+    overflow: scroll;
+}
+.THIS .rounded-corners {
+   border-radius: 5%;
+   height: 3rem;
+}

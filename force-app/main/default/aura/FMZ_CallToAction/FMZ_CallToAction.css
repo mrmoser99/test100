@@ -1,0 +1,35 @@
+/**
+ * Created by samuelmeyers on 11/9/18.
+*/
+.THIS .slds-resizable__divider{
+    display: none;
+}
+.THIS .slds-resizable__handle{
+    display: none;
+}
+.THIS .slds-th__action-button{
+    display: none;
+}
+.THIS .height-scroll{
+    height: 12.5rem;
+    overflow: scroll;
+}
+.THIS .rounded-corners {
+   border-radius: 5%;
+   height: 3rem;
+}
+.THIS .card-style {
+    border: lightgrey solid 1px;
+    border-radius: .3rem;
+    overflow: hidden;
+}
+.THIS .card-style-selected {
+    border: green solid 2px;
+    border-radius: .3rem;
+    overflow: hidden;
+}
+.THIS .card-style:hover {
+    border: green solid 2px;
+    border-radius: .3rem;
+    overflow: hidden;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ICS_Application_Request__c</fullName>
+    <externalId>false</externalId>
+    <label>ICS Application Request</label>
+    <referenceTo>ICS_Application__c</referenceTo>
+    <relationshipLabel>ICS Multiple Year EAD</relationshipLabel>
+    <relationshipName>ICS_Multiple_Year_EAD1</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

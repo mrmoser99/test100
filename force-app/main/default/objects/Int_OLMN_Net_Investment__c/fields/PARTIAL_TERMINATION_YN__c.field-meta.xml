@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PARTIAL_TERMINATION_YN__c</fullName>
+    <description>If there exists a record in Contract_Equipment__C with status__C as TERMINATED and contract status as Active, then Y else N</description>
+    <externalId>false</externalId>
+    <label>PARTIAL TERMINATION YN</label>
+    <length>1</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

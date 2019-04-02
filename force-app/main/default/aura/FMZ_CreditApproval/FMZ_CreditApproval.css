@@ -1,0 +1,33 @@
+/**
+ * Created by tino on 10/8/18.
+ */
+.THIS {
+}
+
+.THIS.is-loaded .input-is-required {
+    font-weight: 400;
+}
+.THIS.is-loaded .input-is-required:before {
+    content: "*";
+    margin: 0 0.125rem 0 0.125rem;
+    color: rgb(194, 57, 52);
+    float: left;
+}
+.THIS .new-customer-btn {
+    right: 0;
+    bottom: 0;
+}
+.THIS .match_overlay{
+    border: 1px solid;
+    border-color: rgb(212, 212, 212);
+    z-index: 1000;
+    background-color: rgb(255, 255, 255);
+    width: inherit;
+    height: inherit;
+}
+.THIS .no-display{
+    display: none;
+}
+.THIS .hover_color:hover{
+    background-color: rgb(220, 220, 220);
+}

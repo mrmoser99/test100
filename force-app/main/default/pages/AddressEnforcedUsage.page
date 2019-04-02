@@ -1,0 +1,11 @@
+<apex:page showHeader="false" sidebar="false"
+ standardController="Address__c"
+extensions="EDQ.DataQualityEnforcedUsageController"
+ action="{!Execute}">
+
+ <EDQ:DataQualityDetailPageScripts Urls="{!Urls}"
+ DetailPageUrl="{!DetailPageUrl}"
+ DataQualityEnforcedUsageData="{!EnforcedUsageData}"
+ EnableEnforcedUsage="true"
+ IsCalledFromDetailPageOverride="false" />
+</apex:page>

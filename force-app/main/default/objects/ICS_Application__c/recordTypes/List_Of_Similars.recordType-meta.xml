@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>List_Of_Similars</fullName>
+    <active>true</active>
+    <label>List Of Similars</label>
+    <picklistValues>
+        <picklist>KYC_Reason__c</picklist>
+        <values>
+            <fullName>KYC Pass - Identity Valid No risk</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KYC Pass - Identity via Other%2C Risk OK</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KYC Pass - Risk erroneous or na</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>KYC_Source__c</picklist>
+        <values>
+            <fullName>Bank Documents</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consumer Credit Report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D%26B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Driver License</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equifax Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Experian Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IRS Documents</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lexis Nexis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical License</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paynet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOS</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

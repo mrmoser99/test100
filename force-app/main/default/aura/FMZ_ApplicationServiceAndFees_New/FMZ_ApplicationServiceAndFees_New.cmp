@@ -1,0 +1,117 @@
+<aura:component controller="FMZ_ApplicationServiceAndFeesController">
+
+    <aura:attribute name="applicationId" type="Id"/>
+    <aura:attribute name="feeDefId" type="Id"/>
+    <aura:attribute name="feeId" type="Id"/>
+    <aura:attribute name="onchange" type="Aura.Action" description="Handle any data changes"/>
+
+    <aura:attribute name="feeName" type="String" access="private"/>
+    <aura:attribute name="fee" type="Application_Fee__c" access="private"/>
+    <aura:attribute name="selectedEquipment" type="List" access="private"/>
+    <aura:attribute name="equipmentOpts" type="List" access="private"/>
+    <aura:attribute name="frequencyOpts" type="List" access="private"/>
+    <aura:attribute name="serviceEscalateOpts" type="List" access="private"/>
+    <aura:attribute name="escalateFreqOpts" type="List" access="private"/>
+    <aura:attribute name="escalateOnOpts" type="List" access="private"/>
+    <aura:attribute name="escalateTypeOpts" type="List" access="private"/>
+    <aura:attribute name="searchString" type="String" access="private"/>
+    <aura:attribute name="processing" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="error" type="String" access="private"/>
+
+    <aura:registerEvent name="appEvent" type="c:FMZ_Application_Refresh"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <lightning:card title="{!'New '+v.feeName}" iconName="standard:partner_marketing_budget">
+        <div class="slds-m-around_medium">
+
+            <lightning:dualListbox aura:id="equipmentList"
+                                   name="equipment"
+                                   required="{!v.feeName == 'Service Fees'}" 
+                                   label= "Select Equipment"
+                                   sourceLabel="Available"
+                                   selectedLabel="Selected"
+                                   fieldLevelHelp="Select equipment to add this fee for."
+                                   options="{!v.equipmentOpts}"
+                                   onchange="{! c.handleChange }"/>
+
+            <lightning:input aura:id="paymentCount" type="number" label="Number of Payments"
+                             value="{!v.fee.Number_of_Payments__c}"
+                             placeholder="Enter Number of Payments"/>
+
+            <lightning:select aura:id="frequency" label="Frequency"
+                              required="false" value="{!v.fee.Frequency__c}">
+                <option value="">--Select--</option>
+                <aura:iteration items="{!v.frequencyOpts}" var="a">
+                    <option value="{!a.value}"
+                            selected="{!a.value==v.fee.Frequency__c}">{!a.label}</option>
+                </aura:iteration>
+            </lightning:select>
+
+            <lightning:input aura:id="amount" type="number" formatter="currency" step="0.01"
+                             label="Fee Amount" placeholder="Enter Fee Amount" value="{!v.fee.Amount__c}"
+                             min="0.01" messageWhenValueMissing="Fee Amount is required." required="true"
+                             />
+
+            <ui:inputDate aura:id="dueDate" format="M/d/yyyy" displayDatePicker="true" label="Due Date"
+                          value="{!v.fee.Start_Date__c}" />
+
+            <!--<aura:if isTrue="{!v.feeName == 'Service Fees'}">-->
+
+                <!--<lightning:select aura:id="serviceEscalate" label="Does Service Escalate?"-->
+                                 <!--required="false" value="{!v.fee.Service_Escalate__c}">-->
+                    <!--<option value="">&#45;&#45;Select&#45;&#45;</option>-->
+                    <!--<aura:iteration items="{!v.serviceEscalateOpts}" var="a">-->
+                        <!--<option value="{!a.value}"-->
+                                <!--selected="{!a.value==v.fee.Service_Escalate__c}">{!a.label}</option>-->
+                    <!--</aura:iteration>-->
+                <!--</lightning:select>-->
+
+                <!--<aura:if isTrue="{!v.fee.Service_Escalate__c == 'YES'}">-->
+
+                    <!--<lightning:select aura:id="escalateFreq" label="Escalation Frequency"-->
+                                      <!--required="true" value="{!v.fee.Escalation_Frequency__c}">-->
+                        <!--<option value="">&#45;&#45;Select&#45;&#45;</option>-->
+                        <!--<aura:iteration items="{!v.escalateFreqOpts}" var="a">-->
+                            <!--<option value="{!a.value}"-->
+                                    <!--selected="{!a.value==v.fee.Escalation_Frequency__c}">{!a.label}</option>-->
+                        <!--</aura:iteration>-->
+                    <!--</lightning:select>-->
+
+                    <!--<lightning:select aura:id="escalateOn" label="Escalate On"-->
+                                      <!--required="true" value="{!v.fee.Escalate_Service_On__c}">-->
+                        <!--<option value="">&#45;&#45;Select&#45;&#45;</option>-->
+                        <!--<aura:iteration items="{!v.escalateOnOpts}" var="a">-->
+                            <!--<option value="{!a.value}"-->
+                                    <!--selected="{!a.value==v.fee.Escalate_Service_On__c}">{!a.label}</option>-->
+                        <!--</aura:iteration>-->
+                    <!--</lightning:select>-->
+
+                    <!--<lightning:select aura:id="escalateType" label="Escalation Type"-->
+                                      <!--required="true" value="{!v.fee.Escalation_Type__c}">-->
+                        <!--<option value="">&#45;&#45;Select&#45;&#45;</option>-->
+                        <!--<aura:iteration items="{!v.escalateTypeOpts}" var="a">-->
+                            <!--<option value="{!a.value}"-->
+                                    <!--selected="{!a.value==v.fee.Escalation_Type__c}">{!a.label}</option>-->
+                        <!--</aura:iteration>-->
+                    <!--</lightning:select>-->
+
+                    <!--<lightning:input aura:id="escalateValue" type="number"  step="0.1"-->
+                                     <!--label="Escalation Value" placeholder="Enter a Value"-->
+                                     <!--value="{!v.fee.Escalation_Value__c}" min="0.1" max="15" required="true"-->
+                                     <!--messageWhenValueMissing="Escalation Value is Required" />-->
+
+                <!--</aura:if>-->
+            <!--</aura:if>-->
+
+            <lightning:button class="slds-m-top_large" label="Cancel" onclick="{!c.handleCancel}"/>
+            <lightning:button class="slds-m-top_large" variant="brand" label="Add" onclick="{!c.handleAdd}"/>
+
+            <aura:if isTrue="{!v.processing}">
+                <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+            </aura:if>
+        </div>
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,29 @@
+<aura:component description="Fortimize Path" implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="stages" type="List" required="true"/>
+    <aura:attribute name="label" type="String" required="true"/>
+    <aura:attribute name="minWidth" type="String" default="10rem"/>
+    
+    <aura:registerEvent name="stageSelect" type="c:FMZ_PipelineSelection"/>
+    <div class="slds-path slds-grow">
+        <div class="slds-grid slds-path__track">
+            <div class="slds-grid slds-path__scroller-container">
+                <div class="slds-path__scroller" role="application">
+                    <div class="slds-path__scroller_inner">
+                        <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+                            <aura:iteration items="{!v.stages}" var="stage">
+                                <li class="{! 'slds-path__item slds-is-incomplete testClass'}" role="presentation">
+                                   <a class="slds-path__link" tabindex="0" onclick="{!c.stageSelected}" data-value="{!stage.label}">
+                                       <span class="slds-path__stage">
+                                       </span>
+                                       <span class="{!'slds-path__title slds-text-heading_small slds-text-color_' + stage.variant}">{!stage.label}-{!stage.values.length}</span>
+                                             
+                                    </a>
+                                </li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

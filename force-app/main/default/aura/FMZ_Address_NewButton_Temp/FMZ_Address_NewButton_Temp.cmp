@@ -1,0 +1,11 @@
+<aura:component description="New Address Button" implements="forceCommunity:availableForAllPageTypes" access="global">
+
+    <lightning:navigation aura:id="nav"/>
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
+    <aura:attribute name="accountId" type="String" default="" access="public"/>
+
+    <lightning:button iconName="utility:jump_to_bottom" name="modal" variant="brand" label="New Address" onclick="{!c.handleShowModal}"/>
+
+</aura:component>

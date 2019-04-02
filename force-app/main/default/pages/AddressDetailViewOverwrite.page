@@ -1,0 +1,10 @@
+<apex:page StandardController="Address__c" tabStyle="Address__c" sidebar="true" extensions="EDQ.DataQualityEnforcedUsageController" action="{!Execute}"> 
+    <apex:stylesheet value="{!URLFOR($Resource.EDQ__DynamicPageCss)}" />
+    <EDQ:DataQualityDetailPageScripts EnforcedUsageRefreshTouchpointsAction="{!Execute}"
+          Urls="{!Urls}" 
+          DetailPageUrl="{!DetailPageUrl}" 
+          DataQualityEnforcedUsageData="{!EnforcedUsageData}" 
+          EnableEnforcedUsage="false" 
+          IsCalledFromDetailPageOverride="true"/>
+    
+    <apex:detail inlineEdit="true" relatedList="true" oncomplete="execute();" /> </apex:page>

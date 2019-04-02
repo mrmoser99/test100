@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>Application Logging</label>
+    <tabs>Vertex_Log__c</tabs>
+    <tabs>cllease__Batch_Process_Log__c</tabs>
+    <tabs>Bill_Monitor__c</tabs>
+    <tabs>OFAC_Log__c</tabs>
+    <tabs>Supertrump_Log__c</tabs>
+    <tabs>ICS_Application__c</tabs>
+    <tabs>ICS_Log__c</tabs>
+    <tabs>Int_Facility__c</tabs>
+    <tabs>Int_Delivery_Control__c</tabs>
+    <tabs>clcommon__NavigationStructure__c</tabs>
+    <tabs>collect__Source_System__c</tabs>
+    <tabs>clcommon__Expression_Assignment__c</tabs>
+    <tabs>clcommon__ComponentStructure__c</tabs>
+    <tabs>ints__Equipment__c</tabs>
+    <tabs>genesis__Application_Pricing_Detail__c</tabs>
+</CustomApplication>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Print_Invoice</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Print Invoice</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/15.0/apex.js&quot;)}
+
+var r = confirm(&quot;Are you sure you want to generate Invoice Document&quot;);
+
+if(r == true)
+{
+   var message = sforce.apex.execute(&quot;CongaGenerateInvoice&quot;,&quot;generateInvoiceDocument&quot;,
+                                    {recordId:&quot;{!Invoice__c.Id}&quot;});
+    alert(message);
+    if(message==&#39;Document generated successfully&#39;){
+        window.location.reload();
+    }
+}</url>
+</WebLink>

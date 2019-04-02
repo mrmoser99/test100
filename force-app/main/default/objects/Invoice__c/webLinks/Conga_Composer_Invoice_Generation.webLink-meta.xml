@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Composer_Invoice_Generation</fullName>
+    <availability>online</availability>
+    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://apxtconga4.cs77.visual.force.com/aCu0t0000008OKnCAM
+11-Mar-2018 03:42:11 AM</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>false</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>660</height>
+    <isResizable>false</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Invoice Generation</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/apex/APXTConga4__Conga_Composer?SolMgr=1
+&amp;serverUrl={!API.Partner_Server_URL_370}
+&amp;Id={!Invoice__c.Id}
+
+&amp;QueryId=[INV]aCo0t0000000Bbo,
+[DueDetailsLines]aCo0t0000000Bbl,
+[AD]aCo0t0000000Bbi,
+[INSFEE]aCo0t0000000Bbq,
+[OrigFee]aCo0t0000000Bbp,
+[InterimRent]aCo0t0000000Bbm,
+[LateFee]aCo0t0000000Bbr,
+[FinanceFee]aCo0t0000000Bbn,
+[EC]aCo0t0000000BeN%3Fpv0%3D{!cllease__Lease_Account__c.Id}
+
+&amp;TemplateId=aCw0t0000008OKx</url>
+    <width>900</width>
+</WebLink>

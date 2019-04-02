@@ -1,0 +1,40 @@
+<!--
+ - Created by samuelmeyers on 11/8/18.
+ -->
+
+<aura:component description="FMZ_QuickAction" implements="forceCommunity:availableForAllPageTypes"
+                controller="FMZ_QuickActionController_Temp" access="global">
+
+    <aura:attribute name="sections" type="List" />
+    <aura:attribute name="processing" type="Boolean" default="true"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--<aura:handler name="render" value="{!this}" action="{!c.onRender}"/>-->
+
+    <lightning:accordion aura:id="accordion" activeSectionName="{!v.sections[0].name}">
+        <aura:iteration var="section" items="{!v.sections}">
+            <lightning:accordionSection name="{!section.name}" label="{!section.label}">
+                <aura:set attribute="body">
+                    <lightning:card>
+                        <aura:set attribute="title">
+                            <img src="{!section.imageSource}" class="rounded-corners slds-m-right_medium"/>
+                            {!section.items.length > 0 ? section.title : section.emptyListMessage}
+                        </aura:set>
+                        <aura:if isTrue="{! section.items.length > 0}" >
+                            <div class="slds-m-around_medium height-scroll">
+                                <lightning:datatable
+                                        data="{!section.items}"
+                                        columns="{! section.columns}"
+                                        keyField="id"
+                                        hideCheckboxColumn="true"/>
+                            </div>
+                        </aura:if>
+                    </lightning:card>
+                </aura:set>
+            </lightning:accordionSection>
+        </aura:iteration>
+        <aura:if isTrue="{!v.processing}">
+            <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+        </aura:if>
+    </lightning:accordion>
+</aura:component>

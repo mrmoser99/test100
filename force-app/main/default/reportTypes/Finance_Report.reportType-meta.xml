@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>cllease__Lease_Account__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>Finance Report</description>
+    <label>Finance Report</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Ctr No</displayNameOverride>
+            <field>Name</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Prgm Code</displayNameOverride>
+            <field>Dealer_Program__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Subs Amt</displayNameOverride>
+            <field>cllease__Subsidy__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Implicit Int Rate</displayNameOverride>
+            <field>cllease__Yield__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Ctr Term</displayNameOverride>
+            <field>cllease__Term__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Adv X Arr F</displayNameOverride>
+            <field>cllease__Payment_Method__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Ctr Bokg Dt</displayNameOverride>
+            <field>cllease__Contract_Date__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Bokd Amt</displayNameOverride>
+            <field>cllease__Financed_Amount__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Cost Of Fndng Pctg</displayNameOverride>
+            <field>Cost_of_Funds__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Bokd Rsdl Amt</displayNameOverride>
+            <field>cllease__Residual_Amount__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Down Pymt Amt</displayNameOverride>
+            <field>cllease__Down_Payment__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Cst Code</displayNameOverride>
+            <field>Account_Number__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Cst Nm</displayNameOverride>
+            <field>cllease__Account__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Prch Opt Desc</displayNameOverride>
+            <field>Purchase_Option__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Cr_Apl_Tp_Code__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Cr Apl Bokd Dt</displayNameOverride>
+            <field>CTA_Booked_Date1__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Cr Apl Bokd Dt_old</displayNameOverride>
+            <field>CTA_Booked_Date__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Prmy Sale Rprstv Last Nm</displayNameOverride>
+            <field>Sales_Rep_Name__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Prom_Code__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Rollov Fees</displayNameOverride>
+            <field>Trade_Up_Amount__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hyp_Based_Ent__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>BU Nm</displayNameOverride>
+            <field>Business_Unit_Name__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Vend Nm</displayNameOverride>
+            <field>cllease__Dealer__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Bokg_Yr_Mo__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Intrm Rent Amt</displayNameOverride>
+            <field>Interim_Rent__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <masterLabel>LS Contracts</masterLabel>
+    </sections>
+</ReportType>

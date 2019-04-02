@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Number_of_Payment_not_greater_than_Term</fullName>
+    <active>true</active>
+    <errorConditionFormula>Number_of_Terms__c &gt; Application__r.genesis__Term__c</errorConditionFormula>
+    <errorMessage>Number of Payments Cannot be Greater than Genesis Lease Term</errorMessage>
+</ValidationRule>

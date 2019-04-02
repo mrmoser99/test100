@@ -1,0 +1,66 @@
+<aura:component controller="FMZ_ApplicationLocationsController">
+
+    <aura:attribute name="applicationId" type="Id"/>
+    <aura:attribute name="accountId" type="String"/>
+    <aura:attribute name="onchange" type="Aura.Action" description="Handle any data changes"/>
+
+    <aura:attribute name="locations" type="List" access="private"/>
+    <aura:attribute name="searchString" type="String" access="private"/>
+    <aura:attribute type="List" name="selection" default="[]" access="private"/>
+    <aura:attribute name="processing" type="Boolean" default="false" access="private"/>
+    <aura:attribute name="error" type="String" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:FMZ_NewCustomerAddress" action="{!c.handleNewAddress}"/>
+
+    <aura:registerEvent name="dataChangedEvent" type="c:FMZ_Application_Refresh"/>
+
+    <aura:method name="saveAndValidate" access="public"/>
+
+    <div class="slds-float--right slds-m-bottom_x-small">
+        <c:FMZ_Address_Button accountId="{!v.accountId}"/>
+    </div>
+
+    <table class="slds-table slds-table_bordered slds-table_striped slds-max-medium-table_stacked-horizontal slds-m-top_medium ssslds-border_left ssslds-border_right">
+        <thead>
+        <tr class="slds-line-height_reset">
+            <th scope="col" style="width:5rem;">
+                &nbsp;
+            </th>
+            <th class="slds-text-title_caps" scope="col" data-label="Location Address">
+                <div class="slds-truncate" title="Location Address">Location Address</div>
+            </th>
+            <th class="slds-text-title_caps" scope="col">
+                <div class="slds-truncate" title="Install At?">Install At?</div>
+            </th> 
+        </tr>
+        </thead>
+        <tbody>
+        <aura:iteration items="{!v.locations}" var="l">
+            <tr class="slds-hint-parent">
+                <td><lightning:icon iconName="standard:address" size="small"/></td>
+                <td>
+                    <div class="slds-p-top_xx-small">{!l.Address_Line_1__c}</div>
+                    <div>{!l.City__c},&nbsp;{!l.State__c}&nbsp;{!l.Zip_Code__c}</div>
+                </td>
+                <td>
+                    <lightning:input aura:id="install" type="checkbox" label="Install At?"
+                                     value="{!l.Install_At__c}" onchange="{!c.handleBlur}"
+                                     checked="{!l.Install_At__c}" required="false"/>
+
+                </td>
+            </tr>
+        </aura:iteration>
+        <aura:if isTrue="{!empty(v.locations)}">
+            <tr>
+                <td colspan="6">No location records found.</td>
+            </tr>
+        </aura:if>
+        </tbody>
+    </table>
+
+    <aura:if isTrue="{!v.processing}">
+        <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>
+    </aura:if>
+
+</aura:component>

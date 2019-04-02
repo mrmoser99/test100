@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KYC_Source__c</fullName>
+    <externalId>false</externalId>
+    <label>KYC Source</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bank Documents</fullName>
+                <default>false</default>
+                <label>Bank Documents</label>
+            </value>
+            <value>
+                <fullName>Consumer Credit Report</fullName>
+                <default>false</default>
+                <label>Consumer Credit Report</label>
+            </value>
+            <value>
+                <fullName>D&amp;B</fullName>
+                <default>false</default>
+                <label>D&amp;B</label>
+            </value>
+            <value>
+                <fullName>Driver License</fullName>
+                <default>false</default>
+                <label>Driver License</label>
+            </value>
+            <value>
+                <fullName>Equifax Business</fullName>
+                <default>false</default>
+                <label>Equifax Business</label>
+            </value>
+            <value>
+                <fullName>Experian Business</fullName>
+                <default>false</default>
+                <label>Experian Business</label>
+            </value>
+            <value>
+                <fullName>IRS Documents</fullName>
+                <default>false</default>
+                <label>IRS Documents</label>
+            </value>
+            <value>
+                <fullName>Lexis Nexis</fullName>
+                <default>false</default>
+                <label>Lexis Nexis</label>
+            </value>
+            <value>
+                <fullName>Medical License</fullName>
+                <default>false</default>
+                <label>Medical License</label>
+            </value>
+            <value>
+                <fullName>Paynet</fullName>
+                <default>false</default>
+                <label>Paynet</label>
+            </value>
+            <value>
+                <fullName>SOS</fullName>
+                <default>false</default>
+                <label>SOS</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

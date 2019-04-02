@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Agreement_Number__c</columns>
+    <columns>Schedule_Start_Date__c</columns>
+    <columns>Payment_Type_Code__c</columns>
+    <columns>Schedule_Amount__c</columns>
+    <columns>Schedule_Class__c</columns>
+    <columns>Currency_Code__c</columns>
+    <columns>Agreement_Name__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Agreement_Source_System__c</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>
