@@ -25,12 +25,12 @@ trigger InitiateCLSReceiptJobsTrigger on Int_Batch_Status__c (before insert) {
         apiHandle.runOnce(dagName);
 	
 	
-	} /*else if(batchStatus.Name == DLLNewCoConstants.BATCH_STATUS_PNC_NSF 
+	} else if(batchStatus.Name == DLLNewCoConstants.BATCH_STATUS_PNC_NSF 
 		&& batchStatus.Status__c == DLLNewCoConstants.BATCH_STATUS_READY) {
 		// Apply Payments From PNC
 		String dagName = 'DAG - Apply PNC NSF Charges';
 		clcommon.DynamicJobAPI2 apiHandle = clcommon.APIFactory.getDynamicJobAPI2();
         apiHandle.runOnce(dagName);
-	}*/
+	}
 	
 }
