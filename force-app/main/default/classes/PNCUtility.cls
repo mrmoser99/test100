@@ -4,6 +4,7 @@
 * 
 *	Change Log: 
 *	4/4/19 - MRM Created
+    4/5/19 - updated comment
 *
 ********************************************************************************************************************/
 public with sharing class PNCUtility { 
@@ -11,7 +12,7 @@ public with sharing class PNCUtility {
        
     /*************************************************************************************************
     * 
-    * voidInvoice 
+    * voidInvoice  1
 	*	
 	* 
     *************************************************************************************************/
@@ -43,7 +44,7 @@ public with sharing class PNCUtility {
             ,Customer_Name__c
             ,Id
             ,LS_Contract__c
-            ,LS_Contract__r.name
+            ,LS_Contract__r.name 
             ,Name
             ,Total_Amount_Due__c 
             FROM Invoice__c
@@ -52,7 +53,7 @@ public with sharing class PNCUtility {
 
         Account a = [select account_number__c
                     ,name
-                    from Account
+                    from Account 
                     where id = :i.bill_to_account__c
                     ];
 
@@ -120,4 +121,3 @@ public with sharing class PNCUtility {
 
     }    
 }
-  		
