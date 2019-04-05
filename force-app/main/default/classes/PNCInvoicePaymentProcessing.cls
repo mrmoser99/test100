@@ -6,7 +6,7 @@
  *     
  **/
 global with sharing class PNCInvoicePaymentProcessing extends clcommon.DynamicJob {
-
+   
     private Map<String, Id> paymentModesMap;
     private Date currentSystemDate;
     private String autoACHPaymentMode = 'Auto ACH';
