@@ -13,7 +13,8 @@ trigger Int_PX_Billing on Int_PX_Billing__c (after update) {
  	/*
  	6|0000000419|0000000419|04/16/2018|05/11/2018|INV-0000000057||||THE EVANGELICAL 
  	*/ 
- 	
+ 	return;
+	 
  	Map<String,Decimal> invoiceMap = new Map<String,Decimal>();
  	
  	for (Int_PX_Billing__c b:trigger.new){
