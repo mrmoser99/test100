@@ -59,7 +59,8 @@ global with sharing class AP_ManualPayment {
         b.Name = 'PX Remit';
         insert b;
 
-
+        PNCUtility.voidInvoice(recordId,false);
+        
         return JSON.serialize(response);
 
 
