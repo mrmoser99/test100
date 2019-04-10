@@ -1,0 +1,21 @@
+<aura:component  implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+
+    <aura:attribute name="recordId" type="String" />
+     
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Invoice__c" >
+            
+        <lightning:layout>
+            <lightning:layoutItem padding="around-large">
+               <lightning:outputField fieldName="Name" />  
+            </lightning:layoutItem>
+
+            <lightning:layoutItem padding="around-large">
+                <lightning:outputField fieldName="LS_Contract__c" />
+            </lightning:layoutItem>
+        </lightning:layout>
+               
+        
+    </lightning:recordViewForm>
+
+   
+</aura:component>

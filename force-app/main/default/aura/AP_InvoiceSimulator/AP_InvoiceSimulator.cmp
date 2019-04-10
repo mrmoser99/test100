@@ -1,0 +1,10 @@
+<aura:component  implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
+     
+    <lightning:card title="Invoice Simulator" iconName="utility:moneybag" >
+     
+        <lightning:messages />  
+      
+       
+    </lightning:card>
+
+</aura:component>	

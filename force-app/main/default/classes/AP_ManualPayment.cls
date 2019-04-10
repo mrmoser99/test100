@@ -66,4 +66,18 @@ global with sharing class AP_ManualPayment {
 
 	}
 
+    @AuraEnabled
+	public static String addAdjustment(String invoiceId, String type, Decimal debit, Decimal credit){
+        
+        Map<String,String> response = new Map<String,String>(); 
+
+        Adjustment__c a = new Adjustment__c(Invoice__c = invoiceId, Adjustment_Category__c = type, debit__c = debit, credit__c = credit);
+        insert a;
+
+        return JSON.serialize(response);
+
+    }
+
+   
+		
 }
