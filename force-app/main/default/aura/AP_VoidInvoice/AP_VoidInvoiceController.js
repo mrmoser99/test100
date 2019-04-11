@@ -15,9 +15,9 @@
 
         component.set('v.columnsA', [
             {label: 'Type', fieldName: 'Adjustment_Category__c', type: 'text'}, 
-            {label: 'Debit Amount', fieldName: 'Debit__c', type: 'currency'},
-            {label: 'Credit Amount', fieldName: 'Credit__c', type: 'currency'},
-            {label: 'Tax Amount', fieldName: 'Tax_Amount__c', type: 'currency' cellAttributes: { alignment: 'left' }},
+            {label: 'Debit', fieldName: 'Debit__c', type: 'currency', cellAttributes: { alignment: 'left' }},
+            {label: 'Credit', initialWidth:120, fieldName: 'Credit__c', type: 'currency', cellAttributes: { alignment: 'left' } },
+            {label: 'Tax Amount', fieldName: 'Tax_Amount__c', type: 'currency', cellAttributes: { alignment: 'left' } },
             { type: 'action', typeAttributes: { rowActions: actions } }
             ]);
     
@@ -125,22 +125,28 @@
     },
     handleRowAction: function (component, event, hleper) {
       
+        var rows = component.get('v.adjList');
         var action = component.get("c.deleteAdj");
-        var actionChosen = event.getParam('action');
         var row = event.getParam('row');
-        alert('Row is ' + JSON.stringify(row));
-       
+        var rowIndex = rows.indexOf(row);
+        rows.splice(rowIndex, 1);
+        component.set('v.adjList', rows);
         
         action.setParams({
           "toDelete": row
         });
 
         action.setCallback(this, function(response) {
-            
+           
             var state = response.getState();
             console.log(state);
             if (state === "SUCCESS") {
-                
+                var msg='Adjustment Deleted!';
+                component.find('notifLib').showToast({
+                              'variant': 'success',
+                              'message': msg,
+                              'mode': 'sticky'
+                });
             }
            
             

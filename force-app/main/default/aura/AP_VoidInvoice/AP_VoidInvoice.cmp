@@ -30,7 +30,7 @@
     <aura:attribute name="selectedRow" type="Object"/>
     <aura:attribute name="data" type="List" default="[]"/>
     <aura:attribute name="columns" type="List"/>
-    <aura:attribute name="dataA" type="List" default="[]"/>
+    <aura:attribute name="dataA" type="Object" />
     <aura:attribute name="columnsA" type="List"/>
     <aura:attribute name="adjList" type="Adjustment__c[]" />
    
