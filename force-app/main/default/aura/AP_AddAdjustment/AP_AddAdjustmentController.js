@@ -2,22 +2,68 @@
     
         doInit: function(component, event, helper) {
            var recordId = component.get('v.recordId');
+           console.log('do init recid:' + recordId);
+           var fee = component.get('v.fee');
+           var amountDue = component.get('v.amountDue');
+
           
+           
+           var parentId = component.get('v.rowId');
+          
+           if (parentId.startsWith('a3')){
+                var show = true;
+                component.set("v.isCharge",show);
+                component.find("chargeLookup").set("v.value", parentId);
+           }
+           else{
+                var show = false;
+                component.set("v.isCharge",show); 
+                component.find("dLookup").set("v.value", parentId);
+           }
+
+           component.find("aType").set("v.value", fee);    
+           component.find("credit").set("v.value", '100');     
+
             
-       }, 
+        }, 
+        
         handleSubmit: function(component,event,helper){
-           var recordId = component.get('v.recordId');
-           var action = component.get('c.addAdjustment'); 
-           var invoiceId = component.get('v.invoiceId');
+           
+            var recordId = component.get('v.recordId');
+            console.log('hasdfasd:' + recordId);
+            var action = component.get('c.addAdjustment'); 
+          
+            var chargeId;
+            var dueId;
+            
+            if (component.find("chargeLookup") == null){
+                chargeId = null;
+            }
+            else{     
+                chargeId = component.find("chargeLookup").get("v.value");
+            }
+            
+            if (component.find("dLookup") == null){
+                dueId = null;
+            }
+            else{
+                dueId = component.find("dLookup").get("v.value");
+            }
+           
            //String recordId, String checkNumber, Decimal checkAmount Date paymentDate)
+            
            action.setParams({
-               invoiceId: component.get('v.invoiceId'),
-               type:  component.find("typeIn").get("v.value"),
-               debit: component.find("debitIn").get("v.value"),
-               credit: component.find("creditIn").get("v.value")
+               recordId: component.get('v.recordId'),
+               aType:  component.find("aType").get("v.value"),
+               credit: component.find("credit").get("v.value"),
+               chargeId: chargeId,
+               dueId: dueId
            });
            console.log('hello world');
-           action.setCallback(this,function(response) {
+           console.log(component.get('v.recordId'));
+           console.log(component.find("aType").get("v.value"));
+           console.log('recid:' + recordId);
+           action.setCallback(this,function(response) { 
                var state = response.getState();
                var validationError = JSON.parse(response.getReturnValue());
                if (state == 'SUCCESS'){
@@ -38,7 +84,7 @@
                        
                        var navEvt = $A.get("e.force:navigateToSObject");
                        navEvt.setParams({
-                           "recordId": invoiceId,
+                           "recordId": recordId,
                            "slideDevName": "detail"
                        });
                        navEvt.fire();
@@ -64,11 +110,14 @@
    
            });
            component.set('v.processing', true);
+           event.preventDefault();
            $A.enqueueAction(action);
         },
        handleCancel: function(component, event, helper) {
-           let dismiss = $A.get('e.force:closeQuickAction');
-           dismiss.fire();
+            
+            var modalCloseEvt = component.getEvent("ModalCloseEvent");
+            modalCloseEvt.fire();
+       
        }
        
    

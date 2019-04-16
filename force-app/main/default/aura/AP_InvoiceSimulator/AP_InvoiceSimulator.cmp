@@ -1,10 +1,91 @@
-<aura:component  implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
-     
+<aura:component  controller="AP_InvoiceSimulator" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:attribute name="dataBalance" type="List" default="[]"/>
+    <aura:attribute name="columnsBalance" type="List"/>
+    <aura:attribute name="dataDue" type="List" default="[]"/>
+    <aura:attribute name="columnsDue" type="List"/>
+    <aura:attribute name="dataAdjustments" type="List" default="[]"/>
+    <aura:attribute name="columnsAdjustments" type="List"/>
+    <aura:attribute name="dataTotal" type="List" default="[]"/>
+    <aura:attribute name="columnsTotal" type="List"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+
+
     <lightning:card title="Invoice Simulator" iconName="utility:moneybag" >
      
-        <lightning:messages />  
       
+
+ 
+
+        <h3 style="background-color: #99ddff;height: 80px; text-align: center; padding: 20px 0; color: #3392ff;font-size: 30px;border: 1px solid #0099e6; border-radius: 5px;font-style: italic;">Invoice</h3>  
        
+        <div style="height: auto; border: 1px solid #0099e6;border-radius: 5px;">
+                <p style="font-weight: bold;">Previous Balance</p>
+
+            <lightning:datatable
+                keyField="id"
+                data="{! v.dataBalance }"
+                columns="{! v.columnsBalance }"
+                enableInfiniteLoading="false"
+                hideCheckboxColumn="true" 
+                hideTableHeader="true"
+            /> 
+           
+        </div>
+         
+        
+        <div style="height:auto; border: 1px solid #0099e6;border-radius: 5px;">
+            <p style="font-weight: bold;">Bills and Charges</p>
+            <lightning:datatable
+                keyField="id"
+                data="{! v.dataDue }"
+                columns="{! v.columnsDue }"
+                enableInfiniteLoading="false"
+                hideCheckboxColumn="true"
+                hideTableHeader="false"
+                resizeColumnDisabled="false"
+                
+            /> 
+        </div>
+           
+       
+        
+        <div style="height: auto; border: 1px solid #0099e6;border-radius: 5px;">
+                <p style="font-weight: bold;">Adjustments</p>
+
+            <lightning:datatable
+            keyField="id"
+            data="{! v.dataAdjustments }"
+            columns="{! v.columnsAdjustments }"
+            enableInfiniteLoading="false"
+            hideCheckboxColumn="true"
+            hideTableHeader="false"
+            /> 
+
+        </div>
+       
+        
+
+        <div style="height: auto; border: 1px solid #0099e6;border-radius: 5px;">
+            <p style="font-weight: bold;">Adjusted Total</p>
+
+            <lightning:datatable
+            keyField="id"
+            data="{! v.dataTotal }"
+            columns="{! v.columnsTotal}"
+            enableInfiniteLoading="false"
+            hideCheckboxColumn="true"
+            hideTableHeader="true"
+            /> 
+       
+        </div>
+
+        <div style="background-color: #99ddff;height: 20px; border: 1px solid #0099e6;border-radius: 5px;"></div>  
+       
+    
     </lightning:card>
 
 </aura:component>	

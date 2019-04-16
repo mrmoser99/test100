@@ -43,6 +43,7 @@
                 enableInfiniteLoading="false"
                 hideCheckboxColumn="true"
                 onloadmore="{! c.loadMoreData }" 
+                onrowaction="{! c.handleRowActionAdd }"
                 />
     </div> 
 
@@ -59,7 +60,7 @@
         </div>
 
     <lightning:overlayLibrary aura:id="overlayLib"/>
-    <lightning:button class="slds-m-top_large" variant="brand" type="submit1" label="Add Adjustment" onclick="{!c.handleShowModal}" />
+    
     <lightning:button class="slds-m-top_large" variant="brand" type="submit1" label="Calculate" onclick="{!c.handleSubmit}" />
     <lightning:button class="slds-m-top_large" variant="brand" type="submit2" label="Approve" onclick="{!c.handleSubmit}" />
     <lightning:button class="slds-m-top_large" label="Cancel" onclick="{!c.handleCancel}"/>

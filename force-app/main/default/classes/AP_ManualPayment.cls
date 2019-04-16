@@ -67,17 +67,39 @@ global with sharing class AP_ManualPayment {
 	}
 
     @AuraEnabled
-	public static String addAdjustment(String invoiceId, String type, Decimal debit, Decimal credit){
+	public static String addAdjustment(String recordId, String aType,  Decimal credit, String chargeId, String dueId){
         
-        Map<String,String> response = new Map<String,String>(); 
+        cllease__Charge__c c;
+        cllease__Due_Detail_Lines__c d;
+        String equipment;
 
-        Adjustment__c a = new Adjustment__c(Invoice__c = invoiceId, Adjustment_Category__c = type, debit__c = debit, credit__c = credit);
+        Map<String,String> response = new Map<String,String>(); 
+        if (chargeId != Null){
+            c = [select cllease__Contract_Equipment__r.Equipment_Description1__c 
+                from 
+                cllease__Charge__c 
+                where id = :chargeId
+                ];
+            equipment = c.cllease__Contract_Equipment__r.Equipment_Description1__c;
+        }
+
+        if (dueId != Null){
+            d = [select cllease__Contract_Equipment__r.Equipment_Description1__c 
+                from 
+                cllease__Due_Detail_Lines__c 
+                where id = :dueId
+                ];
+            equipment = d.cllease__Contract_Equipment__r.Equipment_Description1__c;
+        }
+        Adjustment__c a = new Adjustment__c(Invoice__c = recordId, Adjustment_Type__c = aType, credit__c = credit, equipment__c = equipment, charge__c = chargeId, due_detail_line__c = dueId);
         insert a;
+        
 
         return JSON.serialize(response);
 
     }
 
+   
    
 		
 }

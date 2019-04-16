@@ -8,6 +8,7 @@
   3/26/19 - added logic to skip trigger processing for manual payments.
   3/26/19 - changed the code to fix a produciton problem.  this line  r.record_number__c == 0 
   			was changed to say == 0 instead of > 0
+  4/12/19 - problems persisted.  changed delete logic to use invoice number = 'Delete Record'
 *
 **********************************************************************************************/
 trigger Int_PX_Remit on Int_PX_Remit__c (before insert, after insert) {
@@ -15,8 +16,8 @@ trigger Int_PX_Remit on Int_PX_Remit__c (before insert, after insert) {
 	public class CommonException extends Exception {}
 	
 	
-	//if (AP_ManualPayment.manualPayment == true)  
-	//	return;
+	if (AP_ManualPayment.manualPayment == true)  
+		return;
 
 	List<Int_Batch_Status__c> bList = [	select id
 										from Int_Batch_Status__c
@@ -59,26 +60,18 @@ trigger Int_PX_Remit on Int_PX_Remit__c (before insert, after insert) {
 				r.line_data__c = null;
 			}
 			else{
-				system.debug('in here');
-				system.debug(columnlist);
-				if (columnList[0] == 'V1.0'){
-					system.debug('header');
-					r.record_number__c = 0; 
-					r.invoice_number__c = 'BATCH HEADER';
-					r.payment_batch_date__c = NewCoUtility.convertDateYYYYMMDD(columnList[4]);
-					//r.payment_batch_total_amount__c = decimal.valueOf(columnList[5])/100;
-				}
+				r.invoice_number__c = 'Delete Record';
 			}
 		}
 	}
 	else{
-		system.debug('here 2');
+		 
 		List<Int_PX_Remit__c> dList = new List<Int_PX_Remit__c>();
 		
 		for (Int_PX_Remit__c r:trigger.new){
 			Int_PX_Remit__c d = new Int_PX_Remit__c();
 			d.id = r.id;
-			if (r.record_number__c == null || r.record_number__c == 0 || r.invoice_number__c == 'BATCH HEADER')
+			if (r.invoice_number__c == 'Deleted Record')
 					dList.add(d);
 		}
 		if (!dList.isEmpty())

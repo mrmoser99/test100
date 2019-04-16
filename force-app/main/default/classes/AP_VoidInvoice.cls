@@ -65,11 +65,13 @@ global with sharing class AP_VoidInvoice {
     }
     
      public class resultLine{
-
+        @AuraEnabled public String equipmentName;
+        @AuraEnabled public String name;
         @AuraEnabled public String chargeId;
         @AuraEnabled public String fee;
         @AuraEnabled public String feeAmount;
         @AuraEnabled public String	taxAmount;
+        @AuraEnabled public String id;
       
      }
 
@@ -79,6 +81,7 @@ global with sharing class AP_VoidInvoice {
         @AuraEnabled public String debit;
         @AuraEnabled public String credit;
         @AuraEnabled public String taxAmount;
+      
       
      }
     /********************************************************************************************
@@ -95,39 +98,65 @@ global with sharing class AP_VoidInvoice {
                 ,name
                 ,cllease__Original_Amount__c
                 ,cllease__Tax_Due__c
+                ,cllease__Contract_Equipment__r.Equipment_Description1__c
                 ,cllease__Fee_Definition__r.name
-                from cllease__Charge__c
+                from cllease__Charge__c 
                 where invoiced_In__c = :invoiceId
+                order by cllease__Contract_Equipment__r.Equipment_Description1__c
                 
                 ];
         
         for (cllease__charge__c c:cList){
             resultLine  r = new resultLine();
-            r.chargeId = c.name;
-            r.fee = c.cllease__Fee_Definition__r.name;
+            r.name = c.name;
+            r.id = c.id;
+            r.equipmentName = c.cllease__Contract_Equipment__r.Equipment_Description1__c;
+            r.chargeId = URL.getSalesforceBaseUrl().toExternalForm() + '/lightning/r/cllease__Charge__c/' + c.id + '/view?0.source=alohaHeader';
+            r.fee =  c.cllease__Fee_Definition__r.name;
             r.feeAmount =  string.valueOf(c.cllease__Original_Amount__c);
             r.taxAmount = string.valueOf(c.cllease__Tax_Due__c);
             system.debug('REsult is ' + r);
             results.add(r);
         }
 
+        Map<ID,cllease__Lease_account_Due_Details__c> billMap = new Map<ID,cllease__Lease_account_Due_Details__c>();
+
         List<cllease__Lease_account_Due_Details__c> bList = new List<cllease__Lease_account_Due_Details__c>();
         bList = [select Id
-                ,name
                 ,cllease__Due_Type_Description__c
-                ,cllease__Tax_Due_Amount__c
-                ,cllease__Rental_Due_Amount__c
                 from cllease__Lease_account_Due_Details__c
                 where invoiced_In__c = :invoiceId
-                
+                ];
+        for (cllease__Lease_account_Due_Details__c b:blist){
+            billMap.put(b.id,b);
+
+        }
+
+        List<cllease__Due_Detail_Lines__c> eList = new List<cllease__Due_Detail_Lines__c>();
+        eList = [select Id
+                ,name
+                ,cllease__bill__c
+                ,cllease__contract_equipment__r.equipment_description1__c
+                ,cllease__Tax_Due_Amount__c
+                ,cllease__Rental_Due_Amount__c
+                ,cllease__total_due_amount__c
+                from cllease__Due_Detail_Lines__c
+                where cllease__bill__c in :billMap.keySet()
+                order by cllease__Contract_Equipment__r.Equipment_Description1__c
                 ];
 
-         for (cllease__Lease_account_Due_Details__c b:bList){
+
+         for (cllease__Due_Detail_Lines__c e:eList){
             resultLine  r = new resultLine();
-            r.chargeId = b.name;
-            r.fee = b.cllease__Due_Type_Description__c;
-            r.feeAmount =  string.valueOf(b.cllease__Rental_Due_Amount__c);
-            r.taxAmount = string.valueOf(b.cllease__Tax_Due_Amount__c);
+            r.equipmentName = e.cllease__Contract_Equipment__r.Equipment_Description1__c;
+            r.name = e.name;
+            r.id = e.id;
+            r.chargeId = URL.getSalesforceBaseUrl().toExternalForm() + '/lightning/r/cllease__Due_Detail_Lines__c/' + e.id + '/view?0.source=alohaHeader';
+           
+            r.fee = billMap.get(e.cllease__bill__c).cllease__Due_Type_Description__c;
+
+            r.feeAmount =  string.valueOf(e.cllease__Rental_Due_Amount__c);
+            r.taxAmount = string.valueOf(e.cllease__Tax_Due_Amount__c);
             system.debug('REsult is ' + r);
             results.add(r);
         }
@@ -143,19 +172,23 @@ global with sharing class AP_VoidInvoice {
     @AuraEnabled
     public static List<adjustment__c> getAdjustments(String invoiceId, Integer intOffset){
         
-        List<resultLine2> results = new List<resultLine2>();
+        
         
         List<adjustment__c> aList = new List<adjustment__c>();
         aList = [select Id
-                ,adjustment_category__c
+                ,adjustment_type__c
                 ,credit__c
                 ,debit__c
+                ,Charge__r.Name  
+                ,Due_Detail_Line__r.Name  
                 ,tax_amount__c
+                ,equipment__c
                 from adjustment__c
                 where invoice__c = :invoiceId
           ];
-        
-        
+        for (adjustment__c a:aList)
+            system.debug(a.charge__r.name);
+        system.debug(aList);
         return aList;
 
     }    
@@ -173,7 +206,9 @@ global with sharing class AP_VoidInvoice {
 
         return JSON.serialize(response);
 
-    }     
+    }  
+
+    
         
 
 }

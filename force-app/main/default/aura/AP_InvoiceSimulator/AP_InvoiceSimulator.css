@@ -1,2 +1,20 @@
-.THIS {
+
+.THIS .makeBold {
+    font-weight: bold;
+    
 }
+.THIS .rightJustify {
+    text-align: justify;
+  text-justify: inter-word;
+}
+
+.THIS .slds-button_icon-bare{
+  display: none;
+  
+}
+
+.THIS thead th span{
+  font-weight: bold;
+  
+}
+  

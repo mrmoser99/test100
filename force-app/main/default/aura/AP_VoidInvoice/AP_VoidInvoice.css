@@ -1,2 +1,11 @@
-.THIS {
-}
+
+
+.THIS thead th span{
+    font-weight: bold;
+    
+  } 
+
+  .THIS .slds-button_icon-bare{
+    display: none;
+    
+  }

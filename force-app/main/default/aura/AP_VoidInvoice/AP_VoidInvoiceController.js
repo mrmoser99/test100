@@ -4,18 +4,26 @@
        var actions = [
             { label: 'Delete', name: 'delete' }
         ];
+
+        var actions2 = [
+            { label: 'Adjust', name: 'adjust' }
+        ];
        
        component.set('v.columns', [
-        {label: 'Charge/Bill Id', fieldName: 'chargeId', type: 'text'},
-        {label: 'Type', fieldName: 'fee', type: 'text'},
+        {label: 'Equipment', fieldName: 'equipmentName', type: 'text', initialWidth : 200},
+        {label: 'Charge/Bill Id', fieldName: 'chargeId',  initialWidth : 200, type: 'url',sortable: true,typeAttributes: {label:{ fieldName: 'name'}}},
+        {label: 'Description', fieldName: 'fee', type: 'text', initialWidth : 200},
         {label: 'Amount Due', fieldName: 'feeAmount', type: 'decimal'},
         {label: 'Tax Due', fieldName: 'taxAmount', type: 'decimal'},
+        { type: 'action', typeAttributes: { rowActions: actions2 } }
         ]);
 
 
         component.set('v.columnsA', [
-            {label: 'Type', fieldName: 'Adjustment_Category__c', type: 'text'}, 
-            {label: 'Debit', fieldName: 'Debit__c', type: 'currency', cellAttributes: { alignment: 'left' }},
+            {label: 'Equipment', fieldName: 'Equipment__c', type: 'text', initialWidth : 200},
+            {label: 'Charge Id', fieldName: 'ChargeName', type: 'text'}, 
+            {label: 'Bill Id', fieldName: 'DueName', type: 'text'}, 
+            {label: 'Description', fieldName: 'Adjustment_Type__c', type: 'text'}, 
             {label: 'Credit', initialWidth:120, fieldName: 'Credit__c', type: 'currency', cellAttributes: { alignment: 'left' } },
             {label: 'Tax Amount', fieldName: 'Tax_Amount__c', type: 'currency', cellAttributes: { alignment: 'left' } },
             { type: 'action', typeAttributes: { rowActions: actions } }
@@ -99,7 +107,39 @@
         console.log('hey there');
         let modalBody;
         var recordId = component.get('v.recordId');
-        $A.createComponent('c:AP_AddAdjustment', {invoiceId :recordId},
+        $A.createComponent('c:AP_AddAdjustment', {invoiceId :recordId, chargeId : chargeId},
+            function(content, status, errorMessage) {
+                if (status === 'SUCCESS') {
+                    modalBody = content;
+                    component.find('overlayLib').showCustomModal({
+                        body: modalBody,
+                        showCloseButton: true,
+                        cssClass: 'mymodal',
+                        closeCallback: function() {
+                            //alert('You closed the alert!');
+                        }
+                    })
+                } else if (status === 'ERROR') {
+                    let toast = $A.get('e.force:showToast');
+                    toast.setParams({
+                        title: 'Error',
+                        message: errorMessage,
+                        type: 'error'
+                    });
+                    toast.fire();
+                }
+            }
+        );
+    },
+    handleRowActionAdd: function (component, event, helper) {
+        console.log('hey there');
+        let modalBody;
+        var recordId = component.get('v.recordId');
+        var row = event.getParam('row');
+        console.log('you' + recordId);
+        //alert(JSON.stringify(row));
+        //alert(row.id);
+        $A.createComponent('c:AP_AddAdjustment', {recordId :recordId, rowId :row.id, fee: row.fee, amountDue: row.feeAmount},
             function(content, status, errorMessage) {
                 if (status === 'SUCCESS') {
                     modalBody = content;
@@ -128,6 +168,7 @@
         var rows = component.get('v.adjList');
         var action = component.get("c.deleteAdj");
         var row = event.getParam('row');
+        
         var rowIndex = rows.indexOf(row);
         rows.splice(rowIndex, 1);
         component.set('v.adjList', rows);
