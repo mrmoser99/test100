@@ -21,6 +21,7 @@
                     <lightning:outputField fieldName="Customer_Name__c" />  
                     <lightning:outputField fieldName="LS_Contract__c" />  
                     <lightning:outputField fieldName="Balance_Due_Amount__c" />
+                    <lightning:outputField fieldName="Previous_Balance_Due__c" />
                 </div>
                
             </lightning:card>

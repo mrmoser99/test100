@@ -22,20 +22,7 @@
 
         <h3 style="background-color: #99ddff;height: 80px; text-align: center; padding: 20px 0; color: #3392ff;font-size: 30px;border: 1px solid #0099e6; border-radius: 5px;font-style: italic;">Invoice</h3>  
        
-        <div style="height: auto; border: 1px solid #0099e6;border-radius: 5px;">
-                <p style="font-weight: bold;">Previous Balance</p>
-
-            <lightning:datatable
-                keyField="id"
-                data="{! v.dataBalance }"
-                columns="{! v.columnsBalance }"
-                enableInfiniteLoading="false"
-                hideCheckboxColumn="true" 
-                hideTableHeader="true"
-            /> 
-           
-        </div>
-         
+       
         
         <div style="height:auto; border: 1px solid #0099e6;border-radius: 5px;">
             <p style="font-weight: bold;">Bills and Charges</p>
@@ -54,7 +41,7 @@
        
         
         <div style="height: auto; border: 1px solid #0099e6;border-radius: 5px;">
-                <p style="font-weight: bold;">Adjustments</p>
+                <p style="font-weight: bold;">- Adjustments</p>
 
             <lightning:datatable
             keyField="id"
@@ -70,7 +57,7 @@
         
 
         <div style="height: auto; border: 1px solid #0099e6;border-radius: 5px;">
-            <p style="font-weight: bold;">Adjusted Total</p>
+            <p style="font-weight: bold;">= Adjusted Total</p>
 
             <lightning:datatable
             keyField="id"
@@ -78,7 +65,7 @@
             columns="{! v.columnsTotal}"
             enableInfiniteLoading="false"
             hideCheckboxColumn="true"
-            hideTableHeader="true"
+            hideTableHeader="false"
             /> 
        
         </div>

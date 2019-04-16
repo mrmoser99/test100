@@ -47,7 +47,7 @@
 },
 fetchDataNewBillsAndCharges : function(component, event, offSetCount) {
        
-        
+       
     var action = component.get("c.getNewBillsAndCharges");
     var recordId = component.get('v.recordId');
     console.log('rec id hre is:' + recordId);
@@ -61,7 +61,7 @@ fetchDataNewBillsAndCharges : function(component, event, offSetCount) {
         if (state === "SUCCESS") {
             
             var results = response.getReturnValue();
-            component.set('v.dataAdjustments', results);
+            component.set('v.dataTotal', results);
         }
     });
     
