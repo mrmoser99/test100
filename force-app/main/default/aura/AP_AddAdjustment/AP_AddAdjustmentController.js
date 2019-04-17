@@ -5,9 +5,7 @@
            console.log('do init recid:' + recordId);
            var fee = component.get('v.fee');
            var amountDue = component.get('v.amountDue');
-
-          
-           
+        
            var parentId = component.get('v.rowId');
           
            if (parentId.startsWith('a3')){
@@ -112,11 +110,14 @@
            component.set('v.processing', true);
            event.preventDefault();
            $A.enqueueAction(action);
+            
+           $A.get('e.force:refreshView').fire();
+
         },
        handleCancel: function(component, event, helper) {
-            
-            var modalCloseEvt = component.getEvent("ModalCloseEvent");
-            modalCloseEvt.fire();
+           
+            component.find("overlayLib").notifyClose();
+          
        
        }
        

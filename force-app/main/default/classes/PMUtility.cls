@@ -4,90 +4,98 @@
 * 
 *	Change Log: 
 *	3/15/19 - MRM Created
+*   4/17/19 - 
 *
 ********************************************************************************************************************/
 public with sharing class PMUtility {
     
     //wrapper classs or search results
 
-    public class resultLine{
+    
+    public class ServiceContractResponse{
 
-        @AuraEnabled public String customerName;
-        @AuraEnabled public String leaseNumber;
-        @AuraEnabled public String postalCode;
-        @AuraEnabled public Date contractStartDate;
-        @AuraEnabled public String term;
-        @AuraEnabled public String remainingPayments;
-        @AuraEnabled public String equipmentDescription;
-        @AuraEnabled public Decimal originalCost;
-        @AuraEnabled public Decimal basePayment;
-        @AuraEnabled public String type;
-        @AuraEnabled public Boolean newcoReady;
+        @AuraEnabled public Common common;
+        @AuraEnabled public Data data;
         
-        public resultLine(String customerName, String leaseNumber, String postalCode, Date contractStartDate, String term, String remainingPayments, String equipmentDescription,Decimal originalCost, Decimal  basePayment, String type, Boolean newcoReady){
-            this.customerName = customerName;
-            this.leaseNumber = leaseNumber;
-            this.postalCode = postalCode;
-            this.contractStartDate = contractStartDate;
-            this.term = term; 
-            this.remainingPayments = remainingPayments;
-            this.equipmentDescription = equipmentDescription;
-            this.originalCost = originalCost;
-            this.basePayment = basePayment;
-            this.type = type;
-            this.newcoReady = newcoReady;
+    }
 
-        }
+    public class Common{
+
+         @AuraEnabled public Links links;
+         @AuraEnabled public Meta meta;
+    }
+
+     public class Links{
+ 
+        @AuraEnabled public String self;
+        @AuraEnabled public String first;
+        @AuraEnabled public String prev;
+        @AuraEnabled public String next;
+        @AuraEnabled public String last;
+    
+    }
+
+    public class Meta{
+
+         @AuraEnabled public Integer itemTotal;
+         @AuraEnabled public Integer size;
+         @AuraEnabled public Integer page;
+         @AuraEnabled public Integer pageTotal;
+         @AuraEnabled public List<String> sortableFields;
 
     }
 
     //wrapper classs for detail of a single lease
 
-    public class leaseDetail{
+    public class Data{
         
-        @AuraEnabled public List<assetDetail> assetDetail;
-        @AuraEnabled public String billingAddresslilne2;
-        @AuraEnabled public String billingAddressLine1;
-        @AuraEnabled public String billingCity;
-        @AuraEnabled public String billingState;
-        @AuraEnabled public String billingZipCode;
-        @AuraEnabled public String businessSegment;
-        @AuraEnabled public Integer contractAverageDaysToPay;
-        @AuraEnabled public String contractExpireDate;
         @AuraEnabled public String contractNumber;
-        @AuraEnabled public Decimal contractOriginalCost;
-        @AuraEnabled public Decimal contractPayment;
+        @AuraEnabled public String contractType;
+        @AuraEnabled public String contractTerm;
         @AuraEnabled public String contractPeriodicity;
+        @AuraEnabled public String contractPurchaseOption;
         @AuraEnabled public String contractProgramId;
         @AuraEnabled public String contractProgramName;
-        @AuraEnabled public String contractPurchaseOption;
+        @AuraEnabled public String contractStartDate;
+        @AuraEnabled public String contractExpireDate;
+        @AuraEnabled public String contractOriginalCost;
+        @AuraEnabled public String contractPayment;
+        @AuraEnabled public String contractAverageDaysToPay;
         @AuraEnabled public String contractSigner;
         @AuraEnabled public String contractSignerTitle;
-        @AuraEnabled public String contractStartDate;
-        @AuraEnabled public Integer contractTerm;
-        @AuraEnabled public String contractType;
+        @AuraEnabled public String leaseSignerTitle;
+        @AuraEnabled public String numberOfRemainingPayments;
+        @AuraEnabled public String lastPaymentReceivedDate;
+        @AuraEnabled public String businessSegment;
+        @AuraEnabled public String subBusinessSegment;
+        @AuraEnabled public String customerName;
+        @AuraEnabled public String customerNumber;
         @AuraEnabled public String customerAddressLine1;
         @AuraEnabled public String customerAddressline2;
         @AuraEnabled public String customerCity;
-        @AuraEnabled public String customerName;
-        @AuraEnabled public String customerNumber;
         @AuraEnabled public String customerState;
         @AuraEnabled public String customerZipCode;
-        @AuraEnabled public String lastPaymentReceivedDate;
-        @AuraEnabled public String leaseSignerTitle;
-        @AuraEnabled public Integer numberOfRemainingPayments;
-        @AuraEnabled public String subBusinessSegment;
-        @AuraEnabled public String vendorAddressLine1;
-        @AuraEnabled public String vendorAddressLine2;
-        @AuraEnabled public String vendorCity;
-        @AuraEnabled public String vendorName;
+        @AuraEnabled public String billingAddressLine1;
+        @AuraEnabled public String billingAddresslilne2;
+        @AuraEnabled public String billingCity;
+        @AuraEnabled public String billingState;
+        @AuraEnabled public String billingZipCode;
+        @AuraEnabled public String vendorSiteCode;
         @AuraEnabled public String vendorNumber1;
         @AuraEnabled public String vendorNumber2;
         @AuraEnabled public String vendorNumber3;
-        @AuraEnabled public String vendorSiteCode;
+        @AuraEnabled public String vendorName;
+        @AuraEnabled public String vendorAddressLine1;
+        @AuraEnabled public String vendorAddressLine2;
+        @AuraEnabled public String vendorCity;
         @AuraEnabled public String vendorState;
         @AuraEnabled public String vendorZipCode;
+
+        @AuraEnabled public List<assetDetail> assetDetail;
+
+       
     }
+    
 
      //wrapper classs for detail of a single asset
 
@@ -107,6 +115,9 @@ public with sharing class PMUtility {
         @AuraEnabled public Decimal assetPayment;
 
     }
+
+
+
 
     //wrapper classs for detail of a single quote
 
@@ -164,51 +175,41 @@ public with sharing class PMUtility {
     *    *ABC* matches value that contains ABC
     *    *ABC*DEF* Matches value containing ABC anywhere in the value followed by DEF anywhere in the value
     *    ABC*DEF Matches value ABC\*DEF exactly
+    *
+    *
     *************************************************************************************************************************************************************/
-
-    public static List<resultLine> searchPortfolio(String customerName
+ 
+    public static String searchPortfolio(String customerName
                                     , String customerNumber
                                     , String assetSerialNumber
                                     , String choice
-                                    , String size
+                                    , Integer size
                                     , String sortOrder
                                     , Boolean assetDetail
                                     , Integer intOffSet){
        
-        List<PMUtility.resultLine> searchResults = new List<PMUtility.resultLine>();
+        ServiceContractResponse response = new ServiceContractResponse();
         //intOffSet = 0;
 
-        List<Account> alist = [select id, name, Account_Number__c from Account where name like :customerName  limit 20 OFFSET : intOffSet];  
-        Integer i = 19887;
-        /*
-        String customerName
-        String leaseNumber
-        String postalCode
-        Date contractStartDate
-        Integer term
-        Integer remainingPayments
-        String equipmentDescription
-        Decimal originalCost
-        Decimal  basePayment
-        String type
-        Boolean newcoReady
-        */
-        for (Account a: aList){ 
-            i++;
-            searchResults.add(new PMUtility.resultLine(a.name, a.account_number__c,string.valueOf(i),date.today(),'60','43','Equipment',i*100/12.2,i/33.22,'STD',true));
-        }
-        return searchResults;  
+        //List<Account> alist = [select id, name, Account_Number__c from Portfoli_Contract__c where name like :customerName  limit 20 OFFSET : intOffSet];  
+         
+        
+        //for (Account a: aList){ 
+         
+        //}
+
+        return JSON.serialize(response);  
     }
 
     /************************************************************************************************************************************************************
     *   getLeaseDetails
     *************************************************************************************************************************************************************/
 
-    public static leaseDetail getLeaseDetails(String leaseNumber){
+    public static String getLeaseDetails(String leaseNumber){
         
-        leaseDetail ld = new leaseDetail();
+        String response;
 
-        return ld;
+        return JSON.serialize(response); 
 
     }
      /************************************************************************************************************************************************************

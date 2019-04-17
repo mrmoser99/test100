@@ -33,6 +33,7 @@ global with sharing class AP_InvoiceSimulator {
                 ,equipment__c
                 from adjustment__c
                 where invoice__c = :recordId
+                order by equipment__c, charge_bill_name__C
           ];
         
         Decimal feeTotal = 0;
@@ -155,6 +156,7 @@ global with sharing class AP_InvoiceSimulator {
                 from cllease__Due_Detail_Lines__c
                 where cllease__bill__c in :billMap.keySet()
                 order by cllease__Contract_Equipment__r.Equipment_Description1__c
+
                 ];
 
 
@@ -261,10 +263,12 @@ global with sharing class AP_InvoiceSimulator {
                 ,equipment__c
                 from adjustment__c
                 where invoice__c = :recordId
+                 order by equipment__c, charge_bill_name__C
           ];
         
         Map<String,List<Adjustment__c>> adjMap = new Map<String,List<Adjustment__c>>();
         for (Adjustment__c a:aList){
+            system.debug( 'in loop a is:' + a);
             if (a.charge__c != null){
                 List<Adjustment__c> tempList = new List<Adjustment__c>();
 
@@ -273,6 +277,7 @@ global with sharing class AP_InvoiceSimulator {
                 }
                 else{
                     tempList = adjMap.get(a.charge__c);
+                    tempList.add(a);
                 }
                 adjMap.put(a.charge__c,tempList);
             }
@@ -284,6 +289,7 @@ global with sharing class AP_InvoiceSimulator {
                 }
                 else{
                     tempList = adjMap.get(a.due_detail_line__c);
+                    templist.add(a);
                 }
                 adjMap.put(a.due_detail_line__c,tempList);
             }
@@ -299,20 +305,23 @@ global with sharing class AP_InvoiceSimulator {
 
           
         for (cllease__charge__c c:clist){
-
+            system.debug('map is: ' + adjMap.get(c.id));
             List<Adjustment__c> adjList = adjMap.get(c.id);  //list of adjustments to this bill
             Decimal amount = c.cllease__Original_Amount__c;
             Decimal tax = c.cllease__Tax_Due__c;
             Decimal total = amount + tax;
 
-            for (Adjustment__c adj:adjList){
-                if (adj.tax_amount__c == null)
-                    adj.tax_amount__c = 0.00;
-                amount = amount - adj.credit__c;
-                tax = tax - adj.tax_amount__c;
-                total = amount + tax;
+            if (adjList != Null){
+                for (Adjustment__c adj:adjList){
+                    if (adj.tax_amount__c == null)
+                        adj.tax_amount__c = 0.00;
+                    system.debug('amount is: ' + amount);
+                    amount = amount - adj.credit__c;
+                    tax = tax - adj.tax_amount__c;
+                    total = amount + tax;
+                }
             }
-            if (total > 0 ){
+            if (total <> 0 ){
                 r = new resultLine();
                 r.equipmentName = c.cllease__contract_equipment__r.equipment_description1__c;
                 system.debug(c);
@@ -338,15 +347,17 @@ global with sharing class AP_InvoiceSimulator {
             Decimal amount = e.cllease__Rental_Due_Amount__c;
             Decimal tax = e.cllease__Tax_Due_Amount__c;
             Decimal total = e.cllease__total_due_amount__c;
-
-            for (Adjustment__c adj:adjList){
-                if (adj.tax_amount__c == null)
-                    adj.tax_amount__c = 0.00;
-                amount = amount - adj.credit__c;
-                tax = tax - adj.tax_amount__c;
-                total = amount + tax;
+            if (adjList != null) {
+                for (Adjustment__c adj:adjList){
+                    system.debug('adj  ' + adj);
+                    if (adj.tax_amount__c == null)
+                        adj.tax_amount__c = 0.00;
+                    amount = amount - adj.credit__c;
+                    tax = tax - adj.tax_amount__c;
+                    total = amount + tax;
+                }
             }
-            if (total > 0 ){
+            if (total <> 0 ){
                 r = new resultLine();
                 r.equipmentName = e.cllease__contract_equipment__r.equipment_description1__c;
                 r.fee = billMap.get(e.cllease__bill__c).cllease__Due_Type_Description__c;

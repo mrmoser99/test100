@@ -26,19 +26,19 @@
                     fieldName:"className"
                 }
             }},
-            {label: 'Amount', fieldName: 'feeAmount', type: 'text',
+            {label: 'Amount', fieldName: 'feeAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
                 }
             }},
-            {label: 'Tax', fieldName: 'taxAmount', type: 'text',
+            {label: 'Tax', fieldName: 'taxAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
                 }
             }},
-            {label: 'Total', fieldName: 'totalAmount', type: 'text',
+            {label: 'Total', fieldName: 'totalAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
@@ -67,19 +67,19 @@
                     fieldName:"className"
                 }
             }},
-            {label: 'Amount', fieldName: 'feeAmount', type: 'text',
+            {label: 'Amount', fieldName: 'feeAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
                 }
             }},
-            {label: 'Tax', fieldName: 'taxAmount', type: 'text',
+            {label: 'Tax', fieldName: 'taxAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
                 }
             }},
-            {label: 'Total', fieldName: 'totalAmount', type: 'text',
+            {label: 'Total', fieldName: 'totalAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
@@ -107,19 +107,19 @@
                     fieldName:"className"
                 }
             }},
-            {label: 'Amount', fieldName: 'feeAmount', type: 'text',
+            {label: 'Amount', fieldName: 'feeAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
                 }
             }},
-            {label: 'Tax', fieldName: 'taxAmount', type: 'text',
+            {label: 'Tax', fieldName: 'taxAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"
                 }
             }},
-            {label: 'Total', fieldName: 'totalAmount', type: 'text',
+            {label: 'Total', fieldName: 'totalAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'},
             cellAttributes:{  
                 class:{  
                     fieldName:"className"

@@ -164,7 +164,35 @@ global with sharing class AP_VoidInvoice {
 
 
     }
+    /********************************************************************************************
+   	* Approve
+   	* 
+   	********************************************************************************************/
+    @AuraEnabled
+    public static String approve(String recordId){
 
+        Map<String,String> response = new Map<String,String>();
+
+        Invoice__c i = [select id from Invoice__c where id = :recordId];
+        i.adjustment_status__c = 'Approved';
+        update i;
+
+        return JSON.serialize(response);
+    }   
+
+    /********************************************************************************************
+   	* Get Invoice
+   	* 
+   	********************************************************************************************/
+    @AuraEnabled
+    public static String getInvoice(String recordId){
+
+        Invoice__c i = [select adjustment_status__c from Invoice__c where id = :recordId];
+
+        
+        return i.adjustment_status__c;
+    }     
+        
     /********************************************************************************************
    	* Get Adjustments
    	* 
@@ -183,8 +211,10 @@ global with sharing class AP_VoidInvoice {
                 ,Due_Detail_Line__r.Name  
                 ,tax_amount__c
                 ,equipment__c
+                ,Charge_Bill_Name__c
                 from adjustment__c
                 where invoice__c = :invoiceId
+                order by equipment__c, charge_bill_name__C
           ];
         for (adjustment__c a:aList)
             system.debug(a.charge__r.name);
@@ -199,11 +229,27 @@ global with sharing class AP_VoidInvoice {
     @AuraEnabled
 	public static String deleteAdj(Adjustment__c toDelete){
         
+        
         Map<String,String> response = new Map<String,String>(); 
         system.debug('to delete is: ' + toDelete);
         
-        delete toDelete;
+        
+        Adjustment__c a = [select invoice__c from Adjustment__c where id = :toDelete.id];
+        Invoice__c i = [select id from Invoice__c where id = :a.invoice__c];
 
+        List<Adjustment__c> aList = [select id from Adjustment__c where invoice__c = :a.invoice__c ];
+        if (aList.size() == 1){
+            
+            i.adjustment_status__c = 'Ready';
+           
+        }
+        else{
+            i.adjustment_status__c = 'Pending Approval';
+        }
+
+        delete toDelete;
+        update i;
+        
         return JSON.serialize(response);
 
     }  

@@ -11,7 +11,7 @@
     <aura:attribute name="amountDue" type="decimal" />
  
  
-    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
     <lightning:notificationsLibrary aura:id="notifLib"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>  

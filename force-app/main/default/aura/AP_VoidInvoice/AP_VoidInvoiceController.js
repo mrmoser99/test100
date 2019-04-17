@@ -8,24 +8,44 @@
         var actions2 = [
             { label: 'Adjust', name: 'adjust' }
         ];
+
+        var action = component.get('c.getInvoice');  
+        action.setParams({
+            recordId: recordId
+        });
        
-       component.set('v.columns', [
+        action.setCallback(this, function(response) {
+            var state = response.getState();
+            if (state === "SUCCESS") {
+                var results = response.getReturnValue();
+                 
+                if (results == 'Approved'){
+                    component.set('v.isDisabled',true);
+                }
+                else{
+                    component.set('v.isDisabled',false);
+                }
+            }
+        });
+        $A.enqueueAction(action);
+         
+
+        component.set('v.columns', [
         {label: 'Equipment', fieldName: 'equipmentName', type: 'text', initialWidth : 200},
         {label: 'Charge/Bill Id', fieldName: 'chargeId',  initialWidth : 200, type: 'url',sortable: true,typeAttributes: {label:{ fieldName: 'name'}}},
         {label: 'Description', fieldName: 'fee', type: 'text', initialWidth : 200},
-        {label: 'Amount Due', fieldName: 'feeAmount', type: 'decimal'},
-        {label: 'Tax Due', fieldName: 'taxAmount', type: 'decimal'},
+        {label: 'Amount Due', fieldName: 'feeAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'}},
+        {label: 'Tax Due', fieldName: 'taxAmount', type: 'currency', typeAttributes: { currencyCode: 'USD'}},
         { type: 'action', typeAttributes: { rowActions: actions2 } }
         ]);
 
 
         component.set('v.columnsA', [
             {label: 'Equipment', fieldName: 'Equipment__c', type: 'text', initialWidth : 200},
-            {label: 'Charge Id', fieldName: 'ChargeName', type: 'text'}, 
-            {label: 'Bill Id', fieldName: 'DueName', type: 'text'}, 
+            {label: 'Charge/Bill Id', fieldName: 'Charge_Bill_Name__c', type: 'text'}, 
             {label: 'Description', fieldName: 'Adjustment_Type__c', type: 'text'}, 
-            {label: 'Credit', initialWidth:120, fieldName: 'Credit__c', type: 'currency', cellAttributes: { alignment: 'left' } },
-            {label: 'Tax Amount', fieldName: 'Tax_Amount__c', type: 'currency', cellAttributes: { alignment: 'left' } },
+            {label: 'Credit', initialWidth:120, fieldName: 'Credit__c', type: 'currency', typeAttributes: { currencyCode: 'USD'}},
+            {label: 'Tax Amount', fieldName: 'Tax_Amount__c', type: 'currency', typeAttributes: { currencyCode: 'USD'}},
             { type: 'action', typeAttributes: { rowActions: actions } }
             ]);
     
@@ -34,9 +54,9 @@
         
         helper.fetchAdjustments(component,event, 0);
    }, 
-    handleSubmit: function(component,event,helper){
+    handleApprove: function(component,event,helper){
        var recordId = component.get('v.recordId');
-       var action = component.get('c.void'); 
+       var action = component.get('c.approve');  
       
        action.setParams({
            recordId: recordId
@@ -56,20 +76,22 @@
                    });
                }
                else{
-                   var msg='Void Submittted!';
+                   var msg='Invoice Adjustment Has Been Approved!';
                    component.find('notifLib').showToast({
                           'variant': 'success',
                           'message': msg,
                           'mode': 'sticky'
                    });
-                   
+                  
                    var navEvt = $A.get("e.force:navigateToSObject");
                    navEvt.setParams({
                        "recordId": recordId,
                        "slideDevName": "detail"
                    });
                    navEvt.fire();
-               }   
+
+               } 
+               $A.get('e.force:refreshView').fire();  
            }
            else if (state == 'ERROR'){
                var errors = response.getError();
@@ -93,7 +115,7 @@
        component.set('v.processing', true);
        $A.enqueueAction(action);
     },
-   handleCancel: function(component, event, helper) {
+    handleCancel: function(component, event, helper) {
        let dismiss = $A.get('e.force:closeQuickAction');
        dismiss.fire();
    },
@@ -104,7 +126,7 @@
     },
 
     handleShowModal: function(component, evt, helper) {
-        console.log('hey there');
+        
         let modalBody;
         var recordId = component.get('v.recordId');
         $A.createComponent('c:AP_AddAdjustment', {invoiceId :recordId, chargeId : chargeId},
@@ -116,7 +138,7 @@
                         showCloseButton: true,
                         cssClass: 'mymodal',
                         closeCallback: function() {
-                            //alert('You closed the alert!');
+                            
                         }
                     })
                 } else if (status === 'ERROR') {
@@ -132,13 +154,12 @@
         );
     },
     handleRowActionAdd: function (component, event, helper) {
-        console.log('hey there');
+        
         let modalBody;
         var recordId = component.get('v.recordId');
         var row = event.getParam('row');
-        console.log('you' + recordId);
-        //alert(JSON.stringify(row));
-        //alert(row.id);
+         
+       
         $A.createComponent('c:AP_AddAdjustment', {recordId :recordId, rowId :row.id, fee: row.fee, amountDue: row.feeAmount},
             function(content, status, errorMessage) {
                 if (status === 'SUCCESS') {
@@ -188,13 +209,17 @@
                               'message': msg,
                               'mode': 'sticky'
                 });
+                $A.get('e.force:refreshView').fire();  
             }
-           
             
+            $A.get('e.force:refreshView').fire();
         });
         
         
         $A.enqueueAction(action);
+         
+       
+
     }     
    
 })

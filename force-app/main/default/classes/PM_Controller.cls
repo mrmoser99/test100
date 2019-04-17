@@ -7,7 +7,7 @@ public with sharing class PM_Controller {
    	* 
    	********************************************************************************************/
     @AuraEnabled
-    public static List<PMUtility.resultLine> searchPortfolio(String customerName
+    public static String searchPortfolio(String customerName
                                     , String customerNumber
                                     , String assetSerialNumber
                                     , String choice

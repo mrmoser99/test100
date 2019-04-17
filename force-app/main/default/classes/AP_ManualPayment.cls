@@ -61,7 +61,7 @@ global with sharing class AP_ManualPayment {
 
         PNCUtility.voidInvoice(recordId,false);
         
-        return JSON.serialize(response);
+        return JSON.serialize(response); 
 
 
 	}
@@ -92,6 +92,12 @@ global with sharing class AP_ManualPayment {
             equipment = d.cllease__Contract_Equipment__r.Equipment_Description1__c;
         }
         Adjustment__c a = new Adjustment__c(Invoice__c = recordId, Adjustment_Type__c = aType, credit__c = credit, equipment__c = equipment, charge__c = chargeId, due_detail_line__c = dueId);
+        
+        Invoice__c i = [select id from Invoice__c where id = :recordId];
+        i.adjustment_status__c = 'Pending Approval';
+        
+        update i;
+        
         insert a;
         
 
