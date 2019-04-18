@@ -16,15 +16,6 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
-        <content>ICS_Application_LOS</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>ICS_Application__c</pageOrSobjectType>
-        <recordType>ICS_Application__c.List_Of_Similars</recordType>
-        <type>Flexipage</type>
-        <profile>Admin</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
         <content>ICS_Application</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>ICS_Application__c</pageOrSobjectType>
@@ -40,6 +31,15 @@
         <recordType>ICS_Application__c.Decision</recordType>
         <type>Flexipage</type>
         <profile>Newco Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>ICS_Application_LOS</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>ICS_Application__c</pageOrSobjectType>
+        <recordType>ICS_Application__c.List_Of_Similars</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
     </profileActionOverrides>
     <tabs>standard-home</tabs>
     <tabs>genesis__Quick_Quotes__c</tabs>

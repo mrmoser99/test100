@@ -33,14 +33,39 @@
 
     },
 
+    getApp: function(component) {
+        try {
+            let action = component.get('c.getApplication'),
+                applicationId = component.get('v.applicationId');
+            action.setParams({
+                applicationId: applicationId
+            });
+            action.setCallback(this, function (response) {
+                let state = response.getState();
+                if (state === 'SUCCESS') {
+                    component.set('v.application',response.getReturnValue());
+                } else if (state === 'ERROR') {
+                    let error = response.getError();
+                    if (error && error[0].message) {
+                        console.log(error[0].message);
+                    }
+                }
+            });
+            $A.enqueueAction(action);
+        } catch(e) {
+            console.log(e);
+        }
+
+    },
+
     checkCompletion: function(component) {
         let steps = this.steps, //steps = ['parties', 'terms', 'locations', 'equipment', 'services'],
             progress = component.find('progress'),
             finishCount = 0;
         try {
 
-            for (let step of steps) {
-                let stepCmp = component.find(step);
+            for (let x in steps) {
+                let stepCmp = component.find(steps[x]);
                 if (stepCmp.get('v.complete')) {
                     finishCount++;
                 }
@@ -50,8 +75,8 @@
             progress.set('v.progressValue', progressValue);
             component.set('v.applicationComplete', progressValue == 100);
 
-            for (let step of steps) {
-                let stepCmp = component.find(step);
+            for (let y in steps) {
+                let stepCmp = component.find(steps[y]);
                 if (!stepCmp.get('v.complete')) {
                     stepCmp.set('v.collapsed', false);
                     break;

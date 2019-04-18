@@ -46,7 +46,7 @@
     <description>This contains interface ap information headed to newco oracle
 
 MD50 - Interface GLBLxxxx – AP Payments to NEWCO</description>
-    <enableActivities>true</enableActivities>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>

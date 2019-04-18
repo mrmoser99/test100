@@ -11,7 +11,7 @@
 *
 ********************************************************************************************************************/
 global class ICSResponse {
-	  
+	 
 	/* Define the structure to hold the response from ICS */
 	 
 	

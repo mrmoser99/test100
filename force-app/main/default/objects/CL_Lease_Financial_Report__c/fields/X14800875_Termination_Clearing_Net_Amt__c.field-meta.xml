@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X14800875_Termination_Clearing_Net_Amt__c</fullName>
+    <externalId>false</externalId>
+    <formula>X14800875_Termination_Clearing_Debit_Amt__c -  X14800875_Termination_Clearing_Credit_Am__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>14800875 Termination Clearing Net Amt</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

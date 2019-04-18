@@ -11,8 +11,14 @@
     <columns>ACCOUNT__c</columns>
     <columns>TRANSACTION_DESCRIPTION__c</columns>
     <columns>JOURNAL_DATE__c</columns>
-    <columns>Report_Period__c</columns>
     <columns>JOURNAL_REFERENCE__c</columns>
+    <columns>JOURNAL_DESCRIPTION__c</columns>
+    <columns>CREATED_DATE</columns>
     <filterScope>Everything</filterScope>
+    <filters>
+        <field>JOURNAL_DATE__c</field>
+        <operation>equals</operation>
+        <value>20190331</value>
+    </filters>
     <label>All</label>
 </ListView>

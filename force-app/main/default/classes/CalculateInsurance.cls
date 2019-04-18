@@ -36,8 +36,6 @@ Global class CalculateInsurance{
                                                             WHERE Fee__r.Name='Insurance Fees' 
                                                                 AND Application__c=:applicationid];
             if(appfeelist.size() > 0 && ClleaseFee.size() > 0){
-                System.debug('****'+appfeelist.size());
-                System.debug('****'+ClleaseFee.size());
                 Boolean shouldUpdateAppFees = false;
                 // code for update of application fee records
                 Decimal insuranceAmount = (TotalEquipmentValue *  ClleaseFee[0].RateFactor__c) + ClleaseFee[0].clcommon__Amount__c;
@@ -58,7 +56,6 @@ Global class CalculateInsurance{
                     update appfeelist;
                 }
             } else if(appfeelist.size() == 0 && ClleaseFee.size() > 0){
-                System.debug('***entered new insurence Fee Creation***'+appfeelist.size()+'*****'+ClleaseFee.size());
                 // code for insert of application fee records
                 //(Total equipment Value * 0.00028) + $17.25 = Monthly Insurance Charge
                 Decimal insuranceAmount = (TotalEquipmentValue *  ClleaseFee[0].RateFactor__c) + ClleaseFee[0].clcommon__Amount__c;

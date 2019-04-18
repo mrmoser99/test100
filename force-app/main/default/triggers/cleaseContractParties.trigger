@@ -4,8 +4,6 @@
 * Log:
 *
 * 	4/18/18 - MRM Created
-*   10/11/18 - Fortimize - set Dealer on LS Contract (for community sharing)
-*
 *
 * Place the delear name, state and createddate on the lease when inserting contract parties that are 
 * delears.  This will be used for reporting etc...
@@ -61,7 +59,6 @@ trigger cleaseContractParties on cllease__Contract_Parties__c (before update, be
 		l.dealer_state__c = contractAccountState.get(contractAccountMap.get(l.id));
 		l.dealer_approved_date__c = contractAccountApprovedDate.get(contractAccountMap.get(l.id));
 		l.dealer_oracle_vendor_id__c = oraclevendor.get(contractAccountMap.get(l.id));
-		l.cllease__Dealer__c = contractAccountMap.get(l.Id);
 	}
  
 	if (!lList.isEmpty())

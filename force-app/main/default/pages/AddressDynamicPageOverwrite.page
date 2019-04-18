@@ -5,6 +5,7 @@
 
         <apex:form styleClass="edq-{!PageRenderer.SObjectName}" id="experianForm">
             <apex:pageMessages id="messages" />
+
             <apex:sectionheader title="{!$ObjectType.Address__c.label} Edit" subtitle="{!IF(ISNULL(Address__c.Name), 'New Address', Address__c.Name)}"/>
 
             <EDQ:DuplicatesTable duplicates="{!PageRenderer.Duplicates}" pagerenderer="{!PageRenderer}" />

@@ -7,7 +7,7 @@ public with sharing class CLSCustomUtil {
 	/**
 	 * Utillity to pull all fields for a object
 	 * @param: ObjectAPIName
-	 * @return: object fields API Names separated with comma (,)  
+	 * @return: object fields API Names separated with comma (,)
 	 */
 
 	public static String fetchObjectFields(String objectName) {

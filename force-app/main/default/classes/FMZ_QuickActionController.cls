@@ -25,7 +25,6 @@ public with sharing class FMZ_QuickActionController {
         FMZ_CTA_Settings__c setting = FMZ_CTA_Settings__c.getOrgDefaults();
         List<Section> sections = new List<Section>();
         sections.add(new Section(
-                setting.Fund_Apps_Image__c,
                 'Fund_Applications',
                 setting.Fund_Apps_Label__c,
                 setting.Fund_Apps_Call_to_Action__c,
@@ -34,7 +33,6 @@ public with sharing class FMZ_QuickActionController {
                 setting.Fund_Apps_Action_Label__c,
                 setting.Fund_Apps_Complete_Message__c));
         sections.add(new Section(
-                setting.Complete_Apps_Image__c,
                 'Complete_Applications',
                 setting.Complete_Apps_Label__c,
                 setting.Complete_Apps_Call_to_Action__c,
@@ -43,7 +41,6 @@ public with sharing class FMZ_QuickActionController {
                 setting.Complete_Apps_Action_Label__c,
                 setting.Complete_Apps_Complete_Message__c));
         sections.add(new Section(
-                setting.Convert_CC_Image__c,
                 'Convert_Credit_Checks',
                 setting.Convert_CC_Label__c,
                 setting.Convert_CC_Call_to_Action__c,
@@ -57,7 +54,7 @@ public with sharing class FMZ_QuickActionController {
         appStatus.addAll(appInProgressStrings);
 
         List<genesis__Applications__c> apps = [
-                SELECT Id, Name, genesis__Status__c, genesis__Account__r.Name
+                SELECT Id, Name, genesis__Status__c, genesis__Account__r.Name, Lease_Number__c
                 FROM genesis__Applications__c
                 WHERE genesis__Status__c IN: appStatus
                 ORDER BY LastModifiedDate DESC, genesis__Status__c
@@ -75,9 +72,9 @@ public with sharing class FMZ_QuickActionController {
 
         if(apps.size() > 0){
             for(genesis__Applications__c app : apps){
-                if(appApprovedStrings.contains(app.genesis__Status__c)){
+                if(appApprovedStrings.contains(app.genesis__Status__c) && app.Lease_Number__c == null){
                     approvedApps.add(new SectionItem(app.Id, app.Name, BASE_URL+app.Id, app.genesis__Account__r.Name, null, 'Fund'));
-                }else{
+                }else if(appInProgressStrings.contains(app.genesis__Status__c) && app.Lease_Number__c == null){
                     inProgressApps.add(new SectionItem(app.Id, app.Name, BASE_URL+app.Id, app.genesis__Account__r.Name, null, 'View'));
                 }
             }
@@ -98,9 +95,6 @@ public with sharing class FMZ_QuickActionController {
     }
 
     public class Section {
-        @AuraEnabled
-        public String imageSource;
-
         @AuraEnabled
         public String name;
 
@@ -125,8 +119,7 @@ public with sharing class FMZ_QuickActionController {
         @AuraEnabled
         public List<SectionItem> items;
 
-        public Section(String imageSource, String name, String label, String title, String linkColTitle, String infoColTitle, String globalAction, String emptyListMessage){
-            this.imageSource = imageSource;
+        public Section(String name, String label, String title, String linkColTitle, String infoColTitle, String globalAction, String emptyListMessage){
             this.name = name;
             this.label = label;
             this.title = title;

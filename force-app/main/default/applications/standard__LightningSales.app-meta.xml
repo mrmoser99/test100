@@ -7,7 +7,6 @@
     <label>Sales</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
-    <tabs>Portfolio_Manager</tabs>
     <tabs>standard-Opportunity</tabs>
     <tabs>standard-Lead</tabs>
     <tabs>standard-Task</tabs>
@@ -25,7 +24,7 @@
     <tabs>standard-Case</tabs>
     <tabs>standard-Forecasting3</tabs>
     <tabs>standard-EmailTemplate</tabs>
-    <tabs>ints__Equipment__c</tabs>
-    <tabs>genesis__Application_Pricing_Detail__c</tabs>
+    <tabs>CL_Lease_Financial_Report__c</tabs>
+    <tabs>Lease_Financial_Report_Mapping__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

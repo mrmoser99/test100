@@ -69,5 +69,3 @@ fetchDataNewBillsAndCharges : function(component, event, offSetCount) {
     
 }
 })
-
- 

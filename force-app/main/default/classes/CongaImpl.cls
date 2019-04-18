@@ -1,14 +1,12 @@
 /*
 Author: CLS
 
-11/8/2018 - T.Mattheou (Fortimize) - changed version and partnerUrl to public for newco portal
-
 Summary: This class is created to call conga composer in order to generate Creditpull, D&A and Lease Agreement Templets
 */
 global class CongaImpl
 {
-    public static string version = DLLNewCoConstants.SOAP_VERSION;
-    public static string partnerUrl = Url.getSalesforceBaseUrl().toExternalForm() + version + UserInfo.getOrganizationId().subString(0, 15);
+    static string version = DLLNewCoConstants.SOAP_VERSION;
+    static string partnerUrl = Url.getSalesforceBaseUrl().toExternalForm() + version + UserInfo.getOrganizationId().subString(0, 15);
     static string congaUrl;
     // this  method is used to generate Credit Approval Document
    /* webservice static string generateCreditApprovalDocument(string recordId)

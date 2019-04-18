@@ -7,7 +7,7 @@
 * 2/15/18 - MRM Created
 *
 **********************************************************************************************/
-global with sharing class NewCoUtility {  
+global with sharing class NewCoUtility { 
 	
 	public static Boolean skipApplicationTrigger = false;
     
@@ -77,7 +77,7 @@ global with sharing class NewCoUtility {
     public static void deleteOfac(Map<ID,String> ofacMap){
     	
     	List <Int_OFAC__c> deleteList = new List<Int_OFAC__c>(0);
-    	 
+    	
     	deletelist = [select id from Int_OFAC__c where id in : ofacMap.keySet()];
     	
     	if (!deleteList.isEmpty())
@@ -130,11 +130,10 @@ global with sharing class NewCoUtility {
     * SendWelcome Packet
     *
     *************************************************************************************************/
-  
+   	
     public static void sendWelcomePacket(Map<ID,String> leaseMap){
     	
-    	
-    	
+    
       	cllease__Lease_Account__c lease = new cllease__Lease_Account__c();
       	
       	lease = [	Select c.cllease__Account__r.Id, c.cllease__Account__c 

@@ -96,21 +96,28 @@ global without sharing class FMZ_QQ_ConvertToApplicationController {
             update app;
         }
 
+        List<clcommon__Party__c> existingParties = [
+                SELECT  clcommon__Type__r.Name, clcommon__Account__c
+                FROM    clcommon__Party__c
+                WHERE   genesis__Application__c =: app.Id
+                        AND clcommon__Type__r.Name = 'DEALER'
+                        AND clcommon__Account__c =: app.Dealer__c
+        ];
 
+        if(existingParties == null || existingParties.size() == 0){
+            List<clcommon__Party__c> parties = new List<clcommon__Party__c>();
 
-        List<clcommon__Party__c> parties = new List<clcommon__Party__c>();
+            Id ptId = [SELECT Id FROM clcommon__Party_Type__c WHERE Name = 'DEALER' LIMIT 1].Id;
 
-        Id ptId = [SELECT Id FROM clcommon__Party_Type__c WHERE Name = 'DEALER' LIMIT 1].Id;
-
-        parties.add(new clcommon__Party__c(clcommon__Type__c = ptId, clcommon__Account__c = app.Dealer__c, genesis__Application__c = app.Id)
-        );
+            parties.add(new clcommon__Party__c(clcommon__Type__c = ptId, clcommon__Account__c = app.Dealer__c, genesis__Application__c = app.Id));
 //        parties.add(new genesis__Application_Parties__c(
 //                genesis__Application__c = app.Id,
 //                genesis__Party_Account_Name__c = app.Dealer__c,
 //                genesis__Party_Type__c = 'DEALER'
 //        ));
 
-        insert parties;
+            insert parties;
+        }
     }
 
     public static final String RESPONSE_KEYWORD_STATUS = 'Status';
@@ -137,49 +144,6 @@ global without sharing class FMZ_QQ_ConvertToApplicationController {
         quickQuoteOC.buildQuery();
         return (genesis__Quick_Quotes__c) quickQuoteOC.executeQuery().getRecords()[0];
     }
-
-//    private static Account getAccountWithDefaultValues(){
-//        Account newRecord = new Account();
-//        RecordType lessee = [SELECT ID
-//        FROM RecordType
-//        WHERE DeveloperName = 'Lessee'
-//        AND SobjectType = 'Account'
-//        AND IsActive = true limit 1];
-//        clcommon__Legal_Entity__c corp = [SELECT ID
-//        FROM clcommon__Legal_Entity__c
-//        WHERE Name = 'Corporation' limit 1];
-//        newRecord.clcommon__Legal_Entity_Type__c = corp.Id;
-//        newRecord.RecordTypeId = lessee.Id;
-//        return newRecord;
-//    }
-//
-//    private static Address__c getAddressWithDefaultValues(){
-//        RecordType lessee = [SELECT ID
-//        FROM RecordType
-//        WHERE DeveloperName = 'Lessee'
-//        AND SobjectType = 'Address__c'
-//        AND IsActive = true limit 1];
-//        Address__c address = new Address__c();
-//        address.RecordTypeId = lessee.Id;
-//        address.Country__c = 'USA';
-//        address.Bill_To_Usage__c = true;
-//        address.Install_At__c = true;
-//        return address;
-//    }
-
-//    private static List<sObject> getDuplicateRecords(Database.DuplicateError duplicateError){
-//        List<sObject> duplicateRecords = new List<sObject>();
-//        if (duplicateError != NULL){
-//            Datacloud.DuplicateResult duplicateResult = duplicateError.getDuplicateResult();
-//            Datacloud.MatchResult[] matchResults = duplicateResult.getMatchResults();
-//            Datacloud.MatchResult matchResult = matchResults[0];
-//            Datacloud.MatchRecord[] matchRecords = matchResult.getMatchRecords();
-//            for (Datacloud.MatchRecord matchRecord : matchRecords) {
-//                duplicateRecords.add(matchRecord.getRecord());
-//            }
-//        }
-//        return duplicateRecords;
-//    }
 
     webservice static string createApplication(String quickQuoteId,
             Boolean mapDuplicateAccount){
@@ -214,57 +178,9 @@ global without sharing class FMZ_QQ_ConvertToApplicationController {
 
         try{
             genesis__Quick_Quotes__c quickQuote = queryQuickQuote(quickQuoteId);
-//            Account accRecord = getAccountWithDefaultValues();
-//            for (String accountField : accountFieldByQuickQuoteField.keySet()){
-//                String qqField = accountFieldByQuickQuoteField.get(accountField);
-//                accRecord.put(accountField, quickQuote.get(qqField));
-//            }
-//
-//            Database.SaveResult saveResult = Database.insert(accRecord, false);
-//            if (!saveResult.isSuccess()) {
-//                for (Database.Error error : saveResult.getErrors()) {
-//                    if (error instanceof Database.DuplicateError) {
-//                        List<sObject> duplicates = getDuplicateRecords((Database.DuplicateError)error);
-//                        accRecord = (Account) duplicates[0];
-//                        if(mapDuplicateAccount == false){
-//                            response.put(RESPONSE_KEYWORD_STATUS, STATUS_ERROR);
-//                            response.put(RESPONSE_KEYWORD_MESSAGE, 'An account already exists in the system');
-//                            response.put(DUPLICATE_RECORD_ID, accRecord.Id);
-//                            return makeJSONString(response);
-//                        }
-//                    } else {
-//                        response.put(RESPONSE_KEYWORD_STATUS, STATUS_ERROR);
-//                        response.put(RESPONSE_KEYWORD_MESSAGE, error.getMessage());
-//                        return makeJSONString(response);
-//                    }
-//                }
-//            }
-//
-//            // map address
-//            Address__c address = getAddressWithDefaultValues();
-//            for (String addressField : addressFieldByQuickQuoteField.keySet()){
-//                String qqField = addressFieldByQuickQuoteField.get(addressField);
-//                address.put(addressField, quickQuote.get(qqField));
-//            }
-//            address.Account__c = accRecord.Id;
-//            saveResult = Database.insert(address, false);
-//            if (!saveResult.isSuccess()) {
-//                for (Database.Error error : saveResult.getErrors()) {
-//                    if (error instanceof Database.DuplicateError) {
-//                        List<sObject> duplicates = getDuplicateRecords((Database.DuplicateError)error);
-//                        if(duplicates.size() == 1){
-//                            address = (Address__c) duplicates[0];
-//                        }
-//                    }
-//                }
-//            }
-//
-//
-//            quickQuote.genesis__Account__c = accRecord.Id;
-//            quickQuote.Billing_Address__c = address.Id;
-//            update quickQuote;
 
             String qqResponse =  genesis.QuickQuoteController.convertQuickQuoteToApplication(quickQuote);
+            System.debug('QQRESPONSE: '+ qqResponse);
             if(qqResponse.contains('"status":"ERROR"')){
                 return qqResponse;
             }

@@ -2,8 +2,8 @@
 <WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Conga_Composer_Invoice</fullName>
     <availability>online</availability>
-    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://apxtconga4.cs66.visual.force.com/a2k1I000000Bz7fQAC
-25-Jul-2018 04:00:28 AM</description>
+    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://apxtconga4.cs77.visual.force.com/a360t0000001YrHAAU
+06-Mar-2018 11:29:34 PM</description>
     <displayType>button</displayType>
     <encodingKey>UTF-8</encodingKey>
     <hasMenubar>false</hasMenubar>
@@ -22,16 +22,18 @@
 &amp;serverUrl={!API.Partner_Server_URL_370}
 &amp;Id={!Invoice__c.Id}
 
-&amp;QueryId=[INV]a2e1I000000Qam7,
-[DueDetailsLines]a2e1I000000Qam4,
-[AD]a2e1I000000Qam2,
-[INSFEE]a2e1I000000Qam9,
-[OrigFee]a2e1I000000Qam8,
-[InterimRent]a2e1I000000Qam5,
-[LateFee]a2e1I000000QamA,
-[FinanceFee]a2e1I000000Qam6,
-[EC]a2e1I000000Qalp
+&amp;QueryId=[INV]a300t0000000BnF,
+[DueDetailsLines]a300t00000003Ce,
+[AD]a300t0000000CBe,
+[INSFEE]a300t0000000CBo,
+[OrigFee]a300t0000000CBt,
+[InterimRent]a300t0000000CBy,
+[LateFee]a300t0000000CC3,
+[FinanceFee]a300t0000000CC8,
+[Bill]a300t0000000CCD,
+[EC]a300t0000000Gq7%3Fpv0%3D{!cllease__Lease_Account__c.Id},
+[ES]a300t000000Mfw0
 
-&amp;TemplateId=a2m1I000000hEEP</url>
+&amp;TemplateId=a380t0000000s2w</url>
     <width>900</width>
 </WebLink>

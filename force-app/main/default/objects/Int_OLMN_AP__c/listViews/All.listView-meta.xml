@@ -4,6 +4,7 @@
     <columns>NAME</columns>
     <columns>Committed__c</columns>
     <columns>Vendor_Code__c</columns>
+    <columns>Contract_Number__c</columns>
     <columns>Invoice_Number__c</columns>
     <columns>Invoice_Date__c</columns>
     <columns>GL_Date__c</columns>
@@ -14,7 +15,7 @@
     <columns>Expense_Amount__c</columns>
     <columns>CREATEDBY_USER</columns>
     <columns>UPDATEDBY_USER</columns>
-    <columns>Contract_Number__c</columns>
+    <columns>CREATED_DATE</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

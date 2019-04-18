@@ -1,7 +1,7 @@
 public with sharing class PM_Controller {
      
     @AuraEnabled
-    public static List<PMUtility.resultLine> searchResults {get;set;} 
+    public static String searchResults {get;set;} 
     /********************************************************************************************
    	* Search
    	* 
@@ -11,7 +11,7 @@ public with sharing class PM_Controller {
                                     , String customerNumber
                                     , String assetSerialNumber
                                     , String choice
-                                    , String size
+                                    , Integer size
                                     , String sortOrder
                                     , Boolean assetDetail
                                     , Integer intOffSet){   
@@ -32,17 +32,17 @@ public with sharing class PM_Controller {
    	* 
    	********************************************************************************************/
     @AuraEnabled
-    public static PMUtility.leaseDetail getLeaseDetails(String leaseNumber){   
+    public static String getLeaseDetails(String leaseNumber){   
          
         return PMUtility.getLeaseDetails(leaseNumber);
     } 
 
     /********************************************************************************************
-   	* Quote List - high leve info about generated quotes.
+   	* Quote List - high level info about generated quotes.
    	* 
    	********************************************************************************************/
     @AuraEnabled
-    public static List<PMUtility.quoteSummary> generateQuotes(String leaseNumber){   
+    public static String generateQuotes(String leaseNumber){   
         
         return PMUtility.generateQuotes(leaseNumber);
         
@@ -54,7 +54,7 @@ public with sharing class PM_Controller {
    	* 
    	********************************************************************************************/
     @AuraEnabled
-    public static PMUtility.quoteDetail getQuoteDetail(String quoteNumber){   
+    public static String getQuoteDetail(String quoteNumber){   
         
         return PMUtility.getQuoteDetail(quoteNumber);
     } 

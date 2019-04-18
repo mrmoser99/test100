@@ -55,9 +55,10 @@
 	updateApplication: function (component) {
 		try {
 			let p = new Promise($A.getCallback(function(resolve, reject) {
-				console.log('update application');
 				let action = component.get('c.updateApplication'),
-					application = component.get('v.application');
+					application = component.get('v.application'),
+                    applicationId = component.get('v.applicationId');
+                application.Id = applicationId;
 				action.setParams({
 					app: application
 				});
@@ -122,17 +123,56 @@
 		try {
 			let p = new Promise($A.getCallback(function(resolve, reject) {
 				console.log('generating agreement');
-				var action = component.get('c.generateLeaseDocument');
+				var action = component.get('c.callCongaTrigger'); 
 				action.setParams({
 					applicationId: component.get('v.applicationId')
-				});
-				action.setBackground();
-				action.setCallback(this, function (response) {
-					var state = response.getState();
-					if (state === 'SUCCESS') {
-						console.log(response.getReturnValue());
-						resolve(response.getReturnValue());
-					} else if (state === 'ERROR') {
+                });
+                action.setBackground();
+                action.setCallback(this, function (response) {
+                    var state = response.getState();
+                    if (state === 'SUCCESS') {
+                        var docsInterval = window.setInterval($A.getCallback(function(){
+                            var getDocs = component.get('c.getDocuments');
+                            getDocs.setParams({
+                                applicationId: component.get('v.applicationId')
+                            });
+                            getDocs.setCallback(this, function(response) {
+                                console.log('!!! POLLING');
+                                var state = response.getState();
+                                if (state === 'SUCCESS') {
+                                    var docs = component.get('v.documents');
+                                    if(docs.length != response.getReturnValue().length){
+                                        var assignmentAction = component.get('c.createDocumentAssosiation');
+                                        assignmentAction.setParams({
+                                            attId: response.getReturnValue()[0].Id
+                                        });
+                                        assignmentAction.setCallback(this, function(response) {
+                                            var state = response.getState();
+                                            if (state === 'SUCCESS') {
+                                                resolve(response.getReturnValue());
+                                                window.clearInterval(component.get("v.setIntervalId"));
+                                            } else if (state === 'ERROR') {
+                                                let error = response.getError();
+                                                if (error && error[0]) {
+                                                    console.log(error[0].message);
+                                                }
+                                                window.clearInterval(component.get("v.setIntervalId"));
+                                            }
+                                        });
+                                        $A.enqueueAction(assignmentAction);
+                                    }
+                                } else if (state === 'ERROR') {
+                                    let error = response.getError();
+                                    if (error && error[0]) {
+                                        console.log(error[0].message);
+                                    }
+                                    window.clearInterval(component.get("v.setIntervalId"));
+                                }
+                            });
+                            $A.enqueueAction(getDocs);
+                        }), 10000);
+                        component.set('v.setIntervalId', docInterval);
+                    } else if (state === 'ERROR') {
 						let error = response.getError();
 						if (error && error[0]) {
 							console.log(error[0].message);
@@ -144,11 +184,17 @@
 			}));
 			return p;
 		} catch (e) {
+            console.log('Generate Catch');
 			console.log(e);
 		}
 	},
+    
+    pollForDocs: function(component){
+       
+    },
 
 	uploadFile: function(component, file) {
+        console.log('file: '+file);
 		try {
 			let p = new Promise($A.getCallback(function(resolve, reject) {
 				let reader = new FileReader(),
@@ -178,6 +224,26 @@
 					console.log('uploading');
 					$A.enqueueAction(action);
 				});
+                if (!FileReader.prototype.readAsBinaryString) {
+                    FileReader.prototype.readAsBinaryString = function (fileData) {
+                       var binary = "";
+                       var pt = this;
+                       var reader = new FileReader();      
+                       reader.onload = function (e) {
+                           var bytes = new Uint8Array(reader.result);
+                           var length = bytes.byteLength;
+                           for (var i = 0; i < length; i++) {
+                               binary += String.fromCharCode(bytes[i]);
+                           }
+                        //pt.result  - readonly so assign binary
+                        pt.content = binary;
+                        console.log('HERE!');
+                        $(pt).trigger('onloadend'); 
+                        console.log('HERE!!!');
+                    }
+                    reader.readAsArrayBuffer(fileData);
+                    }
+                }
 				reader.readAsBinaryString(file);
 			}));
 			return p;

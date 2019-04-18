@@ -17,6 +17,7 @@
     <aura:attribute name="searchString" type="String" access="private"/>
     <aura:attribute name="processing" type="Boolean" default="false" access="private"/>
     <aura:attribute name="error" type="String" access="private"/>
+    <aura:attribute name="isInvalid" type="Boolean" access="private" default="false"/>
 
     <aura:registerEvent name="appEvent" type="c:FMZ_Application_Refresh"/>
 
@@ -26,6 +27,14 @@
 
     <lightning:card title="{!'New '+v.feeName}" iconName="standard:partner_marketing_budget">
         <div class="slds-m-around_medium">
+
+            <div class="{!'slds-notify_container slds-is-relative slds-m-left_x-small ' + (v.isInvalid ? '' : 'slds-hide')}">
+                <div role="alert" class="slds-notify slds-notify_toast slds-theme_error">
+                    <div class="slds-notify_content">
+                        <h2 class="slds-text-heading_small">Please complete required fields.</h2>
+                    </div>
+                </div>
+            </div>
 
             <lightning:dualListbox aura:id="equipmentList"
                                    name="equipment"
@@ -38,11 +47,11 @@
                                    onchange="{! c.handleChange }"/>
 
             <lightning:input aura:id="paymentCount" type="number" label="Number of Payments"
-                             value="{!v.fee.Number_of_Payments__c}"
-                             placeholder="Enter Number of Payments"/>
+                             value="{!v.fee.Number_of_Payments__c}" min="1" messageWhenRangeUnderflow="There must be at least 1 payment."
+                             placeholder="Enter Number of Payments" required="true" messageWhenValueMissing="There must be at least 1 payment"/>
 
             <lightning:select aura:id="frequency" label="Frequency"
-                              required="false" value="{!v.fee.Frequency__c}">
+                              required="true" value="{!v.fee.Frequency__c}" messageWhenValueMissing="Select a frequency">
                 <option value="">--Select--</option>
                 <aura:iteration items="{!v.frequencyOpts}" var="a">
                     <option value="{!a.value}"
@@ -52,11 +61,14 @@
 
             <lightning:input aura:id="amount" type="number" formatter="currency" step="0.01"
                              label="Fee Amount" placeholder="Enter Fee Amount" value="{!v.fee.Amount__c}"
-                             min="0.01" messageWhenValueMissing="Fee Amount is required." required="true"
+                             min="0.01" messageWhenRangeUnderflow="Fee Amount must be more than $0.00"
+                             messageWhenValueMissing="Fee Amount is required." required="true"
                              />
 
-            <ui:inputDate aura:id="dueDate" format="M/d/yyyy" displayDatePicker="true" label="Due Date"
-                          value="{!v.fee.Start_Date__c}" />
+            <aura:if isTrue="{!or(v.feeName != 'Service Fees', and(v.feeName == 'Service Fees', v.fee.Frequency__c == 'ONE TIME'))}">
+                <ui:inputDate aura:id="dueDate" format="M/d/yyyy" displayDatePicker="true" label="Due Date"
+                              value="{!v.fee.Start_Date__c}" />
+            </aura:if>
 
             <!--<aura:if isTrue="{!v.feeName == 'Service Fees'}">-->
 

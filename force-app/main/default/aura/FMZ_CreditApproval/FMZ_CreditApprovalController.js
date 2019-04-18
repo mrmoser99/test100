@@ -2,12 +2,25 @@
     doInit: function(component, event, helper) {
         var recordId = component.get('v.recordId');
         if (recordId) {
-            component.set('v.accountId', recordId);
-            component.set('v.newAccount', false);
+            var action = component.get('c.getAccountId');
+            action.setParams({
+                'recordId': recordId
+            });
+            action.setCallback(this, function(response) {
+                var state = response.getState();
+                if (state === 'SUCCESS') {
+                    var accId = response.getReturnValue();
+                    component.set('v.accountId', accId);
+                    component.set('v.newAccount', false);
+                    helper.loadFields(component, helper);
+        			helper.loadDealerId(component);
+                }
+            });
+            $A.enqueueAction(action);
+        }else{
+            helper.loadFields(component, helper);
+        	helper.loadDealerId(component);
         }
-
-        helper.loadFields(component, helper);
-        helper.loadDealerId(component);
     },
     findMatchingAddresses : function(component, event, helper){
         var action = component.get('c.getMatches');
@@ -71,6 +84,7 @@
         var recordId = component.get('v.recordId');
         var account = component.get('v.account');
 
+        fields['Primary_Phone_number__c'] = fields['Primary_Phone_number__c'].replace(/(\(|\)| |-)/g, "");
         fields['genesis__Address_Line_1__c'] = component.find('addressLine1').get('v.value');
         fields['genesis__City__c'] = component.find('city').get('v.value');
         fields['County__c'] = component.find('county').get('v.value');
@@ -141,7 +155,8 @@
                                                     component.find('notifLib').showToast({
                                                         'variant': 'error',
                                                         'message': 'ERROR: An error has occurred processing your request. Try again later, or report this issue to a System Administrator.',
-                                                        'mode': 'sticky'
+                                                        'mode': 'dismissible',
+                                                        'duration': '5000'
                                                     });
                                                     let dismiss = $A.get('e.force:closeQuickAction');
                                                     dismiss.fire();
@@ -153,7 +168,8 @@
                                             component.find('notifLib').showToast({
                                                 'variant': 'error',
                                                 'message': 'Please use the existing Account to create this Credit Approval',
-                                                'mode': 'sticky'
+                                                'mode': 'dismissible',
+                                                'duration': '5000'
                                             });
                                             let dismiss = $A.get('e.force:closeQuickAction');
                                             dismiss.fire();
@@ -166,7 +182,9 @@
                                 toast.setParams({
                                     title: 'Error',
                                     message: errorMessage,
-                                    type: 'error'
+                                    type: 'error',
+                                    mode: 'dismissible',
+                                    duration: '5000'
                                 });
                                 toast.fire();
                             }
@@ -177,7 +195,8 @@
                 component.find('notifLib').showToast({
                     'variant': 'error',
                     'message': 'ERROR: An error has occurred processing your request. Try again later, or report this issue to a System Administrator.',
-                    'mode': 'sticky'
+                    'mode': 'dismissible',
+                    'duration': '5000'
                 });
                 let dismiss = $A.get('e.force:closeQuickAction');
                 dismiss.fire();

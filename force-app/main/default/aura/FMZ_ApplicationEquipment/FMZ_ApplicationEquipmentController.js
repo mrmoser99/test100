@@ -51,23 +51,8 @@
 
     // validate required fields and at least one piece of equipment
     saveAndValidate: function(component, event, helper) {
-        let equipment = component.get('v.equipment'),
-            lookup = component.find('lookup');
-        try {
-            if (!Boolean(equipment) || equipment.length == 0) {
-                $A.util.addClass(lookup, 'slds-has-error');
-                component.set('v.error', 'Please add equipment to the application.')
-                return false;
-            } else if (!helper.isEquipmentValid(component)) {
-                return false;
-            } else {
-                $A.util.removeClass(lookup, 'slds-has-error');
-                component.set('v.error', null)
-                return true;
-            }
-        } catch (e) {
-            console.log(e);
-        }
+        console.log('SAVE AND VALIDATE')
+        return helper.helpSaveAndValidate(component);
     },
 
     // mark components with equipment-changed css class
@@ -149,7 +134,7 @@
                     break;
                 case 'price':
 					if (newValue && !isNaN(newValue) && msrp && msrpWarningPct && !isNaN(msrpWarningPct)
-					&& Number(newValue) > (1 + Number(msrpWarningPct)/100.0) * msrp) {
+					&& Number(newValue) > (Number(msrpWarningPct)/100.0) * msrp) {
 						let toast = $A.get('e.force:showToast');
 						toast.setParams({
 							title: 'Warning',
@@ -186,6 +171,7 @@
         var source = event.getParam('source');
         if (source === 'FMZ_ApplicationLocations') {
             helper.loadInstallAddresses(component);
+            //helper.helpSaveAndValidate(component);
         } else if (source === 'FMZ_ApplicationForm') {
         	//helper.refreshUpfrontTax(component);
 		}

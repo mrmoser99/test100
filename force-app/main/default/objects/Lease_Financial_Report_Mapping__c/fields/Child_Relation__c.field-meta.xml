@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Child_Relation__c</fullName>
+    <externalId>false</externalId>
+    <label>Child Relation API</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>cllease__Charge__c</fullName>
+                <default>false</default>
+                <label>cllease__Charge__c</label>
+            </value>
+            <value>
+                <fullName>cllease__Residual_Stream__c</fullName>
+                <default>false</default>
+                <label>cllease__Residual_Stream__c</label>
+            </value>
+            <value>
+                <fullName>cllease__Rental_Stream__c</fullName>
+                <default>false</default>
+                <label>cllease__Rental_Stream__c</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

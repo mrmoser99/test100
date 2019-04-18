@@ -47,7 +47,7 @@
             if (state === 'SUCCESS') {
                 var result = response.getReturnValue();
                 console.log(result);
-                if (Boolean(result) && result.indexOf('success') != -1) {
+                if (Boolean(result) && (result.indexOf('success') != -1 || result.indexOf('Submitted')) ) {
                     this.showToast (
                         component,
                         'success',
@@ -137,7 +137,15 @@
 
     // set the value of inputField based on field set position
     prepopulateField: function(component, fieldName, value) {
-        var inputField = component.find('inputField');
+         var inputField = component.find('inputField'),
+            inputFieldPhone = component.find('inputFieldPhone');
+         if (inputField) {
+             if(!Array.isArray(inputField)){
+                 inputField = [inputField, inputFieldPhone];
+             }else{
+                 inputField.push(inputFieldPhone);
+             }
+         }
         for (var i = 0; i < inputField.length; i++) {
             console.log(inputField[i].get('v.fieldName'));
             if (fieldName == inputField[i].get('v.fieldName')) {
@@ -151,13 +159,51 @@
     isValid: function(component) {
         var result = true,
             fields = component.get('v.fields'),
-            inputField = component.find('inputField');
+            inputField = component.find('inputField'),
+            inputFieldPhone = component.find('inputFieldPhone'),
+            inputFieldFinance = component.find('inputFieldFinance');
+
+        if(component.get('v.newAccount')){
+            var inputAccountId = component.find('inputFieldAccountId');
+            if(!inputAccountId.get('v.value') || inputAccountId.get('v.value') == ''){
+                $A.util.addClass(inputAccountId, 'slds-has-error');
+                result = false;
+            }
+        }else{
+            var inputAccountName = component.find('inputFieldAccountName');
+            if(!inputAccountName.get('v.value') || inputAccountName.get('v.value') == ''){
+                $A.util.addClass(inputAccountName, 'slds-has-error');
+                result = false;
+            }
+        }
+
+        if (inputField) {
+            if(!Array.isArray(inputField)){
+                inputField = [inputField, inputFieldPhone, inputFieldFinance];
+            }else{
+                inputField.push(inputFieldPhone);
+                inputField.push(inputFieldFinance);
+            }
+        }
+        var phoneValue = inputFieldPhone.get('v.value').replace(/(\(|\)| |-)/g, "");
+        var regularExpression;
+        var re = new RegExp('[1-9]{1}[0-9]{9}');
+        console.log('REGEXP PHONE: '+!re.test(phoneValue));
+        if(!re.test(phoneValue) || phoneValue.length != 10){
+            component.set('v.invalidFormatPhone', true);
+            $A.util.addClass(inputFieldPhone, 'slds-has-error');
+            result = false;
+        }
+        if(!inputFieldFinance.get('v.value') || inputFieldFinance.get('v.value') == ''){
+            $A.util.addClass(inputFieldFinance, 'slds-has-error');
+            result = false;
+        }
         var requiredByFieldPath = [];
         for (var i = 0; i < fields.length; i++) {
             requiredByFieldPath[fields[i].fieldPath] = fields[i].required;
         }
         for (var j = 0; i < inputField.length; i++) {
-            if (requiredByFieldPath[inputField[j].get('v.fieldName')] && !Boolean(inputField[j].get('v.value'))) {
+            if (requiredByFieldPath[inputField[j].get('v.fieldName')] && !Boolean(inputField[j].get('v.value')) ) {
                 $A.util.addClass(inputField[j], 'slds-has-error');
                 result = false;
             }
@@ -194,7 +240,8 @@
                     label: linkLabel
                 }
             ],
-            'mode': 'sticky'
+            'mode': 'dismissible',
+            'duration': '5000'
         });
     },
 

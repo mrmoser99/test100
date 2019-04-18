@@ -1,6 +1,7 @@
 ({
     onInit: function(component, event, helper) {
         helper.loadCompletion(component);
+        helper.getApp(component);
     },
     handlePartiesNext: function(component, event, helper) {
         let parties = component.find('parties'),
@@ -85,6 +86,7 @@
 	},
     handleChange: function(component, event, helper) {
     	try {
+    	    console.log('Caught handleChange!!!');
 			let appSummary = component.find('appSummary');
 			appSummary.set('v.pricingMessage', null);
 			appSummary.set('v.recalculating', true);
@@ -96,7 +98,7 @@
 				.catch($A.getCallback(function (error) {
 					appSummary.set('v.recalculating', false);
 				}));
-			
+
 		} catch (e) {
     		console.log(e);
 		}
@@ -125,5 +127,24 @@
             component.set('v.processing', false);
         });
         $A.enqueueAction(action);
+    },
+    handleRefresh: function(component, event, helper){
+        var source = event.getParam('source');
+        console.log('handleRefresh source: '+source);
+        if (source === 'FMZ_ApplicationEquipment:InstallAddressChange') {
+            let equipmentForm = component.find('equipmentForm'),
+                equipment = component.find('equipment');
+            try {
+                if (equipmentForm.saveAndValidate()) {
+                    equipment.set('v.complete', true);
+                    helper.checkCompletion(component);
+                } else {
+                    equipment.set('v.complete', false);
+                    helper.checkCompletion(component);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
     }
 })

@@ -10,3 +10,6 @@ declare module "@salesforce/apex/FMZ_ApplicationController.checkCompletion" {
 declare module "@salesforce/apex/FMZ_ApplicationController.moveToOFACCheck" {
   export default function moveToOFACCheck(param: {appId: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FMZ_ApplicationController.getApplication" {
+  export default function getApplication(param: {applicationId: any}): Promise<any>;
+}

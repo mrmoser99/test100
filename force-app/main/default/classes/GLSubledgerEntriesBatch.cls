@@ -63,6 +63,7 @@ global with sharing class GLSubledgerEntriesBatch extends clcommon.DynamicJob {
                 ' FROM cllease__GL_Transaction_Detail__c          '+
                 ' WHERE ( GL_SubLedger_Credit_Record_Id__c = null '+
                 '     OR GL_SubLedger_Debit_Record_Id__c = null ) '+
+                '   AND Valid_GL_Entries__c = true '+
                 '   AND CL_Lease_Transaction_Type__c not in ( '+excludeTxns+' ) '+
                 '   AND cllease__GL_Date__c <= '+ txnDateStr;
 

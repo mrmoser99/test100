@@ -25,6 +25,7 @@
     },
     handleAdd: function(component, event, helper){
         var valid = helper.validate(component);
+        console.log('VALID: '+valid);
         if(!valid) {
             return;
         }
@@ -38,7 +39,10 @@
         action.setCallback(this, function(response) {
             var state = response.getState();
             if (state === 'SUCCESS') {
-                var appEvent = $A.get("e.c:FMZ_Application_Refresh");
+                 var appEvent = $A.get("e.c:FMZ_Application_Refresh");
+                 appEvent.setParams({
+                      source: 'FMZ_ApplicationServiceAndFees_New'
+                  });
                  appEvent.fire();
                  let dismiss = $A.get('e.force:closeQuickAction');
                  dismiss.fire();
@@ -55,8 +59,8 @@
     },
      handleCancel: function(component, event, helper) {
          //helper.deleteFee(component, component.get('v.feeId'));
-         var appEvent = $A.get("e.c:FMZ_Application_Refresh");
-         appEvent.fire();
+//         var appEvent = $A.get("e.c:FMZ_Application_Refresh");
+//         appEvent.fire();
          let dismiss = $A.get('e.force:closeQuickAction');
          dismiss.fire();
      },

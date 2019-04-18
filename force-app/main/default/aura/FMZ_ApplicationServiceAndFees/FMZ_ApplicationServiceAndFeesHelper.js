@@ -15,6 +15,7 @@
                     console.log(error[0].message);
                 }
             }
+            component.set('v.processing', false);
         });
         $A.enqueueAction(action);
     },
@@ -39,11 +40,11 @@
     // load or reload installation addresses for the application account
     loadPicklistOptions: function(component) {
         var helper = this;
-        this.loadFieldOpts(component, 'Service_Escalate__c', 'v.serviceEscalateOpts');
+//        this.loadFieldOpts(component, 'Service_Escalate__c', 'v.serviceEscalateOpts');
         this.loadFieldOpts(component, 'Frequency__c', 'v.frequencyOpts');
-        this.loadFieldOpts(component, 'Escalation_Frequency__c', 'v.escalateFreqOpts');
-        this.loadFieldOpts(component, 'Escalate_Service_On__c', 'v.escalateOnOpts');
-        this.loadFieldOpts(component, 'Escalation_Type__c', 'v.escalateTypeOpts');
+//        this.loadFieldOpts(component, 'Escalation_Frequency__c', 'v.escalateFreqOpts');
+//        this.loadFieldOpts(component, 'Escalate_Service_On__c', 'v.escalateOnOpts');
+//        this.loadFieldOpts(component, 'Escalation_Type__c', 'v.escalateTypeOpts');
         var action = component.get('c.getEquipmentOptions');
         action.setParams({
             applicationId : component.get('v.applicationId')
@@ -74,10 +75,12 @@
                 onChangeAction = component.get('v.onchange');
             component.set('v.processing', false);
             if (state === 'SUCCESS') {
+                console.log('!!! SUCCESS ADD: onchange - '+onChangeAction);
                 let lookup = component.find('lookup');
                 lookup.set('v.selection', []);
                 this.loadApplicationFees(component);
                 if (onChangeAction) {
+                    console.log('!!! ENQUEUE onChangeAction');
                     $A.enqueueAction(onChangeAction);
                 }
             } else if (state === 'ERROR') {
@@ -95,7 +98,7 @@
         action.setCallback(this, function(response) {
             let state = response.getState(),
                 onChangeAction = component.get('v.onchange');
-            component.set('v.processing', false);
+            //component.set('v.processing', false);
             if (state === 'SUCCESS') {
                 this.loadApplicationFees(component);
                 if (onChangeAction) {

@@ -1,6 +1,5 @@
 ({
 	approveAction : function(component, event, helper) {
-        component.set('v.processing', true);
 		var recordId = component.get("v.recordId");
         var action = component.get('c.approveApplication');
         action.setParams({
@@ -10,13 +9,16 @@
         	var state = response.getState();
             if (state == 'SUCCESS'){
                 var approveError = JSON.parse(response.getReturnValue());
-                console.log(info);
+                console.log(approveError);
                 if (approveError.Message){
                 	component.find('notifLib').showToast({
                            'variant': 'error',
                            'message': approveError.Message,
                            'mode': 'pester'
                     });
+                }
+                else{
+                	$A.get('e.force:refreshView').fire();
                 }
             }
             else if (state == 'ERROR'){

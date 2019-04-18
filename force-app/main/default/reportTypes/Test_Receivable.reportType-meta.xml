@@ -1522,6 +1522,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Remaining_Payments__c</field>
+            <table>cllease__Lease_Account__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Unbilled_Receivable__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>

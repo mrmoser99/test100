@@ -36,32 +36,6 @@ public class VertexHttpResponseGenerator  {
         res.setStatusCode((chargeNames.size() <= 2 ? 200 : 500));
         return res;
     }
-    public static HTTPResponse vertexAdjustChargeHTTPResponse(cllease__Charge__c charge) {
-        // extracting Names  from Charges
-        List<String> chargeNames = new List<String>();
-        chargeNames.add(charge.Name);
-        HttpResponse res = new HttpResponse();
-        res.setHeader('Content-Type', 'text/xml');
-        res.setBody((chargeNames.size() <= 2 ? generateResponse(chargeNames) : vertexFailedHTTPResponse()));
-        res.setStatusCode((chargeNames.size() <= 2 ? 200 : 500));
-        return res;
-    }
-    /**
-     * Following method helps in generating the HTTP Response for Application
-     * i. if application.size() = 1, generate successful response
-     **/
-    public static HTTPResponse vertexUpFrontApplicationHTTPResponse(List<string> applicationID) {
-        // extracting Names  from Charges
-        List<String>  applicationNames = new List<String>();
-        for(string dueDetailLine : applicationID) { 
-            applicationNames.add(dueDetailLine);
-        }
-        HttpResponse res = new HttpResponse();
-        res.setHeader('Content-Type', 'text/xml');
-        res.setBody((applicationID.Size() == 1 ? generateResponse(applicationID) : vertexFailedHTTPResponse()));
-        res.setStatusCode((applicationID.Size() == 1 ? 200 : 500));
-        return res;
-    }
 
     /**
      * Following  helper method generates the failed response for 

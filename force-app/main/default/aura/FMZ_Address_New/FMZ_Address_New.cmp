@@ -41,8 +41,8 @@
                              messageWhenValueMissing="State is Required"/>
             <lightning:input aura:id="postalCode" type="text" label="Postal Code" required="true"
                              messageWhenValueMissing="Postal Code is Required"/>
-            <lightning:input aura:id="validStatus" type="text" label="Validation Status"/>
-            <lightning:input aura:id="validTime" type="datetime-local" label="Validation Timestamp"/>
+            <lightning:input aura:id="validStatus" type="text" disabled="true" label="Validation Status"/>
+            <lightning:input aura:id="validTime" type="datetime-local" disabled="true" label="Validation Timestamp"/>
 
             <lightning:button class="slds-m-top_large" variant="brand" onclick="{!c.handleCreate}"
                               disabled="{!v.processing}" label="Create" />

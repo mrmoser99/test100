@@ -56,6 +56,7 @@ global with sharing class GLConsolidatedEntriesBatch extends clcommon.DynamicJob
                 ' FROM cllease__GL_Transaction_Detail__c  '+
                 ' WHERE ( GL_Consolidation_Credit_Record_Id__c = null   '+
                 '   OR GL_Consolidation_Debit_Record_Id__c = null )     '+
+                '   AND Valid_GL_Entries__c = true '+
                 '   AND CL_Lease_Transaction_Type__c not in ( '+excludeTxns+' ) '+
             	'   AND cllease__Contract__c != null '+
                 '  AND cllease__GL_Date__c <= '+ txnDateStr;

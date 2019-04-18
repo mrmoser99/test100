@@ -174,24 +174,17 @@ global virtual class ContractProcessor implements clcommon.IContractProcessor {
                 loggingValidation.Error_Code__c =  LendingConstants.VALIDATION_TYPE_DIAGNOSTIC;
                 throw new LeaseServicingException('Exception During Streams Generation: ' + response, 'ERROR');
             }*/
-            String contractId = leaseAccount.Id;
-            System.debug(LoggingLevel.ERROR, '  contract details - before generating streams: '+[Select id, name, cllease__Dealer__c From cllease__Lease_Account__C where Id =:contractId]);
-            Id dealerID = leaseAccount.cllease__dealer__c;
             String result = cllease.RegenerateStreamsCtrl.FinregenerateStreams(leaseAccount.Id, null);
             if (result.containsIgnoreCase(cllease.LendingConstants.CLLEASE_EXCEPTION)) {
                 throw new genesis.OriginationException(result);
             }
-            
-           	leaseAccount.cllease__Lease_Status__c = cllease.LendingConstants.STATUS_APPROVED;
+            leaseAccount.cllease__Lease_Status__c = cllease.LendingConstants.STATUS_APPROVED;
             // CRUD Permissions check
             if(Schema.sObjectType.cllease__Lease_Account__c.isUpdateable()) {
                 update leaseAccount;
             } else {
                 throw new genesis.OriginationException('Insufficient Update Access on custom object: Lease_Account__c');
             }
-            
-            System.debug(LoggingLevel.ERROR, '  contract details - after generating streams: '+[Select id, name, cllease__Dealer__c From cllease__Lease_Account__C where Id =:contractId]);
-            
             result = cllease.ActivateContractCtrl.activateContract(leaseAccount.Id);
             if (result.containsIgnoreCase(cllease.LendingConstants.CLLEASE_ERROR)) {
                 //In case of ActivateContract, Error messsages will be stored in
@@ -203,19 +196,6 @@ global virtual class ContractProcessor implements clcommon.IContractProcessor {
                 }
                 throw new genesis.OriginationException(result);
             }
-            
-            // updating dealer ID which is setting null from product during activation
-            cllease__Lease_Account__c activatedContract = [Select id, name, cllease__Dealer__c From cllease__Lease_Account__C where Id =:contractId];
-            activatedContract.cllease__Dealer__c = dealerID;
-            // CRUD Permissions check
-            if(Schema.sObjectType.cllease__Lease_Account__c.isUpdateable()) {
-                update activatedContract;
-            } else {
-                throw new genesis.OriginationException('Insufficient Update Access on custom object: Lease_Account__c');
-            }
-            
-            System.debug(LoggingLevel.ERROR, '  contract details - after activating contract: '+[Select id, name, cllease__Dealer__c From cllease__Lease_Account__C where Id =:contractId]);
-            
             System.debug(Logginglevel.DEBUG, 'Contract conversion process is completed.');
         } catch (Exception ex) {
             Database.rollback(sp2);

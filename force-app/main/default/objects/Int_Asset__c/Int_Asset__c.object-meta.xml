@@ -53,7 +53,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>false</enableSharing>
     <enableStreamingApi>false</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
+    <externalSharingModel>ReadWrite</externalSharingModel>
     <label>Int Asset</label>
     <nameField>
         <displayFormat>AST-{0000000000}</displayFormat>

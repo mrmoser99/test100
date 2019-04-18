@@ -177,20 +177,26 @@ console.log('update equipment');
     validate: function(component) {
         //perform client side validation so we can catch required fields before they get to the database
         //find all required components, return true if all are valid, false if any are invalid
-        var requiredIds = ['equipmentList', 'amount', 'escalateFreq', 'escalateOn', 'escalateType', 'escalateValue'];
-        return requiredIds.reduce(function(a, id) {
+        var requiredIds = ['equipmentList', 'amount', 'frequency', 'paymentCount', 'escalateFreq', 'escalateOn', 'escalateType', 'escalateValue'];
+        var valid = true;
+        requiredIds.reduce(function(a, id) {
             //show invalid message if component is invalid
             var c = component.find(id);
-            
-            //not all components are immediately visible, so just ignore them if they are not found
             if(!c) return a;
-            
-            //one day, lightning will standardize its api. not today, but maybe one day
-            if(c.checkValidity && !c.checkValidity() || c.isValid && c.isValid()) {
+
+            var validity = c.get('v.validity');
+
+            console.log(validity.valid);
+
+            if(!validity.valid){
+                valid = false;
                 c.showHelpMessageIfInvalid();
             }
-            return a && (c.checkValidity && c.checkValidity() || c.isValid && c.isValid());
+            return a && validity.valid;
+
         }, true);
+        console.l
+        return valid;
 	}
 
 })

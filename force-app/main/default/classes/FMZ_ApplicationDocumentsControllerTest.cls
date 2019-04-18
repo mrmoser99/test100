@@ -16,7 +16,7 @@ public class FMZ_ApplicationDocumentsControllerTest {
 		Account acc = new Account(
 			Name = 'sample Account',
 			clcommon__Legal_Entity_Type__c = lentity.Id,
-			EIN__c = '123456798',
+			EIN__c = '12-1234567',
 			Email_Address__c = 'abc123@gmail.com',
 			Oracle_Vendor_ID__c = 'Y795'
 		);
@@ -102,6 +102,11 @@ public class FMZ_ApplicationDocumentsControllerTest {
 		System.assertEquals(category.clcommon__Category_Name__c, docs[0].Description);
 
 	}
+    
+    static testmethod void waitTest(){
+        FMZ_ApplicationDocumentsController.wait(null);
+        FMZ_ApplicationDocumentsController.wait(500);
+    }
 
 	static testMethod void appWithData_update_changed() {
 
@@ -195,44 +200,44 @@ public class FMZ_ApplicationDocumentsControllerTest {
 
 	}
 
-//	static testMethod void app_uploadAttachment_saved() {
-//
-//		genesis__Applications__c app = [SELECT Id FROM genesis__Applications__c];
-//
-//		clcommon__Document_Category__c category = new clcommon__Document_Category__c (
-//			clcommon__Category_Name__c = FMZ_ApplicationDocumentsController.LEASE_AGREEMENT_CATEGORY,
-//			genesis__Application__c = app.Id
-//		);
-//		insert category;
-//
-//		Test.startTest();
-//
-//		String content = 'ABC TEST 123';
-//		Blob document = Blob.valueOf(content);
-//
-//		FMZ_ApplicationDocumentsController.uploadAttachment(app.Id, 'test.pdf', 'application/pdf',
-//			EncodingUtil.base64Encode(document));
-//
-//		Test.stopTest();
-//
-//		Attachment doc =
-//		[SELECT Name, ParentId, ContentType, Body
-//		FROM Attachment];
-//
-//		System.assertEquals('test.pdf', doc.Name);
-//		System.assertEquals(app.Id, doc.ParentId);
-//		System.assertEquals('application/pdf', doc.ContentType);
-//		System.assertEquals(content, doc.Body.toString());
-//
-//		clcommon__Category_Attachment_Association__c docCategory =
-//		[SELECT Id, Name, clcommon__Document_Category__c, clcommon__Attachment_Id__c
-//		FROM clcommon__Category_Attachment_Association__c];
-//
-//		System.assertEquals('test.pdf', docCategory.Name);
-//		System.assertEquals(category.Id, docCategory.clcommon__Document_Category__c);
-//		System.assertNotEquals(null, docCategory.clcommon__Attachment_Id__c);
-//
-//	}
+	static testMethod void app_uploadAttachment_saved() {
+
+		genesis__Applications__c app = [SELECT Id FROM genesis__Applications__c];
+
+		clcommon__Document_Category__c category = new clcommon__Document_Category__c (
+			clcommon__Category_Name__c = FMZ_ApplicationDocumentsController.LEASE_AGREEMENT_CATEGORY,
+			genesis__Application__c = app.Id
+		);
+		insert category;
+
+		Test.startTest();
+
+		String content = 'ABC TEST 123';
+		Blob document = Blob.valueOf(content);
+
+		FMZ_ApplicationDocumentsController.uploadAttachment(app.Id, 'test.pdf', 'application/pdf',
+			EncodingUtil.base64Encode(document));
+
+		Test.stopTest();
+
+		Attachment doc =
+		[SELECT Name, ParentId, ContentType, Body
+		FROM Attachment];
+
+		System.assertEquals('test.pdf', doc.Name);
+		System.assertEquals(app.Id, doc.ParentId);
+		System.assertEquals('application/pdf', doc.ContentType);
+		System.assertEquals(content, doc.Body.toString());
+
+		clcommon__Category_Attachment_Association__c docCategory =
+		[SELECT Id, Name, clcommon__Document_Category__c, clcommon__Attachment_Id__c
+		FROM clcommon__Category_Attachment_Association__c];
+
+		System.assertEquals('test.pdf', docCategory.Name);
+		System.assertEquals(category.Id, docCategory.clcommon__Document_Category__c);
+		System.assertNotEquals(null, docCategory.clcommon__Attachment_Id__c);
+
+	}
 
 	public class CongaMock implements HttpCalloutMock {
 		public Id applicationId;

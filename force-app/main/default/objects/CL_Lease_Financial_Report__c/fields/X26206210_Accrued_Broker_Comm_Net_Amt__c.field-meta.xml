@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X26206210_Accrued_Broker_Comm_Net_Amt__c</fullName>
+    <externalId>false</externalId>
+    <formula>X26206210_Accrued_Broker_Comm_Debit_Amt__c -  X26206210_Accrued_Broker_Comm_Credit_Amt__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>26206210 Accrued Broker Comm Net Amt</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

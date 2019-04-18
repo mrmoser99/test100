@@ -6,6 +6,18 @@
     <columns>CONTRACT_NUMBER__c</columns>
     <columns>YTD_LEASE_INCOME__c</columns>
     <columns>YTD_RESIDUAL_INCOME__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CONTRACT_START_DATE__c</columns>
+    <columns>CONTRACT_END_DATE__c</columns>
+    <columns>PERIOD_DATE__c</columns>
+    <columns>REMAINING_PAYMENTS__c</columns>
     <filterScope>Everything</filterScope>
+    <filters>
+        <field>PERIOD_DATE__c</field>
+        <operation>equals</operation>
+        <value>20190331</value>
+    </filters>
     <label>All</label>
 </ListView>

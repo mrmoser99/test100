@@ -51,13 +51,15 @@ Public class DMBIInterfaceRecordGeneratorJob {
     }
     //@@SUBMETHOD: constructing a new Int__agreement Exposure object
     Private static Int_Agreement_Exposure__c CreateNewAgreementExposure(cllease__Lease_Account__c cla,map<string,int_agreement__c> agrMap, map<string,string> intmap){
-        /* decimal exposureBooked = 0;
+        /*
+        decimal exposureBooked = 0;
         if(cla.cllease__Account__r.clcommon__direct_Exposure__c!=Null){
             exposureBooked = cla.cllease__Account__r.clcommon__direct_Exposure__c; 
             if(cla.cllease__Account__r.clcommon__Indirect_Exposure__c!=Null){
                 exposureBooked += cla.cllease__Account__r.clcommon__Indirect_Exposure__c;
             }
-        } */
+        }
+        */
         Return new Int_Agreement_Exposure__c(
             Agreement_Name__c = AgrMap.get(cla.name).Id,
             Exposure_Type__c = 'DLL',
@@ -950,15 +952,17 @@ Public class DMBIInterfaceRecordGeneratorJob {
             Extraction_DateTime__c = String.ValueOf(BatchStartTime),
             //Reporting_Date__c = system.today(),
             Reporting_Date__c = system.today().adddays(-1),
-            //End_Of_Day_Indicator__c =System.now().format('am').substring(0,2)=='PM'?'1':'0',
-            End_Of_Day_Indicator__c = calculateMonthEndIndicator()=='0'?'1':'0',            
-            //End_Of_Week_Indicator__c =  System.now().format('EEEE')=='Friday'?'1':'0',
-            End_Of_Week_Indicator__c =  System.now().adddays(-1).format('EEEE')=='Friday'?'1':'0',
-            //End_Of_Month_Indicator__c = Date.newInstance(system.now().year(), system.now().month(), Date.daysInMonth(system.now().year(), system.now().month()))==system.today()?'1':'0',            
+            //End_Of_Day_Indicator__c =System.now().format('am').substring(0,2)=='PM'?'1':'0' ,
+            End_Of_Day_Indicator__c = calculateMonthEndIndicator()=='0'?'1':'0',
+            //End_Of_Week_Indicator__c = System.now().format('EEEE')=='Friday'?'1':'0',
+            End_Of_Week_Indicator__c = System.now().adddays(-1).format('EEEE')=='Friday'?'1':'0',
+            //End_Of_Month_Indicator__c = Date.newInstance(system.now().year(), system.now().month(), Date.daysInMonth(system.now().year(), system.now().month()))==system.today()?'1':'0',
             End_Of_Month_Indicator__c = calculateMonthEndIndicator(),
             Interface_Version__c = '2.0'
         );
     }
+    /*------------------------------------- DELIVERY CONTROL creation ends-----------------------------------------------*/
+    
     //@@SUBMETHOD: Calculate Month End Indicator.
     Public static String calculateMonthEndIndicator(){
         Datetime ReportingDate = system.now().adddays(-1);
@@ -968,7 +972,7 @@ Public class DMBIInterfaceRecordGeneratorJob {
         }
         return MonthEndIndicator;
     }
-    /*------------------------------------- DELIVERY CONTROL creation ends-----------------------------------------------*/
+
     
     Public static integer CountInsertedRecords(list<sobject> sobjectList){
         integer count = 0;

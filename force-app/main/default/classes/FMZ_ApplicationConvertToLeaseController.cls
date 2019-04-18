@@ -4,7 +4,7 @@ public without sharing class FMZ_ApplicationConvertToLeaseController {
 	public static genesis__Applications__c getApplication(Id applicationId) {
 
 		genesis__Applications__c result =
-			[SELECT Id, genesis__Status__c, Lease_Number__c
+			[SELECT Id, genesis__Status__c, Lease_Number__c, Lease_Number__r.cllease__Lease_Status__c
 			FROM genesis__Applications__c
 			WHERE Id = :applicationId];
 
@@ -36,22 +36,17 @@ public without sharing class FMZ_ApplicationConvertToLeaseController {
 				FROM Equipment_Funding_Detail__c
 				WHERE Application__c = :applicationId
 				AND Party__c = NULL];
-
 			if (!funding.isEmpty()) {
 				fixDealerParty(applicationId, funding);
 			}
 
 			String result = genesis.ConvertApplicationCtrl.convertApplicationToContract(applicationId);
-
+			System.debug('!!! Result from Convert to Contract: '+result);
 			if (String.isNotBlank(result) && result.contains('EXCEPTION, ')) {
-				String[] splitResult = result.split('EXCEPTION, ');
-				if (splitResult.size() > 1) {
-					result = splitResult[1];
-					if (result.contains(': [')) {
-						splitResult = result.split(': \\[');
-						result = splitResult[0];
-					}
-				}
+				result = getResultException(result);
+			}else if(result == 'Application is converted to contract successfully'){
+				app.genesis__Status__c = 'APPROVED - CONVERTED TO CONTRACT';
+				update app;
 			}
 
 			return result;
@@ -61,6 +56,20 @@ public without sharing class FMZ_ApplicationConvertToLeaseController {
 			throw new AuraHandledException(e.getMessage());
 		}
 
+	}
+
+	@TestVisible
+	private static String getResultException(String result){
+		String outputResult;
+		String[] splitResult = result.split('EXCEPTION, ');
+		if (splitResult.size() > 1) {
+			outputResult = splitResult[1];
+			if (outputResult.contains(': [')) {
+				splitResult = outputResult.split(': \\[');
+				outputResult = splitResult[0];
+			}
+		}
+		return outputResult;
 	}
 
 	// add the dealer party if they aren't added already

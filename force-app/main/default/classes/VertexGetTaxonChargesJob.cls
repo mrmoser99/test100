@@ -29,7 +29,6 @@ global class VertexGetTaxonChargesJob extends clcommon.DynamicJob implements Dat
                 ' WHERE cllease__Lease_Status__c in (\'ACTIVE - GOOD STANDING\',\'ACTIVE - BAD STANDING\')';
 
         if(contractNames!=null && contractNames.size() > 0) {
-            
             String contractNamesStr = '';
             for (String contractName : contractNames) {
               contractNamesStr = contractNamesStr + '\'' + String.escapeSingleQuotes(contractName) + '\'' + ',';
@@ -63,6 +62,7 @@ global class VertexGetTaxonChargesJob extends clcommon.DynamicJob implements Dat
                        + 'Taxbasis__c, '
                        + 'cllease__Tax_Processed__c, '
                        + 'cllease__Original_Amount__c, '
+                       + 'cllease__Original_Tax_Amount__c, '
                        + 'cllease__Principal_Due__c, '
                        + 'cllease__Tax_Due__c, '
                        + 'cllease__Fee_Definition__r.name, '
@@ -81,14 +81,12 @@ global class VertexGetTaxonChargesJob extends clcommon.DynamicJob implements Dat
                        + 'cllease__Lease_Account__r.cllease__Contract_Date__c, '
                        + 'cllease__Lease_Account__r.cllease__Term__c, '
                        + 'cllease__Lease_Account__r.cllease__First_Payment_Date__c, '
-                       + 'cllease__Lease_Account__r.cllease__Payment_Frequency__c, '
-            		   + 'cllease__Lease_Account__r.cllease__Maturity_Date__c, '
+                       + 'cllease__Lease_Account__r.cllease__Maturity_Date__c, '
                        + 'cllease__Lease_Account__r.cllease__Lease_Status__c,'
             		   + 'cllease__Lease_Account__r.cllease__application_number__c,'
                        + 'cllease__Lease_Account__c, '
                        + 'cllease__Lease_Account__r.Billing_Address__c, '
-                       + 'cllease__Fee_Definition__r.clcommon__Fee_Type__c, '
-            		   + 'cllease__Contract_Equipment__r.Application_Equipment_Number__c';
+                       + 'cllease__Fee_Definition__r.clcommon__Fee_Type__c ';
 
         // Tax Rate and Tax Values fields : 32 fields: so adding  in different string for tracking.
         String taxFields = 'Tax_APO__c, Tax_BOROUGH__c, Tax_CITY__c, Tax_COUNTRY__c, Tax_COUNTY__c, Tax_DISTRICT__c, Tax_FPO__c,'+
@@ -119,7 +117,7 @@ global class VertexGetTaxonChargesJob extends clcommon.DynamicJob implements Dat
     }
    
     public override void doExecute(Database.BatchableContext bc, List<sObject> scope) {
-		
+
         List<cllease__Lease_Account__c> contracts = (List<cllease__Lease_Account__c>)scope;
         List<String> contractNames = new List<String>();
         for(cllease__Lease_Account__c contract : contracts) {
@@ -133,8 +131,8 @@ global class VertexGetTaxonChargesJob extends clcommon.DynamicJob implements Dat
             return;
         }
 
-       List<cllease__Charge__c> invalidChargesToUpdate = new List<cllease__Charge__c>();
-       List<cllease__Charge__c> validChargesToUpdate = new List<cllease__Charge__c>();
+        List<cllease__Charge__c> invalidChargesToUpdate = new List<cllease__Charge__c>();
+        List<cllease__Charge__c> validChargesToUpdate = new List<cllease__Charge__c>();
         HttpResponse res;
         Integer responseCode = 0;
 
@@ -316,6 +314,7 @@ global class VertexGetTaxonChargesJob extends clcommon.DynamicJob implements Dat
                         Decimal taxAmount   = valuesmap.get(charge.Name);
                         String taxComponent = calculatedTax.get(charge.name);
                         charge.cllease__Tax_Due__c = taxAmount;
+                        charge.cllease__Original_Tax_Amount__c = taxAmount;
                         //charge.cllease__Principal_Due__c += taxAmount;
                         charge.Tax_Component__c = taxComponent;
                         charge.cllease__Tax_Processed__c = 'Tax Calculated';

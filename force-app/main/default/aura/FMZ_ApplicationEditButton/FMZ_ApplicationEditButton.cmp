@@ -1,9 +1,13 @@
-<aura:component implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global">
+<aura:component implements="force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" controller="FMZ_ApplicationController">
 
     <aura:attribute name="recordId" type="String"/>
 	<aura:attribute name="fired" type="Boolean" default="false"/>
 
 	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 	<aura:handler event="force:closeQuickAction" action="{!c.closed}"/>
+
+	<lightning:notificationsLibrary aura:id="notifLib"/>
+
+
 
 </aura:component>

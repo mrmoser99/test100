@@ -39,8 +39,11 @@
             <lightning:button variant="brand" label="Add" iconName="utility:jump_to_bottom"
                               disabled="{!empty(v.selection)}" onclick="{!c.handleAdd}"/>
         </lightning:layoutItem>
+        <lightning:layoutItem >
+            <lightning:input variant="label-hidden" class="slds-text-color_error slds-text-title_bold" type="checkbox" label="Customer Provided Insurance" checked="{!v.customerInsurance}" value="{!v.customerInsurance}" onchange="{!c.handleInsuranceChange}"/>
+        </lightning:layoutItem>
         <lightning:layoutItem alignmentBump="right">
-            <lightning:input type="checkbox" label="Customer Provided Insurance" checked="{!v.customerInsurance}" value="{!v.customerInsurance}" onchange="{!c.handleInsuranceChange}"/>
+            <span class="slds-m-left_xxx-small slds-text-color_error slds-text-title_bold">Customer Provided Insurance</span>
         </lightning:layoutItem>
     </lightning:layout>
 
@@ -157,10 +160,10 @@
                 <!--</td>-->
                 <td class="slds-text-align_center">
 
-                    <p class="{!f.Fee__r.Name == 'Estimated Property Tax' || f.Fee__r.Name == 'Insurance Fees' ? '' : 'slds-hide'}">No Action Available</p>
+                    <p class="{!(f.Fee__r.Name == 'Estimated Property Tax' || f.Fee__r.Name == 'Insurance Fees' || f.Fee__r.Name == 'Origination Fees') ? '' : 'slds-hide'}">No Action Available</p>
 
                     <lightning:button aura:id="deleteBtn" label="Delete" variant="base" onclick="{!c.handleDelete}" tabindex="-1" value="{!i}"
-                                      class="{!f.Fee__r.Name == 'Estimated Property Tax' || f.Fee__r.Name == 'Insurance Fees' ? 'slds-hide' : ''}"/>
+                                      class="{!(f.Fee__r.Name == 'Estimated Property Tax' || f.Fee__r.Name == 'Insurance Fees' || f.Fee__r.Name == 'Origination Fees') ? 'slds-hide' : ''}"/>
 
 
 

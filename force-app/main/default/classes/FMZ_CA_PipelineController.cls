@@ -60,7 +60,7 @@ public with sharing class FMZ_CA_PipelineController {
 
 
         Map<Id, genesis__Applications__c> applications = new Map<Id, genesis__Applications__c>([
-                SELECT Name, View_Record__c, genesis__Status__c, genesis__Bank_Name__c
+                SELECT Name, View_Record__c, genesis__Status__c, genesis__Bank_Name__c, Lease_Number__c
                 FROM genesis__Applications__c
                 WHERE genesis__Status__c IN: statuses
                 ORDER BY CreatedDate DESC, genesis__Status__c
@@ -73,9 +73,9 @@ public with sharing class FMZ_CA_PipelineController {
 
         if(applications.size() > 0){
             for(genesis__Applications__c app : applications.values()){
-                if(appInProgress.contains(app.genesis__Status__c)){
+                if(appInProgress.contains(app.genesis__Status__c) && app.Lease_Number__c == null){
                     inProgressApps.add(app);
-                }else if(appOFACApproved.contains(app.genesis__Status__c)){
+                }else if(appOFACApproved.contains(app.genesis__Status__c) && app.Lease_Number__c == null){
                     ofacApps.add(app);
                 }
             }

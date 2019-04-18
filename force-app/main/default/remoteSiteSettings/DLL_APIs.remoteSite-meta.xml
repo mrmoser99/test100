@@ -3,5 +3,5 @@
     <description>To call the ATS API</description>
     <disableProtocolSecurity>false</disableProtocolSecurity>
     <isActive>true</isActive>
-    <url>https://api.dllgroup.com</url>
+    <url>https://apiacc.dllgroup.com</url>
 </RemoteSiteSetting>

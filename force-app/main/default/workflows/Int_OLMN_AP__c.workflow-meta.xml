@@ -2,13 +2,15 @@
 <Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Notify_AP</fullName>
+        <ccEmails>askap@leasedirect.com</ccEmails>
         <description>Notify AP</description>
         <protected>false</protected>
         <recipients>
             <recipient>Internal_Notifications</recipient>
             <type>group</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>newcocustomerservice@leasedirect.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>cnotify__Notification_Templates/Funding</template>
     </alerts>
     <rules>

@@ -12,13 +12,6 @@
     <tabs>standard-report</tabs>
     <tabs>standard-Dashboard</tabs>
     <tabs>clcommon__Address__c</tabs>
-    <tabs>clcommon__Delivery_Detail__c</tabs>
-    <tabs>Int_Facility__c</tabs>
-    <tabs>Int_Delivery_Control__c</tabs>
-    <tabs>clcommon__NavigationStructure__c</tabs>
-    <tabs>collect__Source_System__c</tabs>
-    <tabs>clcommon__Expression_Assignment__c</tabs>
-    <tabs>clcommon__ComponentStructure__c</tabs>
-    <tabs>ints__Equipment__c</tabs>
-    <tabs>genesis__Application_Pricing_Detail__c</tabs>
+    <tabs>CL_Lease_Financial_Report__c</tabs>
+    <tabs>Lease_Financial_Report_Mapping__c</tabs>
 </CustomApplication>

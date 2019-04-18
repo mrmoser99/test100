@@ -12,7 +12,7 @@ public with sharing class Bridger {
     /************************************************************************************************************
     * Bridger Search Input
     ************************************************************************************************************/
- 	public class bridgerInput{ 
+ 	public class bridgerInput{
 
 		public string requestType;  //Individual or Business
 		/* business */
@@ -49,7 +49,7 @@ public with sharing class Bridger {
     	Bridger_Setting__c bridgerSettings = [
  		
  			Select b.User_Id__c
-			, Predefined_Search_Name__c  
+			, b.Predefined_Search_Name__c
 			, b.Password__c
 			, b.Notification_Type__c
 			, b.Notification_Role__c
@@ -61,7 +61,6 @@ public with sharing class Bridger {
 			limit 1
 		
 			];
-	 
 		
     	XgServicesAccount.BasicHttpBinding_IAccount  AccountClient = new XgServicesAccount.BasicHttpBinding_IAccount();
 
@@ -72,12 +71,17 @@ public with sharing class Bridger {
 		Context.UserID = bridgerSettings.user_id__c;
 		Context.Password = bridgerSettings.password__c;
 
-		integer daysUntilExpiration;
-				 
-		if (!Test.isRunningTest()) 
+		//Boolean result = AccountClient.changePassword(Context,'Welcome01!');
+		//system.debug(result);
+
+		//Context.Password = 'Welcome01!'; 
+		
+		integer daysUntilExpiration = 4;
+		
+		if (!Test.isRunningTest())
 			daysUntilExpiration =AccountClient.GetDaysUntilPasswordExpires(Context);
 		
-		system.debug('Days' + daysUntilExpiration);
+		system.debug(daysUntilExpiration);
 		if (daysUntilExpiration < 5 ){  //NewCo2018!
 			String part1 = 'NewCo';
 			Integer sequence = integer.valueOf(bridgerSettings.password__c.mid(5,4));

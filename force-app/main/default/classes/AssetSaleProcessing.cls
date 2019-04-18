@@ -15,15 +15,10 @@ global class AssetSaleProcessing {
        // Savepoint sp;
         try {
                //Query Asset Sale Fee
-                List<clcommon__Fee_Definition__c> fees = [SELECT id,name 
+                clcommon__Fee_Definition__c fee = [SELECT id,name 
                                FROM clcommon__Fee_Definition__c
                                WHERE name = :DLLNewCoConstants.FEE_ASSETSALE limit 1];
-
-                if(fees.size() == 0) {
-                    return 'Fee Definition: ASSET SALE is missing from Fee Configuration, Please create it before Processing Asset Sale...';
-                }
-                clcommon__Fee_Definition__c fee = fees.get(0);
-            
+                               
                //Query Asset Sale Transaction Type
                 cllease__Transaction_Sub_Type__c transactionType = [SELECT id,name
                                 FROM cllease__Transaction_Sub_Type__c

@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldUpdates>
-        <fullName>Update_Amount_Field_on_Application_Fees</fullName>
-        <field>Amount__c</field>
-        <formula>Equipment_Total_Payment__c</formula>
-        <name>Update Amount Field on Application Fees</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Formula</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
         <fullName>Update_Fee_Name</fullName>
         <description>Update Fee Name from Lookup Name</description>
         <field>Fee_Name__c</field>
@@ -29,23 +20,5 @@
         <description>To Populate Fee Name from original lookup field to text field</description>
         <formula>Amount__c  &gt;  0</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Update the application Fee</fullName>
-        <actions>
-            <name>Update_Amount_Field_on_Application_Fees</name>
-            <type>FieldUpdate</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Application_Fee__c.Escalate_Service_On__c</field>
-            <operation>equals</operation>
-            <value>Total Payment</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Application_Fee__c.Parent_id__c</field>
-            <operation>equals</operation>
-        </criteriaItems>
-        <triggerType>onAllChanges</triggerType>
     </rules>
 </Workflow>

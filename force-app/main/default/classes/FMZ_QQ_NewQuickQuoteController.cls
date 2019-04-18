@@ -3,6 +3,17 @@ public without sharing class FMZ_QQ_NewQuickQuoteController {
     public static final String QUICK_QUOTE_OBJECT = 'genesis__Quick_Quotes__c';
 
     @AuraEnabled
+    public static String getAccountId(Id recordId){
+        String accId = '';
+        if(recordId.getSobjectType() == cllease__Lease_Account__c.sObjectType){
+            accId = [SELECT cllease__Account__c FROM cllease__Lease_Account__c WHERE Id=:recordId].cllease__Account__c;
+        }else if(recordId.getSobjectType() == Account.sObjectType){
+            return recordId;
+        }
+        return accId;
+    }
+
+    @AuraEnabled
     public static List<FMZ_EDQ_Address_Callout.Match> getMatches(String addressString){
         return FMZ_EDQ_Address_Callout.getAddressMatches(addressString);
     }
@@ -76,11 +87,19 @@ public without sharing class FMZ_QQ_NewQuickQuoteController {
             if(qq.genesis__Account__c == null ){
                 Id lesseeRecTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Lessee').getRecordTypeId();
 
+                clcommon__Legal_Entity__c legalEntity = [
+                        SELECT Id
+                        FROM clcommon__Legal_Entity__c
+                        WHERE Name = 'Corporation'
+                        LIMIT 1
+                ];
+
                 Account customer = new Account(
                         Name = qq.genesis__Business_Name__c,
                         Phone = qq.Primary_Phone_number__c,
                         Email_Address__c = qq.Email_Address__c,
-                        RecordTypeId = lesseeRecTypeId
+                        RecordTypeId = lesseeRecTypeId,
+                        clcommon__Legal_Entity_Type__c = legalEntity.Id
                 );
 
                 // THE DUPLICATE RULE BLOCKS ALL DUPS
@@ -103,37 +122,37 @@ public without sharing class FMZ_QQ_NewQuickQuoteController {
 //                    //DONE IGNORE DUPS INSERT
 //                    //==================================================================================================
 //                }else{
-                    //==================================================================================================
-                    //LOOK FOR DUPES
-                    //==================================================================================================
-                    System.debug('!!! Inserting Customer');
-                    Database.SaveResult saveResult = Database.insert(customer, false);
-                    if (!saveResult.isSuccess()) {
-                        for (Database.Error error : saveResult.getErrors()) {
-                            if (error instanceof Database.DuplicateError) {
-                                List<sObject> duplicates = getDuplicateRecords((Database.DuplicateError)error);
-                                Set<Id> dupIds = new Set<Id>();
-                                for(sObject dup : duplicates){
-                                    dupIds.add(dup.Id);
-                                }
-                                List<Account> dupAccounts = [SELECT Id, Name, EIN__c FROM Account WHERE Id IN: dupIds];
-                                List<DuplicateRecord> records = new List<DuplicateRecord>();
-                                for(Account dup : dupAccounts){
-                                    records.add(new DuplicateRecord(
-                                            dup.Id,
-                                            dup.Name+ (String.isNotBlank(dup.EIN__c) ? ': '+dup.EIN__c : ''))
-                                    );
-                                }
-
-                                 return new CreateResponse(
-                                        'DUPLICATES',
-                                        'Would you like to use one of these Accounts instead?',
-                                        records
-                                 );
-                            } else {
-                                throw new QQCreationException(error.getMessage());
+                //==================================================================================================
+                //LOOK FOR DUPES
+                //==================================================================================================
+                System.debug('!!! Inserting Customer');
+                Database.SaveResult saveResult = Database.insert(customer, false);
+                if (!saveResult.isSuccess()) {
+                    for (Database.Error error : saveResult.getErrors()) {
+                        if (error instanceof Database.DuplicateError) {
+                            List<sObject> duplicates = getDuplicateRecords((Database.DuplicateError)error);
+                            Set<Id> dupIds = new Set<Id>();
+                            for(sObject dup : duplicates){
+                                dupIds.add(dup.Id);
                             }
+                            List<Account> dupAccounts = [SELECT Id, Name, EIN__c FROM Account WHERE Id IN: dupIds];
+                            List<DuplicateRecord> records = new List<DuplicateRecord>();
+                            for(Account dup : dupAccounts){
+                                records.add(new DuplicateRecord(
+                                        dup.Id,
+                                        dup.Name+ (String.isNotBlank(dup.EIN__c) ? ': '+dup.EIN__c : ''))
+                                );
+                            }
+
+                            return new CreateResponse(
+                                    'DUPLICATES',
+                                    'Would you like to use one of these Accounts instead?',
+                                    records
+                            );
+                        } else {
+                            throw new QQCreationException(error.getMessage());
                         }
+                    }
                     //}
                     System.debug('!!! Customer Inserted');
                     //==================================================================================================
@@ -170,6 +189,23 @@ public without sharing class FMZ_QQ_NewQuickQuoteController {
                 update customer;
                 qq.genesis__Account__c = customer.Id;
                 update qq;
+            } else{
+                Account customer = [
+                        SELECT Id, clcommon__Legal_Entity_Type__c
+                        FROM Account
+                        WHERE Id =: qq.genesis__Account__c
+                        LIMIT 1
+                ];
+                if(customer.clcommon__Legal_Entity_Type__c == null){
+                    clcommon__Legal_Entity__c legalEntity = [
+                            SELECT Id
+                            FROM clcommon__Legal_Entity__c
+                            WHERE Name = 'Corporation'
+                            LIMIT 1
+                    ];
+                    customer.clcommon__Legal_Entity_Type__c = legalEntity.Id;
+                    update customer;
+                }
             }
             System.debug('!!!QQId: '+qq.Id);
             return new CreateResponse('SUCCESS',qq.Id,null);
@@ -184,15 +220,15 @@ public without sharing class FMZ_QQ_NewQuickQuoteController {
     public static Account getAccountInfo(String accountId) {
         System.debug('!!!AccountId: '+accountId);
         Account a =
-            [SELECT Id, Name, Phone, Email_Address__c,
-                    Primary_Address__r.Address_Line_1__c, Primary_Address__r.Address_Line_2__c,
-                    Primary_Address__r.Address_Line_3__c, Primary_Address__r.Address_Line_4__c,
-                    Primary_Address__r.City__c, Primary_Address__r.State__c,
-                    Primary_Address__r.County__c, Primary_Address__r.Country__c,
-                    Primary_Address__r.Zip_Code__c, Primary_Address__r.Validation_Status__c,
-                    Primary_Address__r.Validation_Time_Stamp__c
-            FROM Account
-            WHERE Id = :accountId];
+        [SELECT Id, Name, Phone, Email_Address__c,
+                Primary_Address__r.Address_Line_1__c, Primary_Address__r.Address_Line_2__c,
+                Primary_Address__r.Address_Line_3__c, Primary_Address__r.Address_Line_4__c,
+                Primary_Address__r.City__c, Primary_Address__r.State__c,
+                Primary_Address__r.County__c, Primary_Address__r.Country__c,
+                Primary_Address__r.Zip_Code__c, Primary_Address__r.Validation_Status__c,
+                Primary_Address__r.Validation_Time_Stamp__c
+        FROM Account
+        WHERE Id = :accountId];
 
         return a;
 
@@ -230,7 +266,7 @@ public without sharing class FMZ_QQ_NewQuickQuoteController {
     public static String submitForApproval(Id qqId) {
 
         genesis__Quick_Quotes__c qq = [
-                SELECT Id, estimated_financed_amount__c, genesis__account__c
+                SELECT Id, Name, estimated_financed_amount__c, genesis__account__c
                 FROM genesis__Quick_Quotes__c
                 WHERE Id =: qqId LIMIT 1];
 

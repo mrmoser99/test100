@@ -13,6 +13,7 @@
 			if (!helper.isInputValid(component)) {
 				return;
 			}
+            console.log('handleGenerate AppId: '+component.get('v.applicationId'));
 			component.set('v.processing', true);
 			helper.updateApplication(component)
 				.then($A.getCallback(function (result) {
@@ -36,6 +37,7 @@
 
 				}));
 		} catch (e) {
+            console.log('CLICK CATCH');
 			console.log(e);
 		}
 	},

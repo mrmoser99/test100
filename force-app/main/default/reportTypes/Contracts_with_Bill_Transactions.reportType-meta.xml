@@ -132,37 +132,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Contract_Signer_Title__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Cost_of_Funds__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Contract_Signer_Last_Name__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Accrual_Streams__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Country__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Accrue_Fee__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>County__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -177,11 +152,6 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Applied_Amount_Conga__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Active_flag__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
@@ -192,22 +162,7 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>CTA_Booked_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Aging__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>AutoCaluclate_Finance_Charge_Grace_Days__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Cr_Apl_Tp_Code__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -227,36 +182,6 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Bokg_Yr_Mo__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Booking_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Bill_To_Contact_Id__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>AutoCaluclate_Late_Charge_Grace_Days__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Contract_Signer__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Business_Unit_Name__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Amount_Due_at_Signing__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
@@ -267,27 +192,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Billed_Not_Paid__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Buyout_With_Purchase__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Application_Date__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>cllease__Approval_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Buyout_Without_Purchase__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -312,172 +222,7 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Transaction_Code__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>ST_Lessee_Accounting_Method__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>EIN__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>KYC_Cleared__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Unbilled_Rent__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Next_Insurance_Fee__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>TestCong__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Subvention__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Vertex_Tax_Amount__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>ST_Lessor_Accounting_Method__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>ST_Tax_Classification__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Total_Amount_Conga__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Welcome_Package_Requested__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Branch__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Sum_of_Equipment_Dealer_Charges__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Service_Fees1__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Trade_Up_Amount__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Service_Fees__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Subvention_Stream_Basis__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Server_Url__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Primary_Customer_Address_2__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Primary_Customer_Address__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>System_date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>SessionId__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Trade_up_With_Purchase__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Trade_up_Without_Purchase__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Payment_Method__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Payment_Stream__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Conga__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Remaining_Amount_Due_Conga__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Source_System__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Dealer_Emails__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Termination_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Dealer_Approved_Date__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -487,182 +232,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Rst_Total_Receivable__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Rst_Residual__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>ST_Derived_Product_Name__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Remaining_Payments1__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Sales_Rep_Name__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Hyp_Based_Ent__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Rst_Total_Residual_Income__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Rst_Total_Income__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Last_Current_To_NPA_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Rent_Amount__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Calculation_Method__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>PO_Number__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Dealer_Email__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Prom_Code__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Estimated_Property_Tax1__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Dealer_Oracle_Vendor_Id__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Payment_Amount_Conga__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Estimated_Property_Tax__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Manually_Override_NPA_Status__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Dealer_Name__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Dealer_State__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Fee_Set1__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>DLL_Reference_Number__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Lessee_Company__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Dealer_Party__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Lease_Type__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Number_of_Days_TO_Mature__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Due_This_Period_Conga__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Default_State__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Evergreen_Eligibility__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Final_Notice_Letter__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Final_Letter_Sent__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Cap_Reduction__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__NPA_Status__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Last_NPA_To_Current_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Final_Notice_Letter_Sent__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -673,11 +248,6 @@ Receivables Aging Report</description>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>cllease__Charged_Off_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Net_Dealer_Funding__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -697,21 +267,6 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Interim_Rent__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Insurance_Fees1__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Insurance_Fees__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Closed_Date__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
@@ -727,52 +282,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Customer_City__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Customer_Number__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Customer__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Contact__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Customer_State__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Customer_Primary_Contact__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Contract_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Customer_Zip_Code__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Custom_Finance_Charge_Grace_Days__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Customer_Primary_Phone__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -783,11 +298,6 @@ Receivables Aging Report</description>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>cllease__County_Surcharge_Amount__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Custom_Late_Charge_Grace_Days__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -842,22 +352,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Total_Monthly_Payment__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Current_Yield__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>cllease__Days_Convention__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Account_Number__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -877,17 +377,7 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Address__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Dealer_Payment_Date__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Additional_Residual_Amount__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>
         <columns>
@@ -2065,11 +1555,6 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Premium_Purchase_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Period_Start_Date__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
         </columns>
@@ -2085,27 +1570,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Unbilled_Service_and_Maintenance__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Quote_Header__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Invoiced_In__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Quote_Tax__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>VertexTax_Computed_DDL_Count__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
         </columns>
         <columns>
@@ -2116,11 +1586,6 @@ Receivables Aging Report</description>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>cllease__Rental_Due_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Lease_Account__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r</table>
         </columns>
         <columns>
@@ -2313,32 +1778,7 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>DestinationState__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>BillingType__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>cllease__Bill__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Other_Tax2_Rate__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Estimated_Property_Tax_Fee_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>DestinationZipCode__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
         </columns>
         <columns>
@@ -2358,11 +1798,6 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Estimated_Property_Tax_Tax_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Other_Tax4_Rate__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
         </columns>
@@ -2373,57 +1808,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Service_Fee_Fee_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Payment_Sales_Use_Tax__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Payment_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Contract_Type__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>CompanyCode__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Other_Tax__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Payment_Total_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Remarks__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>MessageS__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Service_Fee_Tax_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LeaseType__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
         </columns>
         <columns>
@@ -2468,212 +1858,12 @@ Receivables Aging Report</description>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>DestinationCounty__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>DestinationCity__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>cllease__Transaction_Date__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>cllease__VAT_Amount__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_APO__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_COUNTY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_CITY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_FPO__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_PARISH__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_SPECIAL_PURPOSE_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_TERRITORY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_TRADE_BLOCK__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_BOROUGH__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_COUNTRY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_LOCAL_IMPROVEMENT_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_PROVINCE__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_STATE__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_TOWNSHIP__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_TRANSIT_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Taxbasis__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Component__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_BOROUGH__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_COUNTRY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_LOCAL_IMPROVEMENT_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_PROVINCE__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Payment_Type__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_APO__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_FPO__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_COUNTY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_CITY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_TOWNSHIP__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_PARISH__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_SPECIAL_PURPOSE_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_STATE__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_TRANSIT_DISTRICT__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Transaction_Code__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_TERRITORY__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Tax_Rate_TRADE_BLOCK__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Total_Amount_Conga__c</field>
-            <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Vertex_Tax_Processed__c</field>
             <table>cllease__Lease_Account__c.cllease__Dues_Details__r.cllease__Due_Detail_Lines__r</table>
         </columns>
         <masterLabel>Due Detail Lines</masterLabel>

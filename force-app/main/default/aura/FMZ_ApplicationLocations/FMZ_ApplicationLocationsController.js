@@ -74,7 +74,14 @@
                 inputControls = component.find(localId),
                 locations = component.get('v.locations'),
                 newValue = inputControl.get('v.value'),
-                validity = inputControl.get('v.validity'),
+                question = 'If any equipment is using this address, the equipment address will be changed to blank. Would you like to continue?';
+
+                if(!newValue && !confirm(question)){
+                    inputControl.set('v.value', true);
+                    return;
+                }
+
+                var validity = inputControl.get('v.validity'),
                 isValid = Boolean(validity) ? validity.valid : true,
                 addressId,
                 addressUpdate = {},

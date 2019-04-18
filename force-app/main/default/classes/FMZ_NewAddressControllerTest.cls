@@ -19,7 +19,7 @@ public with sharing class FMZ_NewAddressControllerTest {
     public testMethod static void createAddressTest(){
         Account acc = new Account (
                 Name = 'sample Account',
-                EIN__c='123456798',
+                EIN__c = '12-1234567',
                 Email_Address__c='abc123@gmail.com',
                 Oracle_Vendor_ID__c='Y795'
         );
@@ -38,6 +38,33 @@ public with sharing class FMZ_NewAddressControllerTest {
         FMZ_NewAddressController.createAddress(address);
         List<Address__c> addrs = [SELECT Id FROM Address__c WHERE Account__c =: acc.Id];
         System.assertEquals(1, addrs.size());
+    }
+
+    public testMethod static void getAddress(){
+        Account acc = new Account (
+                Name = 'sample Account',
+                EIN__c = '12-1234567',
+                Email_Address__c='abc123@gmail.com',
+                Oracle_Vendor_ID__c='Y795'
+        );
+        insert acc;
+
+        Address__c address = new Address__c (
+                Account__c = acc.Id,
+                Address_Line_1__c = '123 Main Street',
+                City__c = 'Morristown',
+                State__c = 'NJ',
+                County__c = 'Morris',
+                Country__c = 'USA',
+                Install_At__c = true
+        );
+        insert address;
+
+        Address__c addr1 = FMZ_NewAddressController.getAddress(acc.Id);
+        Address__c addr2 = FMZ_NewAddressController.getAddress(address.Id);
+
+        System.assertEquals(acc.Id, addr1.Account__c);
+        System.assertEquals(address.Id, addr2.Id);
     }
 
 }

@@ -16,7 +16,7 @@ public with sharing class FMZ_ApplicationCustomerControllerTest {
 		Account acc = new Account(
 			Name = 'sample Account',
 			clcommon__Legal_Entity_Type__c = lentity.Id,
-			EIN__c = '123456798',
+			EIN__c = '12-1234567',
 			Email_Address__c = 'abc123@gmail.com',
 			Oracle_Vendor_ID__c = 'Y795',
 			Phone = '8005551212'
@@ -53,7 +53,7 @@ public with sharing class FMZ_ApplicationCustomerControllerTest {
 		System.assertEquals('sample Account', acct.Name);
 		System.assertEquals('abc123@gmail.com', acct.Email_Address__c);
 		System.assertEquals('8005551212', acct.Phone);
-		System.assertEquals('123456798', acct.EIN__c);
+		System.assertEquals('12-1234567', acct.EIN__c);
 
 	}
 
@@ -69,7 +69,7 @@ public with sharing class FMZ_ApplicationCustomerControllerTest {
 		acct.Phone = '8881112222';
 		acct.EIN__c = '22-1234567';
 
-		FMZ_ApplicationCustomerController.updateAccount(acct);
+		FMZ_ApplicationCustomerController.updateAccount(acct, app.Id);
 
 		Test.stopTest();
 

@@ -1,10 +1,10 @@
 @isTest
 public with sharing class TestPNCIntegration {
     @isTest
-	public static void testPNCOutbound() {
+    public static void testPNCOutbound() {
 
-		Testhelper.getVertexCustomSettings();
-		// A. Creating Contract Using TestHelper
+        Testhelper.getVertexCustomSettings();
+        // A. Creating Contract Using TestHelper
         cllease__Lease_Account__c contract = TestHelper.createContract();
         String contractStatus = 'ACTIVE - GOOD STANDING';
         System.assert(contractStatus.containsIgnoreCase(contract.cllease__Lease_Status__c));
@@ -44,10 +44,10 @@ public with sharing class TestPNCIntegration {
 
         cllease__Charge__c charge1 = cllease.TestHelper.createUnpaidCharge(contract, dummyFee, 100);
         charge1.cllease__Tax_Processed__c = 'Tax Not Calculated';
-        charge1.cllease__Date__c 		  = chargeDate;
+        charge1.cllease__Date__c          = chargeDate;
         charge1.cllease__Contract_Equipment__c = contractEquipment.id;
-        charge1.Tax_Processed__c   		  = false;
-        charge1.Tax_Component__c   		  = '';
+        charge1.Tax_Processed__c          = false;
+        charge1.Tax_Component__c          = '';
         update charge1;
 
         // Creating  Charge without Equipment Attached
@@ -57,17 +57,17 @@ public with sharing class TestPNCIntegration {
 
         cllease__Charge__c charge2 = cllease.TestHelper.createUnpaidCharge(contract, dummyFee2, 100);
         charge2.cllease__Tax_Processed__c = 'Tax Not Calculated';
-        charge1.cllease__Date__c 		  = chargeDate.addMonths(1);
-        charge2.Tax_Processed__c 		  = false;
-        charge2.Tax_Component__c 		  = '';
+        charge1.cllease__Date__c          = chargeDate.addMonths(1);
+        charge2.Tax_Processed__c          = false;
+        charge2.Tax_Component__c          = '';
         update charge2;
 
         // Changing the current System Date
         Date currentSystemDate = Date.newInstance(2018, 02, 28);
         List<cllease__Office_Name__c> companies = [Select Id, Name, cllease__Current_System_Date__c
-        											From cllease__Office_Name__c];
+                                                    From cllease__Office_Name__c];
         for(cllease__Office_Name__c company : companies) {
-        	company.cllease__Current_System_Date__c = currentSystemDate;
+            company.cllease__Current_System_Date__c = currentSystemDate;
         }
         update companies;
 
@@ -76,9 +76,9 @@ public with sharing class TestPNCIntegration {
             // Creating DAG
             String dagName = 'CLLease-BatchTestDAG';
             List<String> listOfJobs = new List<String>{ 
-            					'cllease.BillGeneratorJob', 'cllease.BillDetailGeneratorJob',
-            					'VertexGetTaxonBillsJob', 'VertexGetTaxonChargesJob', 'CustomLateChargeGeneratorJob',
-            					'BillsandChargesConsolidationJob', 'PNCFileCreationJob'};
+                                'cllease.BillGeneratorJob', 'cllease.BillDetailGeneratorJob',
+                                'VertexGetTaxonBillsJob', 'VertexGetTaxonChargesJob', 'CustomLateChargeGeneratorJob',
+                                'BillsandChargesConsolidationJob', 'PNCFileCreationJob'};
             TestHelper.createDAGSpecificJobs(listOfJobs, dagName);
             // Running DAG
             TestHelper.runDAG(dagName);
@@ -87,13 +87,14 @@ public with sharing class TestPNCIntegration {
         // Validating PNC File Generation
         List<Int_PX_Billing__c> pncBillFiles = [Select Id, Line_Data__c From Int_PX_Billing__c];
         //System.assert( pncBillFiles.size() > 0, 'PNC File Should generate...');
-	}
+    }
 
-    @isTest
-	public static void testPNCInbound() {
-		Testhelper.getVertexCustomSettings();
-		//TestData.createTxnSubTypes();
-		// A. Creating Contract Using TestHelper
+    // @isTest TODO: disabling the Test Inbound test as process change, encouring DLL team to do full manual testing and check for payments applications to wards bills and charges
+    public static void testPNCInbound() {
+        Testhelper.getVertexCustomSettings();
+        
+        //TestData.createTxnSubTypes();
+        // A. Creating Contract Using TestHelper
         cllease__Lease_Account__c contract = TestHelper.createContract();
         String contractStatus = 'ACTIVE - GOOD STANDING';
         System.assert(contractStatus.containsIgnoreCase(contract.cllease__Lease_Status__c));
@@ -102,7 +103,7 @@ public with sharing class TestPNCIntegration {
         Date currentSystemDate = Date.newInstance(2018, 02, 28);
         List<cllease__Office_Name__c> companies = [Select Id, cllease__Current_System_Date__c From cllease__Office_Name__c];
         for(cllease__Office_Name__c company : companies) {
-        	company.cllease__Current_System_Date__c = currentSystemDate;
+            company.cllease__Current_System_Date__c = currentSystemDate;
         }
         update companies;
 
@@ -116,14 +117,14 @@ public with sharing class TestPNCIntegration {
 
         cllease__Lease_Account_Due_Details__c bill = new cllease__Lease_Account_Due_Details__c();
         bill.cllease__Due_Type_Description__c = 'BILL / DUE DATE';
-		bill.cllease__Due_Date__c 			= paymentDate.addDays(-1);
-        bill.cllease__Lease_Account__c		= contract.Id;
+        bill.cllease__Due_Date__c           = paymentDate.addDays(-1);
+        bill.cllease__Lease_Account__c      = contract.Id;
         bill.cllease__Rental_Due_Amount__c  = 90.00;
         bill.cllease__Tax_Due_Amount__c     = 10.00;
-		bill.cllease__Total_Due_Amount__c 	= 100.00;
-		bill.cllease__Total_Paid_Amount__c  = 0.00;
-		bill.cllease__Status__c 	        = 'Tax Calculated';	
-    	bill.Invoiced_In__c                 =  invoice.Id;
+        bill.cllease__Total_Due_Amount__c   = 100.00;
+        bill.cllease__Total_Paid_Amount__c  = 0.00;
+        bill.cllease__Status__c             = 'Tax Calculated'; 
+        bill.Invoiced_In__c                 =  invoice.Id;
         bill.cllease__Transaction_Date__c   = paymentDate;
         insert bill;
 
@@ -133,33 +134,33 @@ public with sharing class TestPNCIntegration {
         update dummyFee;
 
         cllease__Charge__c charge = cllease.TestHelper.createUnpaidCharge(contract, dummyFee, 100);
-        charge.cllease__Tax_Processed__c 	= 'Tax NoCalculated';
-        charge.cllease__Date__c 		  	= paymentDate;
-        charge.cllease__Original_Amount__c 	= 100;
-        charge.cllease__Tax_Due__c 			= 10;
-        charge.cllease__Paid_Amount__c 		= 0;
-        charge.cllease__Principal_Due__c 	= 110; 
+        charge.cllease__Tax_Processed__c    = 'Tax NoCalculated';
+        charge.cllease__Date__c             = paymentDate;
+        charge.cllease__Original_Amount__c  = 100;
+        charge.cllease__Tax_Due__c          = 10;
+        charge.cllease__Paid_Amount__c      = 0;
+        charge.cllease__Principal_Due__c    = 110; 
         charge.cllease__Calculated_Interest3__c = 0;
-        charge.cllease__Tax_Processed__c 	= 'Tax Calculated';
-        charge.Invoiced_In__c 			  	= invoice.Id;
+        charge.cllease__Tax_Processed__c    = 'Tax Calculated';
+        charge.Invoiced_In__c               = invoice.Id;
         update charge;
 
         Invoice__c invoiceRetrieve = [Select Id, Name From Invoice__c Limit 1];
 
         List<Int_PX_Remit__c> mockRemitToInsert = new List<Int_PX_Remit__c>();
-        mockRemitToInsert.add(new Int_PX_Remit__c(  Record_Number__c    = 0, 
+        /*mockRemitToInsert.add(new Int_PX_Remit__c(  Record_Number__c    = 0, 
                                 Invoice_Number__c       = 'BATCH HEADER', 
                                 Payment_Batch_Date__c   = paymentDate.addDays(-2), 
                                 Payment_Batch_Total_Amount__c = 1000.00,
-                                Line_Data__c            = 'x1|x2|x3|x4'));
+                                Line_Data__c            = 'x1|x2|x3|x4'));*/
          mockRemitToInsert.add(new Int_PX_Remit__c(  Record_Number__c = 1, 
                                 Invoice_Number__c       = invoiceRetrieve.Name, 
                                 Transaction_Amount__c   = 300,
                                 Date__c                 = paymentDate,
                                 Payment_Batch_Date__c   = paymentDate.addDays(-2), 
                                 Committed__c            = false,
-                                Payment_Batch_Total_Amount__c = 1000.00,
-                                Line_Data__c            = 'x1|x2|x3|x4'));
+                                Payment_Batch_Total_Amount__c = 300.00,
+                                Line_Data__c            = '1|AccNumber123|txnType|Trans_UID|20190719|PNC|30000|'+invoiceRetrieve.Name+'|30000|'));
 
         insert mockRemitToInsert;
          
@@ -174,28 +175,28 @@ public with sharing class TestPNCIntegration {
         System.Test.stopTest();
 
         List<Int_PX_Remit__c> updatedRemitRecords = [Select Id, Remark__c, Committed__c From Int_PX_Remit__c];
-        System.assertEquals(2, updatedRemitRecords.size(), 'Mismatch in Remit Records Generation...');
+        System.assertEquals(1, updatedRemitRecords.size(), 'Mismatch in Remit Records Generation...');
         System.assertEquals(false, updatedRemitRecords.get(0).Committed__c, 'Mismatch in Remit Record Commit Field Update...');
 
         List<cllease__Lease_Payment_Transaction__c> pmtTxns = [Select Id, cllease__Cleared__c , cllease__Transaction_Amount__c,
-        															cllease__Payment_Mode__r.Name, cllease__Rent_Amount__c,
-                        											cllease__Fees__c, cllease__Tax_Amount__c, cllease__Excess__c,
-                        											cllease__Bill__c, cllease__Charge__c 
-        														From cllease__Lease_Payment_Transaction__c
-        														Order By Name];
+                                                                    cllease__Payment_Mode__r.Name, cllease__Rent_Amount__c,
+                                                                    cllease__Fees__c, cllease__Tax_Amount__c, cllease__Excess__c,
+                                                                    cllease__Bill__c, cllease__Charge__c 
+                                                                From cllease__Lease_Payment_Transaction__c
+                                                                Order By Name];
 
         // cllease__Cleared__c, cllease__Transaction_Amount__c, cllease__Rent_Amount__c, cllease__Fees__c, cllease__Tax_Amount__c, cllease__Excess__c, Bill/ChargeID
         List<List<String>> paymentTxnsExpected = new List<List<String>>();
         paymentTxnsExpected.add(new List<String>{'true', '100.00', '90.00', '0.00',   '10.00', '0.00', bill.Id});
-        paymentTxnsExpected.add(new List<String>{'true', '120.00', '0.00',  '110.00', '10.00',  '0.00', charge.Id});
-        paymentTxnsExpected.add(new List<String>{'true', '80.00',  '0.00',  '0.00',   '0.00',  '80.00',''});                                                                
+        paymentTxnsExpected.add(new List<String>{'true', '110.00', '0.00',  '100.00', '10.00',  '0.00', charge.Id});
+        paymentTxnsExpected.add(new List<String>{'true', '90.00',  '0.00',  '0.00',   '0.00',  '90.00',''});                                                                
 
         System.assertEquals(paymentTxnsExpected.size(), pmtTxns.size(),'Mismatch in No Of Payment Created for Remit File...');
 
         for(Integer i=0; i<pmtTxns.size(); i++) {
             System.assertEquals(Boolean.valueOf(paymentTxnsExpected[i][0]), pmtTxns[i].cllease__Cleared__c, 'Mismatch in cllease__Cleared__c at row: '+i);
-        	System.assertEquals(Decimal.valueOf(paymentTxnsExpected[i][1]), ((Decimal)pmtTxns[i].cllease__Transaction_Amount__c).setScale(2), 'Mismatch in cllease__Transaction_Amount__c at row: '+i);
-		    System.assertEquals(Decimal.valueOf(paymentTxnsExpected[i][2]), ((Decimal)pmtTxns[i].cllease__Rent_Amount__c).setScale(2), 'Mismatch in cllease__Rent_Amount__c at row: '+i);
+            System.assertEquals(Decimal.valueOf(paymentTxnsExpected[i][1]), ((Decimal)pmtTxns[i].cllease__Transaction_Amount__c).setScale(2), 'Mismatch in cllease__Transaction_Amount__c at row: '+i);
+            System.assertEquals(Decimal.valueOf(paymentTxnsExpected[i][2]), ((Decimal)pmtTxns[i].cllease__Rent_Amount__c).setScale(2), 'Mismatch in cllease__Rent_Amount__c at row: '+i);
             System.assertEquals(Decimal.valueOf(paymentTxnsExpected[i][3]), ((Decimal)pmtTxns[i].cllease__Fees__c).setScale(2), 'Mismatch in cllease__Fees__c at row: '+i);
             System.assertEquals(Decimal.valueOf(paymentTxnsExpected[i][4]), ((Decimal)pmtTxns[i].cllease__Tax_Amount__c).setScale(2), 'Mismatch in cllease__Tax_Amount__c at row: '+i);
             System.assertEquals(Decimal.valueOf(paymentTxnsExpected[i][5]), ((Decimal)pmtTxns[i].cllease__Excess__c).setScale(2), 'Mismatch in cllease__Excess__c at row: '+i);

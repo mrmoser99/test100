@@ -45,7 +45,8 @@ public class InvoiceSummaryUtil {
 
                 // Update Invoice Paid Amounts
                 invoice.Paid_Invoice_Amount__c = totalBillPaidAmount + totalchargeAmount ;
-                invoice.File_Generated__c = 'No';
+                // Avoiding resending Invoices to PNC again for remaining amounts. TIcket: 13061
+                //invoice.File_Generated__c = 'No'; 
             }
 
             if(invoices.size() > 0) {

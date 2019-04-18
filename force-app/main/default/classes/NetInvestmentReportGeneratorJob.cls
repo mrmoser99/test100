@@ -222,9 +222,7 @@ global with sharing class NetInvestmentReportGeneratorJob extends clcommon.Dynam
             Decimal unbilledReceivable = 0;
             Integer unbilledRentCount  = 0;
             for(cllease__Payment_Stream__c paymentStream : contract.cllease__Payment_Streams__r) {
-                //if(paymentStream.cllease__Billed__c == false) {
-                // TODO: changed the following condition for report extration
-                if(paymentStream.cllease__Date__c > currentSystemDate) {
+                if(paymentStream.cllease__Billed__c == false) {
                     paymentStream.cllease__Rental_Amount__c = (paymentStream.cllease__Rental_Amount__c !=null ? paymentStream.cllease__Rental_Amount__c : 0);
                     unbilledReceivable += paymentStream.cllease__Rental_Amount__c;
                     unbilledRentCount++;

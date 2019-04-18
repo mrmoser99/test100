@@ -1,7 +1,6 @@
 @isTest
 public class TestContractProcessor {
     static Account borrower;
-    static Account dealer;
     static cllease__Lease_Product__c dummyLP;
 
     static cllease__Payment_Mode__c anyPaymentMode;
@@ -22,8 +21,8 @@ public class TestContractProcessor {
         cllease__Lease_Product__c dummyLeaseProduct = cllease.TestHelper.createLeaseProduct(
                             dummyOffice,
                             dummyFeeSet);
-        insert new Account(Name = 'Borrower');
-        insert new Account(Name = 'Dealer');
+        Account borrowerAccount = new Account(Name = 'Borrower');
+        insert borrowerAccount;
 
     }
     private static void querySetupData() {
@@ -32,8 +31,8 @@ public class TestContractProcessor {
                             WHERE cllease__Lease_Product_Type__c = :cllease.LeaseConstants.LEASE];
         dummyLP.cllease__Maturity_Calculation_Base__c = False;
         update dummyLP;
-        borrower = [SELECT Id, Name FROM Account WHERE Name = 'Borrower'];
-        dealer   = [SELECT Id, Name FROM Account WHERE Name = 'Dealer'];
+        borrower = [SELECT Id, Name
+                            FROM Account];
 
     }
     
@@ -57,8 +56,7 @@ public class TestContractProcessor {
                                                             cllease__Term__c = 12,
                                                             cllease__Contract_Date__c = Date.parse('07/01/2016'),
                                                             cllease__First_Payment_Date__c = Date.parse('07/01/2016'),
-                                                            cllease__Maturity_Date__c = Date.parse('06/30/2017'),
-                                                            cllease__Dealer__c = dealer.Id); //Other values should be defaulted
+                                                            cllease__Maturity_Date__c = Date.parse('06/30/2017')); //Other values should be defaulted
         cllease__Contract_Parties__c party = new cllease__Contract_Parties__c(cllease__Party_Type__c='LESSEE',cllease__Party_Account_Name__c=borrower.id);
         List<SObject> parties = new List<cllease__Contract_Parties__c> {party};
         /**
@@ -97,8 +95,7 @@ public class TestContractProcessor {
                                                 cllease__Lease_Product_Name__c,
                                                 cllease__Lease_Status__c,
                                                 cllease__Financed_Amount__c,
-                                                cllease__Term__c,
-                                                cllease__Dealer__c
+                                                cllease__Term__c
                                             FROM cllease__Lease_Account__c];
 
         System.debug(LoggingLevel.ERROR, ' Contract: '+leaseAccounts);
@@ -106,7 +103,6 @@ public class TestContractProcessor {
         System.assert(leaseAccounts.get(0).cllease__Lease_Status__c.equalsIgnoreCase(cllease.LeaseConstants.LEASE_STATUS_ACTIVE_GOOD_STANDING));
         System.assert(leaseAccounts.get(0).cllease__Financed_Amount__c == 10000);
         System.assert(leaseAccounts.get(0).cllease__Account__c == borrower.Id);
-        System.assert(leaseAccounts.get(0).cllease__Dealer__c == dealer.Id);
 
     }
     
@@ -120,8 +116,7 @@ public class TestContractProcessor {
                                                             cllease__Term__c = 12,
                                                             cllease__Contract_Date__c = Date.parse('07/01/2016'),
                                                             cllease__First_Payment_Date__c = Date.parse('07/01/2016'),
-                                                            cllease__Maturity_Date__c = Date.parse('06/30/2017'),
-                                                            cllease__Dealer__c = dealer.Id); //Other values should be defaulted
+                                                            cllease__Maturity_Date__c = Date.parse('06/30/2017')); //Other values should be defaulted
 
         cllease__Contract_Parties__c party = new cllease__Contract_Parties__c(cllease__Party_Type__c='LESSEE',cllease__Party_Account_Name__c=borrower.id);
         List<SObject> parties = new List<cllease__Contract_Parties__c> {party};
@@ -158,14 +153,12 @@ public class TestContractProcessor {
                                                 cllease__Lease_Product_Name__c,
                                                 cllease__Lease_Status__c,
                                                 cllease__Financed_Amount__c,
-                                                cllease__Term__c,
-                                                cllease__Dealer__c
+                                                cllease__Term__c
                                             FROM cllease__Lease_Account__c];
         System.assert(leaseAccounts.size() == 1);
         System.assert(leaseAccounts.get(0).cllease__Lease_Status__c.equalsIgnoreCase(cllease.LeaseConstants.LEASE_STATUS_PARTIAL_APPLICATION));
         System.assert(leaseAccounts.get(0).cllease__Financed_Amount__c == 10000);
         System.assert(leaseAccounts.get(0).cllease__Account__c == borrower.Id);
-        System.assert(leaseAccounts.get(0).cllease__Dealer__c == dealer.Id);
 
     }
 

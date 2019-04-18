@@ -2,7 +2,6 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Lessee</fullName>
     <active>true</active>
-    <compactLayoutAssignment>Lessee_Address_Compact_Layout</compactLayoutAssignment>
     <label>Lessee</label>
     <picklistValues>
         <picklist>Country__c</picklist>

@@ -22,14 +22,18 @@
 
     handleRefresh: function(component, event, helper){
         var source = event.getParam('source');
+        console.log('!!!'+source);
         if(source === 'FMZ_ApplicationEquipment') {
             var data = event.getParam('data').map(function(d) { 
                 return {label: helper.formatData(d), value: d.Id};
             });
             component.set('v.equipmentOpts', data);
-        } else {
+        } else if(source === 'FMZ_ApplicationServiceAndFees_New') {
         	helper.loadApplicationFees(component);
-        	component.set('v.processing', false);   
+        	var onChangeAction = component.get('v.onchange');
+            $A.enqueueAction(onChangeAction);
+        } else {
+            helper.loadApplicationFees(component);
         }
     },
 
@@ -65,7 +69,6 @@
                         showCloseButton: false,
                         cssClass: 'mymodal',
                         closeCallback: function() {
-                            //alert('You closed the alert!');
                         }
                     })
                 } else if (status === 'ERROR') {
@@ -83,6 +86,7 @@
 
     // delete fee
     handleDelete: function(component, event, helper) {
+        component.set('v.processing', true);
         var val = event.getSource().get('v.value');
         var deleteButtons = component.find('deleteBtn');
         var fee = component.get('v.fees');
@@ -102,6 +106,7 @@
             }
         } catch(e) {
             console.log(e);
+            component.set('v.processing', false);
         }
     },
 

@@ -5,15 +5,13 @@
 *
 *   5/4/18 - MRM Created
 *   10/1/18 - MRM Added line to call icv booking flow
-*   3/8/19 - MRM added exposure calc for updates
 *
 * This trigger sends off a welcome packet when the contract is booked
 *   
 *
 ******************************************************************************/
 trigger clleaseLeaseAccount on cllease__Lease_Account__c (before update) {
-    
-
+       
     //only send welcome packet if this is a single lease update
     if (trigger.new.size() == 1){
          
@@ -41,13 +39,7 @@ trigger clleaseLeaseAccount on cllease__Lease_Account__c (before update) {
                 	ICVAsyncBookLease job = new ICVAsyncBookLease(trigger.new[0].id);  
                 	System.enqueueJob(job);
                 } 
-        }
-        /*
-        if (!ExposureUtility.exposureCalcRunning){
-            Set<String> leaseSet = new Set<String>();
-            leaseSet.add(trigger.old[0].id);
-            ExposureUtility.getExposureFuture(leaseSet);
-        }
-        */
+        } 
+        
     }
 }

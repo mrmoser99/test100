@@ -8,6 +8,10 @@
     <columns>UPDATEDBY_USER</columns>
     <columns>CREATED_DATE</columns>
     <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>equals</operation>
+        <value>Px Remit</value>
+    </filters>
     <label>All</label>
-    <language>en_US</language>
 </ListView>

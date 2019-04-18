@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
-        <fullName>ANNUAL</fullName>
-        <categories>Frequency Caluclation</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>ANNUAL</shortDescription>
-        <value>12</value>
-    </labels>
-    <labels>
         <fullName>Conga_Quote_URL</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Conga Quote URL</shortDescription>
-        <value>https://c.cs66.visual.force.com</value>
+        <value>https://c.cs41.visual.force.com</value>
     </labels>
     <labels>
         <fullName>Conga_URL</fullName>
@@ -23,41 +15,12 @@
         <value>https://composer.congamerge.com/composer8/index.html?SolMgr=1&amp;APIMode=1&amp;sessionId=</value>
     </labels>
     <labels>
-        <fullName>ContractEquipmentQueryDetails</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>ContractEquipmentQueryDetails</shortDescription>
-        <value>a2e0v0000001i2M</value>
-    </labels>
-    <labels>
         <fullName>Credit_Engine</fullName>
-        <categories>ICS</categories>
+        <categories>ATS</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Credit Engine</shortDescription>
         <value>ICS</value>
-    </labels>
-    <labels>
-        <fullName>DefaultEscalationFrequency</fullName>
-        <categories>EscalationFrequency</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>DefaultFrequencyName</shortDescription>
-        <value>ANNUAL</value>
-    </labels>
-    <labels>
-        <fullName>DefaultFrequencyValue</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>DefaultFrequencyValue</shortDescription>
-        <value>12</value>
-    </labels>
-    <labels>
-        <fullName>Email_to_Batch_Failed</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Email to Batch Failed</shortDescription>
-        <value>venkata.suhas@Cloudlendinginc.com</value>
     </labels>
     <labels>
         <fullName>Environment</fullName>
@@ -72,7 +35,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>FMZ Dealer Community Base URL</shortDescription>
-        <value>https://dev-newcodev.cs66.force.com/dealer/</value>
+        <value>https://dev-newcofinance.cs41.force.com/dealer/</value>
     </labels>
     <labels>
         <fullName>FMZ_EDQ_Auth_Token</fullName>
@@ -83,55 +46,27 @@
         <value>8aa60900-71bf-442f-b492-cf194b1b0e88</value>
     </labels>
     <labels>
-        <fullName>FMZ_LightningExp_Host</fullName>
+        <fullName>FMZ_Portal_Soap_Url</fullName>
         <categories>FMZ Dealer Community</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>FMZ LightningExp Host</shortDescription>
-        <value>https://dev-newcodev.cs66.force.com</value>
+        <shortDescription>FMZ_Portal_Soap_Url</shortDescription>
+        <value>https://newcofinance.force.com/dealer/services/Soap/u/39.0/00D4F0000000aGv</value>
     </labels>
     <labels>
         <fullName>FMZ_Price_Exceeds_MSRP_Warning_Percent</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>FMZ Price Exceeds MSRP Warning Percent</shortDescription>
-        <value>25</value>
+        <value>125</value>
     </labels>
     <labels>
-        <fullName>FMZ_Visualforce_Host</fullName>
+        <fullName>FMZ_Request_Funding_Reminder</fullName>
         <categories>FMZ Dealer Community</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>FMZ Visualforce Host</shortDescription>
-        <value>https://newcoleasing--dev--c.cs66.visual.force.com</value>
-    </labels>
-    <labels>
-        <fullName>FinalLetterCongaEmailTemplate</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>FinalLetterCongaEmailTemplate</shortDescription>
-        <value>a2d0v000000HFg3</value>
-    </labels>
-    <labels>
-        <fullName>FinalLetterCongaTemplate</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>FinalLetterCongaTemplate</shortDescription>
-        <value>a2m0v0000005vwu</value>
-    </labels>
-    <labels>
-        <fullName>FinalNoticeLetter_DeliquentDay</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>FinalNoticeLetter-DeliquentDay</shortDescription>
-        <value>91</value>
-    </labels>
-    <labels>
-        <fullName>FromID</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>FromID</shortDescription>
-        <value>0D21I000000CdKt</value>
+        <shortDescription>FMZ Request Funding Reminder</shortDescription>
+        <value>Please verify all required documents are added to the Application before you request funding. Would you like to continue?</value>
     </labels>
     <labels>
         <fullName>ICS_Application_Type_Code</fullName>
@@ -161,7 +96,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>ICS Environment Id</shortDescription>
-        <value>ACC01</value>
+        <value>DEV01</value>
     </labels>
     <labels>
         <fullName>ICS_Financial_Product_Type_Code</fullName>
@@ -201,7 +136,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>ICS Reply To</shortDescription>
-        <value>https://cs66.salesforce.com/services/Soap/class/ICSResponse</value>
+        <value>https://cs41.salesforce.com/services/Soap/class/ICSResponse</value>
     </labels>
     <labels>
         <fullName>ICS_Source_System</fullName>
@@ -327,14 +262,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>OrgUrl</shortDescription>
-        <value>https://newcoleasing--dev.cs66.my.salesforce.com</value>
-    </labels>
-    <labels>
-        <fullName>SUCCESS_MSG</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>SUCCESS_MSG</shortDescription>
-        <value>Success</value>
+        <value>https://cs41.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Welcome_Email</fullName>

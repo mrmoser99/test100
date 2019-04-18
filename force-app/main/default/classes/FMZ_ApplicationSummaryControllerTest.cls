@@ -16,7 +16,7 @@ public class FMZ_ApplicationSummaryControllerTest {
         Account acc = new Account(
             Name = 'sample Account',
             clcommon__Legal_Entity_Type__c = lentity.Id,
-            EIN__c = '123456798',
+            EIN__c = '12-1234567',
             Email_Address__c = 'abc123@gmail.com',
             Oracle_Vendor_ID__c = 'Y795'
         );
@@ -103,6 +103,6 @@ public class FMZ_ApplicationSummaryControllerTest {
 
 		Test.stopTest();
 
-    } 
+    }
 
 }

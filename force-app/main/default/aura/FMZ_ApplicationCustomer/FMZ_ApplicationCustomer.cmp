@@ -23,10 +23,11 @@
 							 messageWhenTypeMismatch="Invalid Email Address"/>
 			<lightning:input aura:id="inputFieldPhone"
 							 value="{!v.customer.Phone}"
+                             onchange="{!c.fixFormatting}"
 							 label="Phone"
 							 required="true"
-							 pattern="[0-9]{10}"
-							 messageWhenPatternMismatch="Phone should be 10 digigts (NO '-')"
+							 pattern="[1-9]{1}[0-9]{9}"
+							 messageWhenPatternMismatch="Phone cannot start with 0 and should be 10 digits (NO '-')"
 							 messageWhenValueMissing="Phone is required."/>
 			<label class="slds-form-element__label" style="margin-right:0.5rem"> <span style="color: rgb(194, 57, 52);;">*</span> EIN</label>
 			<lightning:helpText content="Employer Identification Number"/>

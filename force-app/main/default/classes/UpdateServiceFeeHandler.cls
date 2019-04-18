@@ -127,7 +127,6 @@ public class UpdateServiceFeeHandler{
     
     }
     
-   
     // This is invoked from Calculate Insurance to update date on fees 
     // if expected first payment date on application changes
     public static void updateDateOnFees(String applicationId){

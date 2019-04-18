@@ -17,6 +17,8 @@
 
     <aura:method name="saveAndValidate" access="public"/>
 
+    <div class="slds-text-color_error">{!v.error}</div>
+
     <div class="slds-float--right slds-m-bottom_x-small">
         <c:FMZ_Address_Button accountId="{!v.accountId}"/>
     </div>

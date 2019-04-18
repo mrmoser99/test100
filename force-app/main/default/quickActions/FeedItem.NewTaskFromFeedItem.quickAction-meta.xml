@@ -4,26 +4,23 @@
         <field>Description</field>
         <formula>FeedItem.Body</formula>
     </fieldOverrides>
-    <fieldOverrides>
-        <field>Priority</field>
-        <literalValue>High</literalValue>
-    </fieldOverrides>
-    <fieldOverrides>
-        <field>Status</field>
-        <literalValue>Not Started</literalValue>
-    </fieldOverrides>
     <optionsCreateFeedItem>true</optionsCreateFeedItem>
     <quickActionLayout>
         <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
         <quickActionLayoutColumns>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
-                <field>OwnerId</field>
-                <uiBehavior>Required</uiBehavior>
+                <field>Subject</field>
+                <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
-                <field>Subject</field>
+                <field>ActivityDate</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>WhoId</field>
                 <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>
             <quickActionLayoutItems>

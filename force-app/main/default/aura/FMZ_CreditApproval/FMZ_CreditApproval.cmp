@@ -10,6 +10,7 @@
     <aura:attribute name="fields" type="List"/>
     <aura:attribute name="processing" type="Boolean" default="true"/>
     <aura:attribute name="isInvalid" type="Boolean" default="false"/>
+    <aura:attribute name="invalidFormatPhone" type="Boolean" default="false"/>
     <aura:attribute name="pollingIntervalId" type="Integer"/>
     <aura:attribute name="matches" type="List" access="private"/>
 
@@ -31,8 +32,8 @@
                                   onsuccess="{!c.handleSuccess}"
                                   onerror="{!c.handleError}">
 
-            <div >
-                <lightning:messages aura:id="messages"/>
+            <div class="slds-p-around--medium">
+                <!--<lightning:messages aura:id="messages"/>-->
 
                 <div class="{!'slds-notify_container slds-is-relative slds-m-left_x-small ' + (v.isInvalid ? '' : 'slds-hide')}">
                     <div role="alert" class="slds-notify slds-notify_toast slds-theme_error">
@@ -47,16 +48,30 @@
                 <aura:iteration items="{!v.fields}" var="f">
                     <aura:if isTrue="{!((v.recordId==null&amp;&amp;f.fieldPath=='genesis__Business_Name__c'))}">
                         <aura:if isTrue="{!not(v.newAccount)}">
-                            <lightning:inputField fieldName="genesis__Account__c" aura:id="inputField" class="input-is-required"
-                                                      onchange="{!c.lookupChange}" value="{!v.accountId}"/>
+                            <lightning:inputField fieldName="genesis__Account__c" aura:id="inputFieldAccountName" class="input-is-required"
+                                                  onchange="{!c.lookupChange}" value="{!v.accountId}"/>
                             <aura:set attribute="else">
-                                <lightning:inputField fieldName="genesis__Business_Name__c" aura:id="inputField" class="input-is-required"/>
+                                <lightning:inputField fieldName="genesis__Business_Name__c" aura:id="inputFieldAccountId" class="input-is-required"/>
                             </aura:set>
                         </aura:if>
                     </aura:if>
                     <aura:if isTrue="{!v.recordId!=null||(v.recordId==null&amp;&amp;f.fieldPath!='genesis__Business_Name__c')}">
-                        <lightning:inputField fieldName="{!f.fieldPath}" aura:id="inputField" class="{!f.required?'input-is-required':''}"/>
+                        <aura:if isTrue="{!f.fieldPath == 'Primary_Phone_number__c'}">
+                            <lightning:inputField fieldName="{!f.fieldPath}" aura:id="inputFieldPhone" class="{!f.required?'input-is-required':''}"/>
+                            <aura:if isTrue="{!v.invalidFormatPhone}">
+                                <div class="slds-text-color_error">Phone cannot start with 0 and should be 10 digits (NO '-')</div>
+                            </aura:if>
+                            <aura:set attribute="else">
+                                <aura:if isTrue="{!f.fieldPath == 'Estimated_Financed_Amount__c'}">
+                                    <lightning:inputField fieldName="{!f.fieldPath}" aura:id="inputFieldFinance" class="{!f.required?'input-is-required':''}"/>
+                                    <aura:set attribute="else">
+                                        <lightning:inputField fieldName="{!f.fieldPath}" aura:id="inputField" class="{!f.required?'input-is-required':''}"/>
+                                    </aura:set>
+                                </aura:if>
+                            </aura:set>
+                        </aura:if>
                     </aura:if>
+
                 </aura:iteration>
 
                 <lightning:input aura:id="addressLine1"
@@ -81,8 +96,8 @@
                                  messageWhenValueMissing="State is Required"/>
                 <lightning:input aura:id="postalCode" type="text" label="Postal Code" required="true"
                                  messageWhenValueMissing="Postal Code is Required"/>
-                <lightning:input aura:id="validStatus" type="text" label="Validation Status"/>
-                <lightning:input aura:id="validTime" type="datetime-local" label="Validation Timestamp"/>
+                <lightning:input aura:id="validStatus" type="text" label="Validation Status" disabled="true"/>
+                <lightning:input aura:id="validTime" type="datetime-local" label="Validation Timestamp" disabled="true"/>
 
                 <lightning:button class="slds-m-top_large" variant="brand" type="submit" label="Create" />
                 <lightning:button class="slds-m-top_large" label="Cancel" onclick="{!c.handleCancel}"/>

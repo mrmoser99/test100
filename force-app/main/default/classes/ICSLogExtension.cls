@@ -20,7 +20,8 @@ public with sharing class ICSLogExtension {
 	/******************************************************************************************
     * Submit
     *******************************************************************************************/
-    public pageReference submit(){   
+    public pageReference submit(){
+ 		
  		System.HttpResponse response;
  		ICS_Log__c log;
  	 

@@ -1,6 +1,7 @@
 <aura:component controller="FMZ_ApplicationTermsController">
 
     <aura:attribute name="applicationId" type="Id"/>
+    <aura:attribute name="termOpts" type="List"/>
     <aura:attribute name="onchange" type="Aura.Action" description="Handle any data changes"/>
 
     <aura:attribute name="application" type="Object" access="private"/>
@@ -11,14 +12,26 @@
 
     <lightning:layout>
         <lightning:layoutItem size="12" mediumDeviceSize="8" largeDeviceSize="6">
-            <lightning:input aura:id="term" type="number" formatter="number"
-                             label="Lease Term"
-                             value="{!v.application.genesis__Term__c}"
-                             placeholder="Enter Lease Term (months)"
-                             required="true"
-                             messageWhenValueMissing="Lease Term is required."
-                             class="slds-m-bottom_x-small"
-                             onchange="{!c.handleChange}"/>
+            <!--<lightning:input aura:id="term" type="number" formatter="number"-->
+                             <!--label="Lease Term"-->
+                             <!--value="{!v.application.genesis__Term__c}"-->
+                             <!--placeholder="Enter Lease Term (months)"-->
+                             <!--required="true"-->
+                             <!--messageWhenValueMissing="Lease Term is required."-->
+                             <!--class="slds-m-bottom_x-small"-->
+                             <!--onchange="{!c.handleChange}"/>-->
+            <lightning:select name="Term"
+                              label="Lease Term"
+                              aura:id="term"
+                              value="{!v.application.genesis__Term__c}"
+                              required="true" messageWhenValueMissing="Lease Term is required."
+                              onchange="{!c.handleChange}"
+                              class="slds-m-bottom_x-small">
+                <option text="Enter Lease Term (months)" value=""/>
+                <aura:iteration items="{!v.termOpts}" var="option">
+                    <option text="{!option}" value="{!option}" selected="{!option == v.application.genesis__Term__c}"/>
+                </aura:iteration>
+            </lightning:select>
         </lightning:layoutItem>
     </lightning:layout>
 

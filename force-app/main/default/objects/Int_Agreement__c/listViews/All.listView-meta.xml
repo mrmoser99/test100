@@ -8,13 +8,13 @@
     <columns>Agreement_Activation_Date__c</columns>
     <columns>Agreement_Maturity_Date__c</columns>
     <columns>Agreement_Rate__c</columns>
+    <columns>Committed__c</columns>
     <columns>GL_Code_Block__c</columns>
     <columns>System_Program_Number__c</columns>
     <columns>System_Program_Description__c</columns>
     <columns>Floating_Rate_Cap__c</columns>
     <columns>Syndication_Indicator__c</columns>
     <columns>Syndication_Percentage__c</columns>
-    <columns>Committed__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

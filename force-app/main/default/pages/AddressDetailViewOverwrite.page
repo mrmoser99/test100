@@ -1,6 +1,6 @@
 <apex:page StandardController="Address__c" tabStyle="Address__c" sidebar="true" extensions="EDQ.DataQualityEnforcedUsageController" action="{!Execute}"> 
     <apex:stylesheet value="{!URLFOR($Resource.EDQ__DynamicPageCss)}" />
-    <EDQ:DataQualityDetailPageScripts EnforcedUsageRefreshTouchpointsAction="{!Execute}"
+    <EDQ:DataQualityDetailPageScripts EnforcedUsageRefreshTouchpointsAction="{!Execute}" 
           Urls="{!Urls}" 
           DetailPageUrl="{!DetailPageUrl}" 
           DataQualityEnforcedUsageData="{!EnforcedUsageData}" 

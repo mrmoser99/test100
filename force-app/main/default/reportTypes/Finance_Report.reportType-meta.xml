@@ -98,12 +98,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Cr Apl Bokd Dt</displayNameOverride>
-            <field>CTA_Booked_Date1__c</field>
-            <table>cllease__Lease_Account__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Cr Apl Bokd Dt_old</displayNameOverride>
             <field>CTA_Booked_Date__c</field>
             <table>cllease__Lease_Account__c</table>
         </columns>

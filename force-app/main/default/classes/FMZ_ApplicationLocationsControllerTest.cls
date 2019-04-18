@@ -45,11 +45,11 @@ public class FMZ_ApplicationLocationsControllerTest {
         acc = new Account (
                 Name = 'sample Account',
                 clcommon__Legal_Entity_Type__c = lentity.Id,
-                EIN__c='123456798',
+                EIN__c = '12-1234567',
                 Email_Address__c='abc123@gmail.com',
                 Oracle_Vendor_ID__c='Y795'
         );
-        insert acc;
+        insert acc; 
                 
         dealerProgram = new clcommon__Agreement__c (
             Name = 'NewCo',

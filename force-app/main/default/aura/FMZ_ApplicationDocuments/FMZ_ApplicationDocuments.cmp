@@ -1,8 +1,9 @@
 <aura:component controller="FMZ_ApplicationDocumentsController">
+    <ltng:require scripts="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"/>
 
 	<aura:attribute name="applicationId" type="Id"/>
 	<aura:attribute name="onchange" type="Aura.Action" description="Handle any data changes"/>
-
+	<aura:attribute name="setIntervalId" type="Integer"/>
 	<aura:attribute name="application" type="genesis__Applications__c"
 					default="{ sobjectType: 'genesis__Applications__c' }"
 					access="private"/>
@@ -40,12 +41,14 @@
 					<lightning:input aura:id="docInput"
 									 value="{!v.application.Dealer_Invoice_Number__c}"
 									 label="Invoice #"
+									 required="true"
 									 messageWhenValueMissing="Invoice # is required."/>
 				</lightning:layoutItem>
 				<lightning:layoutItem size="12">
 					<lightning:input aura:id="docInput" type="date"
 									 value="{!v.application.Dealer_Invoice_Date__c}"
 									 label="Invoice Date"
+									 required="true"
 									 messageWhenValueMissing="Invoice Date is required."/>
 				</lightning:layoutItem>
 			</lightning:layout>

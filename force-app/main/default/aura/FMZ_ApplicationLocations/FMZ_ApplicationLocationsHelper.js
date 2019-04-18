@@ -82,8 +82,12 @@
             let installsCount = installs.reduce(function (count, inputCmp) {
                 return count + (inputCmp.get('v.checked') ? 1 : 0);
             }, 0);
+            console.log('!!!installCount: '+installsCount);
+            component.set('v.error', 'There must be at lease one Install Location checked.');
             return installsCount > 0;
         } else {
+            console.log('!!!installs.checked: '+installs.get('v.checked'));
+            component.set('v.error', 'There must be at lease one Install Location checked.');
             return installs.get('v.checked');
         }
     },

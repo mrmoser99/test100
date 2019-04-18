@@ -5,7 +5,7 @@
     <columns>Application__c</columns>
     <columns>Fee__c</columns>
     <columns>Fee_Name__c</columns>
-    <columns>Equipment__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
+    <language>en_US</language>
 </ListView>

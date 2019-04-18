@@ -6,7 +6,7 @@
     <label>AddressDetailViewOverwrite</label>
     <packageVersions>
         <majorNumber>5</majorNumber>
-        <minorNumber>87</minorNumber>
+        <minorNumber>85</minorNumber>
         <namespace>EDQ</namespace>
     </packageVersions>
 </ApexPage>

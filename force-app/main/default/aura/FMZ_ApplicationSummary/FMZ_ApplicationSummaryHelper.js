@@ -18,6 +18,20 @@
         $A.util.removeClass(component, 'new-item');
         $A.enqueueAction(action);
     },
+    getApprovalInfo: function(component, showUpdate) {
+        let action = component.get('c.getApprovalInfo');
+        action.setParams({
+            applicationId: component.get('v.applicationId')
+        });
+        action.setCallback(this, function (response) {
+            let state = response.getState();
+            if (state === 'SUCCESS') {
+                var approval = response.getReturnValue();
+                component.set('v.approval', approval);
+            }
+        });
+        $A.enqueueAction(action);
+    },
     getLocations: function(component) {
         let action = component.get('c.getInstallLocations');
         action.setParams({

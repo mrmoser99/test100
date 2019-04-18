@@ -4,9 +4,10 @@
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Credit Decisioning</label>
-    <logo>SharedDocuments/unnamed_jpg.jpg</logo>
     <tabs>genesis__Quick_Quotes__c</tabs>
     <tabs>standard-Account</tabs>
     <tabs>ICS_Application__c</tabs>
     <tabs>ICS_Log__c</tabs>
+    <tabs>CL_Lease_Financial_Report__c</tabs>
+    <tabs>Lease_Financial_Report_Mapping__c</tabs>
 </CustomApplication>

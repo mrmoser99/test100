@@ -21,5 +21,9 @@
           "isredirect": true
         });
         urlEvent.fire();
+    },
+    fixFormatting: function(component, event, helper){
+        var phoneInput = component.find('inputFieldPhone');
+        phoneInput.set('v.value', phoneInput.get('v.value').replace(/(\(|\)| |-)/g, ""));
     }
 })

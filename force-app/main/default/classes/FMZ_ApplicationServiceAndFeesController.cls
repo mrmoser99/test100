@@ -38,7 +38,13 @@ public without sharing class FMZ_ApplicationServiceAndFeesController {
                 Equipment__r.genesis__Equipment__r.genesis__Model__c
         FROM Application_Fee__c
         WHERE Application__c = :applicationId
-        ORDER BY CreatedDate];
+        ORDER BY
+                Fee__r.Name,
+                Equipment__r.genesis__Equipment__r.Manufacturer__c,
+                Equipment__r.genesis__Equipment__r.genesis__Model__c,
+                Equipment__r.Serial_Number__c,
+                Start_Date__c
+        ];
 
         return result;
 
@@ -94,11 +100,16 @@ public without sharing class FMZ_ApplicationServiceAndFeesController {
 
         String feeIcon = 'standard:partner_marketing_budget';
         clcommon__Fee_Definition__c [] fees = ((List<clcommon__Fee_Definition__c>) searchResults[0]);
-        for (clcommon__Fee_Definition__c f : fees) {
-            results.add(new LookupSearchResult(
-                    f.Id, 'clcommon__Fee_Definition__c', feeIcon,
-                    f.Name, f.clcommon__Taxable__c ? 'Taxable' : 'Non-Taxable'));
+        if(fees.size() > 0){
+            for (clcommon__Fee_Definition__c f : fees) {
+                if(f.Name != 'Insurance Fees'){
+                    results.add(new LookupSearchResult(
+                            f.Id, 'clcommon__Fee_Definition__c', feeIcon,
+                            f.Name, f.clcommon__Taxable__c ? 'Taxable' : 'Non-Taxable'));
+                }
+            }
         }
+
         System.debug('!!!' + results);
         return results;
 
@@ -129,7 +140,23 @@ public without sharing class FMZ_ApplicationServiceAndFeesController {
         }else{
             fees.add(fee);
         }
-        insert fees;
+
+        String feeDefName = [SELECT Id, Name FROM clcommon__Fee_Definition__c WHERE Id =: fee.Fee__c LIMIT 1].Name;
+        if(feeDefName == 'Service Fees' && fee.Frequency__c == 'MONTHLY'){
+            List<Application_Fee__c> existingFees = [
+                    SELECT Id, Amount__c, Equipment__c, Start_Date__c, Number_of_Payments__c
+                    FROM Application_Fee__c
+                    WHERE Application__c =: fee.Application__c
+                        AND Fee__c =: fee.Fee__c
+                        AND Frequency__c = 'MONTHLY'
+                        AND Equipment__c IN: equipment
+            ];
+            existingFees.addAll(fees);
+
+            fees = setServiceFeeDates(existingFees, fee.Application__c);
+        }
+
+        upsert fees;
     }
 
     @AuraEnabled
@@ -142,9 +169,32 @@ public without sharing class FMZ_ApplicationServiceAndFeesController {
 
         delete payments;
 
-        Application_Fee__c fee = new Application_Fee__c( Id = appFeeId );
+        Application_Fee__c fee = [
+                SELECT Id, Amount__c, frequency__c, Application__c, Equipment__c, Fee__r.Name
+                FROM Application_Fee__c
+                WHERE Id =: appFeeId
+                LIMIT 1
+        ];
+        Boolean needsUpdatedDates = fee.Fee__r.Name == 'Service Fees' && fee.Frequency__c == 'MONTHLY';
 
         delete fee;
+
+        if(needsUpdatedDates){
+            List<Application_Fee__c> existingFees = [
+                    SELECT Id, Amount__c, Equipment__c, Start_Date__c, Number_of_Payments__c
+                    FROM Application_Fee__c
+                    WHERE Application__c =: fee.Application__c
+                    AND Fee__c =: fee.Fee__c
+                    AND Frequency__c = 'MONTHLY'
+                    AND Equipment__c =: fee.Equipment__c
+                    AND Id !=: appFeeId
+            ];
+
+            List<Application_Fee__c> updatedFees = setServiceFeeDates(existingFees, fee.Application__c);
+            if(updatedFees.size() > 0){
+                update updatedFees;
+            }
+        }
 
     }
 
@@ -161,5 +211,51 @@ public without sharing class FMZ_ApplicationServiceAndFeesController {
         genesis__Applications__c app = new genesis__Applications__c(Id = appId, Customer_Provided_Insurance__c = customerInsurance);
         System.debug('!!!'+app.Customer_Provided_Insurance__c);
         update app;
+    }
+
+    private static List<Application_Fee__c> setServiceFeeDates(List<Application_Fee__c> existingFees, String appId){
+        Map<String, List<Application_Fee__c>> feeByEquipment = new Map<String, List<Application_Fee__c>>();
+
+        Date firstPayment = [
+                SELECT genesis__Expected_First_Payment_Date__c
+                FROM genesis__Applications__c
+                WHERE Id =: appId
+                LIMIT 1].genesis__Expected_First_Payment_Date__c;
+
+        List<Application_Fee__c> applicationFees = new List<Application_Fee__c>();
+
+        if(existingFees.size() > 0){
+            for(Application_Fee__c appFee : existingFees) {
+                List<Application_Fee__c> appFees = feeByEquipment.get(appFee.Equipment__c);
+                if (appFees == null) {
+                    appFees = new List<Application_Fee__c>();
+                }
+                if (appFees.size() > 0) {
+                    Integer feeCount = appFees.size();
+                    for (Integer i = 0; i < appFees.size(); i++) {
+                        if (appFee.Amount__c < appFees[i].Amount__c) {
+                            appFees.add(i, appFee);
+                            break;
+                        }
+                    }
+                    if(feeCount == appFees.size()){
+                        appFees.add(appFee);
+                    }
+                } else {
+                    appFees.add(appFee);
+                }
+                feeByEquipment.put(appFee.Equipment__c, appFees);
+            }
+
+            for(List<Application_Fee__c> appFees : feeByEquipment.values()){
+                Integer monthsOfPayment = 0;
+                for(Integer i = 0; i < appFees.size(); i++){
+                    appFees[i].Start_Date__c = firstPayment.addMonths(monthsOfPayment);
+                    monthsOfPayment += (Integer) appFees[i].Number_of_Payments__c;
+                }
+                applicationFees.addAll(appFees);
+            }
+        }
+        return applicationFees;
     }
 }

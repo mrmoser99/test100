@@ -4,7 +4,7 @@
 * 
 *	Change Log: 
 *	3/15/19 - MRM Created
-*   4/17/19 - 
+*   4/17/19 - Started mapping for all services
 *
 ********************************************************************************************************************/
 public with sharing class PMUtility {
@@ -45,7 +45,7 @@ public with sharing class PMUtility {
 
     }
 
-    //wrapper classs for detail of a single lease
+     
 
     public class Data{
         
@@ -216,13 +216,13 @@ public with sharing class PMUtility {
     *   generateQuotes
     *************************************************************************************************************************************************************/
 
-    public static List<quoteSummary> generateQuotes(String leaseNumber){
+    public static String generateQuotes(String leaseNumber){
         
-        String quoteNumber1; 
+        String response; 
 
         List<quoteSummary> qsList = new List<quoteSummary>();
 
-        return qsLIst;
+        return JSON.serialize(response);  
 
     }
     
@@ -230,11 +230,13 @@ public with sharing class PMUtility {
     *   getQuotes
     *************************************************************************************************************************************************************/
 
-    public static quoteDetail getQuoteDetail(String quoteNumber){
+    public static String getQuoteDetail(String quoteNumber){
         
+        String response;
+
         quoteDetail qd = new quoteDetail(quoteNumber);
         
-        return qd;
+        return JSON.serialize(response);  
 
     }
 

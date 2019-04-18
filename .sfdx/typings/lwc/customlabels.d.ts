@@ -1,7 +1,3 @@
-declare module "@salesforce/label/c.ANNUAL" {
-    var ANNUAL: string;
-    export default ANNUAL;
-}
 declare module "@salesforce/label/c.Conga_Quote_URL" {
     var Conga_Quote_URL: string;
     export default Conga_Quote_URL;
@@ -10,25 +6,9 @@ declare module "@salesforce/label/c.Conga_URL" {
     var Conga_URL: string;
     export default Conga_URL;
 }
-declare module "@salesforce/label/c.ContractEquipmentQueryDetails" {
-    var ContractEquipmentQueryDetails: string;
-    export default ContractEquipmentQueryDetails;
-}
 declare module "@salesforce/label/c.Credit_Engine" {
     var Credit_Engine: string;
     export default Credit_Engine;
-}
-declare module "@salesforce/label/c.DefaultEscalationFrequency" {
-    var DefaultEscalationFrequency: string;
-    export default DefaultEscalationFrequency;
-}
-declare module "@salesforce/label/c.DefaultFrequencyValue" {
-    var DefaultFrequencyValue: string;
-    export default DefaultFrequencyValue;
-}
-declare module "@salesforce/label/c.Email_to_Batch_Failed" {
-    var Email_to_Batch_Failed: string;
-    export default Email_to_Batch_Failed;
 }
 declare module "@salesforce/label/c.Environment" {
     var Environment: string;
@@ -42,33 +22,17 @@ declare module "@salesforce/label/c.FMZ_EDQ_Auth_Token" {
     var FMZ_EDQ_Auth_Token: string;
     export default FMZ_EDQ_Auth_Token;
 }
-declare module "@salesforce/label/c.FMZ_LightningExp_Host" {
-    var FMZ_LightningExp_Host: string;
-    export default FMZ_LightningExp_Host;
+declare module "@salesforce/label/c.FMZ_Portal_Soap_Url" {
+    var FMZ_Portal_Soap_Url: string;
+    export default FMZ_Portal_Soap_Url;
 }
 declare module "@salesforce/label/c.FMZ_Price_Exceeds_MSRP_Warning_Percent" {
     var FMZ_Price_Exceeds_MSRP_Warning_Percent: string;
     export default FMZ_Price_Exceeds_MSRP_Warning_Percent;
 }
-declare module "@salesforce/label/c.FMZ_Visualforce_Host" {
-    var FMZ_Visualforce_Host: string;
-    export default FMZ_Visualforce_Host;
-}
-declare module "@salesforce/label/c.FinalLetterCongaEmailTemplate" {
-    var FinalLetterCongaEmailTemplate: string;
-    export default FinalLetterCongaEmailTemplate;
-}
-declare module "@salesforce/label/c.FinalLetterCongaTemplate" {
-    var FinalLetterCongaTemplate: string;
-    export default FinalLetterCongaTemplate;
-}
-declare module "@salesforce/label/c.FinalNoticeLetter_DeliquentDay" {
-    var FinalNoticeLetter_DeliquentDay: string;
-    export default FinalNoticeLetter_DeliquentDay;
-}
-declare module "@salesforce/label/c.FromID" {
-    var FromID: string;
-    export default FromID;
+declare module "@salesforce/label/c.FMZ_Request_Funding_Reminder" {
+    var FMZ_Request_Funding_Reminder: string;
+    export default FMZ_Request_Funding_Reminder;
 }
 declare module "@salesforce/label/c.ICS_Application_Type_Code" {
     var ICS_Application_Type_Code: string;
@@ -173,10 +137,6 @@ declare module "@salesforce/label/c.OFAC_Checking" {
 declare module "@salesforce/label/c.OrgUrl" {
     var OrgUrl: string;
     export default OrgUrl;
-}
-declare module "@salesforce/label/c.SUCCESS_MSG" {
-    var SUCCESS_MSG: string;
-    export default SUCCESS_MSG;
 }
 declare module "@salesforce/label/c.Welcome_Email" {
     var Welcome_Email: string;

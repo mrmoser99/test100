@@ -58,18 +58,6 @@ global class ProcessCreditApprovalResponse implements Messaging.InboundEmailHand
                                                                 FROM genesis__Quick_Quotes__c 
                                                                 WHERE Name = :senders_ref];
 
-                    //To attach the base email to the Quick Quote
-                    /*String emailContent = 'FROM: '+email.fromAddress+'\n'
-                            +'SUBJECT: '+email.subject+'\n\n'
-                            +'CONTENT: '+email.plainTextBody;
-
-                    Attachment emailDocument = new Attachment();
-                    emailDocument.Body = Blob.toPDF(emailContent);
-                    emailDocument.Name = email.subject+String.valueOf(Date.today())+'.pdf';
-                    emailDocument.ParentId = Credit_approval.Id;
-                    insert emailDocument;*/
-
-
                     //if approved
                     if (email.plainTextBody.contains('|Approval|')) {
                         Credit_approval.genesis__Status__c = 'CREDIT APPROVED';

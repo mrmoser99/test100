@@ -1,88 +1,97 @@
 <aura:component controller="FMZ_ApplicationController" implements="force:appHostable,forceCommunity:availableForAllPageTypes">
 
     <aura:attribute name="applicationId" type="Id" required="true" default="a0J0v000000WESi"/>
+    <aura:attribute name="application" type="genesis__Applications__c" />
     <aura:attribute name="applicationComplete" type="Boolean" access="private" description="true if progress is 100%" />
     <aura:attribute name="processing" type="Boolean" default="false"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
-    
+    <aura:handler event="c:FMZ_Application_Refresh" action="{!c.handleRefresh}"/>
+
     <aura:registerEvent name="appEvent" type="c:FMZ_Application_Refresh"/>
 
-    <lightning:layout verticalAlign="stretch" multipleRows="true">
 
-        <lightning:layoutItem size="12" largeDeviceSize="8" mediumDeviceSize="12" smallDeviceSize="12"
-                              class="slds-p-right_x-small slds-p-bottom_x-small">
+    <aura:if isTrue="{!and(v.application.genesis__Status__c != 'APPROVED - CONVERTED TO CONTRACT', empty(v.application.Lease_Number__c))}">
+        <lightning:layout verticalAlign="stretch" multipleRows="true">
 
-            <c:FMZ_SetupAssistant aura:id="progress"
-                                  progressText="Complete all the steps below to finish the credit application"
-                                  progressValue="0">
+            <lightning:layoutItem size="12" largeDeviceSize="8" mediumDeviceSize="12" smallDeviceSize="12"
+                                  class="slds-p-right_x-small slds-p-bottom_x-small">
+                <c:FMZ_SetupAssistant aura:id="progress"
+                                      progressText="Complete all the steps below to finish the credit application"
+                                      progressValue="0">
 
-                <c:FMZ_SetupAssistantStep aura:id="parties" stepTitle="Edit Customer" stepNumber="1"
-                                          onnext="{!c.handlePartiesNext}">
+                    <c:FMZ_SetupAssistantStep aura:id="parties" stepTitle="Edit Customer" stepNumber="1"
+                                              onnext="{!c.handlePartiesNext}">
 
-                    <c:FMZ_ApplicationCustomer aura:id="partiesForm"
-                                              applicationId="{!v.applicationId}"
-                                              onchange="{!c.handleChange}"/>
+                        <c:FMZ_ApplicationCustomer aura:id="partiesForm"
+                                                  applicationId="{!v.applicationId}"
+                                                  onchange="{!c.handleChange}"/>
 
-                </c:FMZ_SetupAssistantStep>
+                    </c:FMZ_SetupAssistantStep>
 
-                <c:FMZ_SetupAssistantStep aura:id="terms" stepTitle="Select Lease Terms" stepNumber="2"
-                                          onnext="{!c.handleTermsNext}">
+                    <c:FMZ_SetupAssistantStep aura:id="terms" stepTitle="Select Lease Terms" stepNumber="2"
+                                              onnext="{!c.handleTermsNext}">
 
-                    <c:FMZ_ApplicationTerms aura:id="termsForm"
-                                            applicationId="{!v.applicationId}"
-                                            onchange="{!c.handleChange}"/>
-
-                </c:FMZ_SetupAssistantStep>
-
-
-
-                <c:FMZ_SetupAssistantStep aura:id="locations" stepTitle="Select Locations" stepNumber="3"
-                                          onnext="{!c.handleLocationsNext}">
-
-                    <c:FMZ_ApplicationLocations aura:id="locationsForm"
+                        <c:FMZ_ApplicationTerms aura:id="termsForm"
                                                 applicationId="{!v.applicationId}"
                                                 onchange="{!c.handleChange}"/>
 
-                </c:FMZ_SetupAssistantStep>
+                    </c:FMZ_SetupAssistantStep>
 
-                <c:FMZ_SetupAssistantStep aura:id="equipment" stepTitle="Select Equipment" stepNumber="4"
-                                          onnext="{!c.handleEquipmentNext}">
 
-                    <c:FMZ_ApplicationEquipment aura:id="equipmentForm" applicationId="{!v.applicationId}"
-                                                onchange="{!c.handleChange}"/>
 
-                </c:FMZ_SetupAssistantStep>
+                    <c:FMZ_SetupAssistantStep aura:id="locations" stepTitle="Select Locations" stepNumber="3"
+                                              onnext="{!c.handleLocationsNext}">
 
-                <c:FMZ_SetupAssistantStep aura:id="services" stepTitle="Add Services" stepNumber="5"
-                                          onnext="{!c.handleServicesNext}">
+                        <c:FMZ_ApplicationLocations aura:id="locationsForm"
+                                                    applicationId="{!v.applicationId}"
+                                                    onchange="{!c.handleChange}"/>
 
-                    <c:FMZ_ApplicationServiceAndFees aura:id="servicesForm" applicationId="{!v.applicationId}"
-                                                     onchange="{!c.handleChange}"/>
+                    </c:FMZ_SetupAssistantStep>
 
-                </c:FMZ_SetupAssistantStep>
+                    <c:FMZ_SetupAssistantStep aura:id="equipment" stepTitle="Select Equipment" stepNumber="4"
+                                              onnext="{!c.handleEquipmentNext}">
 
-				<c:FMZ_SetupAssistantStep aura:id="documents" stepTitle="Documentation" stepNumber="6"
-										  onnext="{!c.handleDocumentsNext}">
+                        <c:FMZ_ApplicationEquipment aura:id="equipmentForm" applicationId="{!v.applicationId}"
+                                                    onchange="{!c.handleChange}"/>
 
-					<c:FMZ_ApplicationDocuments aura:id="documentsForm" applicationId="{!v.applicationId}"
-													 onchange="{!c.handleChange}"/>
+                    </c:FMZ_SetupAssistantStep>
 
-				</c:FMZ_SetupAssistantStep>
+                    <c:FMZ_SetupAssistantStep aura:id="services" stepTitle="Add Services and Fees" stepNumber="5"
+                                              onnext="{!c.handleServicesNext}">
 
-			</c:FMZ_SetupAssistant>
+                        <c:FMZ_ApplicationServiceAndFees aura:id="servicesForm" applicationId="{!v.applicationId}"
+                                                         onchange="{!c.handleChange}"/>
 
-        </lightning:layoutItem>
+                    </c:FMZ_SetupAssistantStep>
 
-        <lightning:layoutItem size="12" largeDeviceSize="4" mediumDeviceSize="12" smallDeviceSize="12" class="slds-p-right_x-small">
+                    <c:FMZ_SetupAssistantStep aura:id="documents" stepTitle="Documentation" stepNumber="6"
+                                              onnext="{!c.handleDocumentsNext}">
 
-            <c:FMZ_ApplicationSummary aura:id="appSummary" applicationId="{!v.applicationId}"/>
+                        <c:FMZ_ApplicationDocuments aura:id="documentsForm" applicationId="{!v.applicationId}"
+                                                         onchange="{!c.handleChange}"/>
 
-                <lightning:button label="Submit" variant="brand" class="fullWidth slds-m-top_medium" onclick="{!c.navigateToRecord}"
-                                  disabled="{!not(v.applicationComplete)}" />
-        </lightning:layoutItem>
+                    </c:FMZ_SetupAssistantStep>
 
-    </lightning:layout>
+                </c:FMZ_SetupAssistant>
+
+            </lightning:layoutItem>
+
+            <lightning:layoutItem size="12" largeDeviceSize="4" mediumDeviceSize="12" smallDeviceSize="12" class="slds-p-right_x-small">
+
+                <c:FMZ_ApplicationSummary aura:id="appSummary" applicationId="{!v.applicationId}"/>
+
+                    <lightning:button label="Submit" variant="brand" class="fullWidth slds-m-top_x-small" onclick="{!c.navigateToRecord}"
+                                      disabled="{!not(v.applicationComplete)}" />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+        <aura:set attribute="else">
+            <h1 class="slds-m-around_medium slds-text-heading_small slds-text-color_error">
+                This Application has already been converted, and is not available to edit.
+            </h1>
+        </aura:set>
+    </aura:if>
 
     <aura:if isTrue="{!v.processing}">
         <lightning:spinner variant="brand" size="medium" alternativeText="Please Wait"/>

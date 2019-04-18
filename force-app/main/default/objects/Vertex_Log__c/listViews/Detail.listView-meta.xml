@@ -3,6 +3,7 @@
     <fullName>Detail</fullName>
     <columns>NAME</columns>
     <columns>Contract_Names__c</columns>
+    <columns>Category__c</columns>
     <columns>CREATED_DATE</columns>
     <columns>Request_XML__c</columns>
     <columns>Response_XML__c</columns>

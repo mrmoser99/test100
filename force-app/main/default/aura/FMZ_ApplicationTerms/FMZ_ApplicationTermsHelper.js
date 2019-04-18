@@ -23,6 +23,30 @@
         }
     },
 
+    loadTermOptions: function(component) {
+        try {
+            var action = component.get('c.getTermOptions');
+            action.setParams({
+                applicationId: component.get('v.applicationId')
+            });
+            action.setCallback(this, function (response) {
+                var state = response.getState();
+                if (state === 'SUCCESS') {
+                    console.log('Term Options: '+response.getReturnValue());
+                    component.set('v.termOpts', response.getReturnValue());
+                } else if (state === 'ERROR') {
+                    let error = response.getError();
+                    if (error && error[0]) {
+                        console.log(error[0].message);
+                    }
+                }
+            });
+            $A.enqueueAction(action);
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
     updateTerms: function (component, application) {
         try {
             console.log('update terms');
@@ -51,6 +75,31 @@
                 }
             });
             $A.enqueueAction(action);
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
+    helpSaveAndValidate : function(component){
+        try {
+            let application = component.get('v.application'),
+                term = component.find('term');
+//                if((Number(term.get('v.value')) % 12) > 0){
+//                    term.setCustomValidity("Term must be a multiple of 12");
+//                    term.reportValidity();
+//                }else{
+//                    term.setCustomValidity("");
+//                    term.reportValidity();
+//                }
+            term.showHelpMessageIfInvalid();
+            if(!term.get('v.validity').valid) {
+                return false;
+            } else {
+                if ($A.util.hasClass(term, 'terms-changed')) {
+                    this.updateTerms(component, application);
+                }
+                return true;
+            }
         } catch (e) {
             console.log(e);
         }

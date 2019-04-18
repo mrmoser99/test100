@@ -20,16 +20,15 @@
 	},
 	isInputValid: function(component) {
 		let inputFields = component.find('inputField'),
-		    inputFieldsEIN = component.find('inputFieldEIN'),
 		    inputFieldsPhone = component.find('inputFieldPhone'),
+		    inputFieldsEIN = component.find('inputFieldEIN'),
 			inputFieldsValid = true;
 		if (inputFields) {
 			if(!Array.isArray(inputFields)){
 				inputFields = [inputFields, inputFieldsEIN, inputFieldsPhone];
 			}else{
 			    inputFields.push(inputFieldsPhone);
-			    inputFields.push(inputFieldsEIN);
-            }
+			}
 			inputFieldsValid = inputFields.reduce(function (validFields, inputCmp) {
 				inputCmp.showHelpMessageIfInvalid();
 				return validFields && inputCmp.get('v.validity').valid;
@@ -39,9 +38,12 @@
 	},
 	updateAccount: function(component) {
 		let account = component.get('v.customer'),
+		    appId = component.get('v.applicationId'),
 			action = component.get('c.updateAccount');
+		console.log('!!!APP ID: '+appId);
 		action.setParams({
-			acct: account
+			acct: account,
+			applicationId: appId
 		});
 		action.setCallback(this, function (response) {
 			let state = response.getState();

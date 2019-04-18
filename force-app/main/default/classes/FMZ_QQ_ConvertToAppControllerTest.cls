@@ -17,8 +17,11 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         );
         insert dealerUser;
 
-        List<User> users = getPortalDealerUsers(new List<Contact>{dealerUser});
-        insert users;
+        List<User> users;
+        System.runAs(new User(Id = UserInfo.getUserId())){
+            users = getPortalDealerUsers(new List<Contact>{dealerUser});
+            insert users;
+        }
 
         System.runAs(users[0]){
 
@@ -87,8 +90,11 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         );
         insert dealerUser;
 
-        List<User> users = getPortalDealerUsers(new List<Contact>{dealerUser});
-        insert users;
+        List<User> users;
+        System.runAs(new User(Id = UserInfo.getUserId())){
+            users = getPortalDealerUsers(new List<Contact>{dealerUser});
+            insert users;
+        }
 
         System.runAs(users[0]){
 
@@ -158,8 +164,12 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         );
         insert dealerUser;
 
-        List<User> users = getPortalDealerUsers(new List<Contact>{dealerUser});
-        insert users;
+        List<User> users;
+        System.runAs(new User(Id = UserInfo.getUserId())){
+            users = getPortalDealerUsers(new List<Contact>{dealerUser});
+            insert users;
+        }
+
         System.runAs(users[0]){
 
         clcommon__Fee_Definition__c feeDef = new clcommon__Fee_Definition__c(
@@ -228,8 +238,11 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         );
         insert dealerUser;
 
-        List<User> users = getPortalDealerUsers(new List<Contact>{dealerUser});
-        insert users;
+        List<User> users;
+        System.runAs(new User(Id = UserInfo.getUserId())){
+            users = getPortalDealerUsers(new List<Contact>{dealerUser});
+            insert users;
+        }
 
         System.runAs(users[0]){
 
@@ -300,8 +313,11 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         );
         insert dealerUser;
 
-        List<User> users = getPortalDealerUsers(new List<Contact>{dealerUser});
-        insert users;
+        List<User> users;
+        System.runAs(new User(Id = UserInfo.getUserId())){
+            users = getPortalDealerUsers(new List<Contact>{dealerUser});
+            insert users;
+        }
 
         System.runAs(users[0]){
 
@@ -329,7 +345,7 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         dummyOffice.Dll_Seg3_Department__c      = '3030';
         dummyOffice.Dll_Seg6__c                 = '00000';
         dummyOffice.Dll_Seg7__c                 = '0000';
-        update dummyOffice;
+        insert dummyOffice;
 
         genesis__Quick_Quote_Option__c qqOption = new genesis__Quick_Quote_Option__c(
                 genesis__Documentation_Fees_Originated_Dealer__c = 0,
@@ -409,7 +425,7 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         Account acc = new Account (
                 Name = 'sample Account',
                 clcommon__Legal_Entity_Type__c = lentity.Id,
-                EIN__c='123456798',
+                EIN__c = '12-1234567',
                 Email_Address__c='abc123@gmail.com',
                 Oracle_Vendor_ID__c='Y795'
         );
@@ -485,8 +501,11 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
         );
         insert dealerUser;
 
-        List<User> users = getPortalDealerUsers(new List<Contact>{dealerUser});
-        insert users;
+        List<User> users;
+        System.runAs(new User(Id = UserInfo.getUserId())){
+            users = getPortalDealerUsers(new List<Contact>{dealerUser});
+            insert users;
+        }
 
         System.runAs(users[0]){
 
@@ -544,10 +563,10 @@ public with sharing class FMZ_QQ_ConvertToAppControllerTest {
 
     private static List<User> getPortalDealerUsers(List<Contact> contacts){
         Id p = [select id from profile where name='NewCo Dealer Portal User'].id;
-        Id urId = [SELECT Id, Name FROM UserRole WHERE Name = 'Dealer User'].Id;
+        //Id urId = [SELECT Id, Name FROM UserRole WHERE Name = 'Dealer User'].Id;
         List<User> users = new List<User>();
         for(Contact con : contacts){
-            users.add(new User(alias=con.FirstName, email=con.Email, UserRoleId = urId,
+            users.add(new User(alias=con.FirstName, email=con.Email, /*UserRoleId = urId,*/
                     emailencodingkey='UTF-8', lastname=con.LastName, languagelocalekey='en_US',
                     localesidkey='en_US', profileid = p, country='United States', IsActive =true,
                     ContactId = con.Id, timezonesidkey='America/Los_Angeles', username=con.Email));

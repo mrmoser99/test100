@@ -39,7 +39,6 @@ public without sharing class FMZ_ApplicationController {
     public static String generatePricing(Id applicationId) {
 
 		try {
-
 			String result;
 
 			// make sure the number of months in the term are set
@@ -73,11 +72,11 @@ public without sharing class FMZ_ApplicationController {
 //			}
 
 			// clear property tax for tax exempt
-			List<genesis__Application_Equipment__c> equipment =
-				[SELECT Id, Tax_Exempt__c/*, Upfront_Tax_Amount__c*/
-				FROM genesis__Application_Equipment__c
-				WHERE genesis__Application__c = :applicationId
-				AND Tax_Exempt__c = true];
+//			List<genesis__Application_Equipment__c> equipment =
+//				[SELECT Id, Tax_Exempt__c/*, Upfront_Tax_Amount__c*/
+//				FROM genesis__Application_Equipment__c
+//				WHERE genesis__Application__c = :applicationId
+//				AND Tax_Exempt__c = true];
 
 //			if (!equipment.isEmpty()) {
 //				for (genesis__Application_Equipment__c e : equipment) {
@@ -85,7 +84,6 @@ public without sharing class FMZ_ApplicationController {
 //				}
 //				update equipment;
 //			}
-
 
 			// 2 - Generate Pricing
 			result = genesis.SkuidPricingCtrl.generatePricing(applicationId);
@@ -110,7 +108,8 @@ public without sharing class FMZ_ApplicationController {
 			///// SELECT PRICING BUTTON //////
 
 			List<genesis__Application_Pricing_Detail__c> pricing = [
-				SELECT Id, genesis__Selected__c/*, Payment_Amount__c*/, genesis__Rate_Factor__c
+				SELECT Id, genesis__Selected__c/*, Payment_Amount__c*/,
+						genesis__Rate_Factor__c, genesis__Residual_Percent__c
 				FROM genesis__Application_Pricing_Detail__c
 				WHERE genesis__Application__c = :applicationId
 				LIMIT 1
@@ -118,9 +117,30 @@ public without sharing class FMZ_ApplicationController {
 
 			if (pricing.isEmpty()) {
 				return 'No pricing found.';
+			}else{
+				// Calculate Residual Amounts
+				List<genesis__Application_Equipment__c> equipment =
+				[SELECT Id, genesis__Residual_Value__c
+				FROM genesis__Application_Equipment__c
+				WHERE genesis__Application__c = :applicationId];
+
+				if(equipment.size() > 0){
+					for(genesis__Application_Equipment__c eq : equipment){
+						eq.genesis__Residual_Value__c = pricing[0].genesis__Residual_Percent__c;
+					}
+					update equipment;
+				}
 			}
 
+			List<Application_Fee__c> ept = [
+					SELECT Id, Application__c
+					FROM Application_Fee__c
+					WHERE Application__c = :applicationId
+			];
+			UpdateServiceFeeHandler.func_USF(ept,'Update');
+
 			result = genesis.SelectPricingOnApplication.selectPricingOption(pricing[0].Id);
+
 
 			//TODO: zero out upfront tax for tax exempt properties
 
@@ -141,7 +161,7 @@ public without sharing class FMZ_ApplicationController {
 			[SELECT Id, genesis__Term__c, genesis__Account__c,
 				Contract_Signer__c, Contract_Signer_Last_Name__c, Contract_Signer_Title__c,
 				genesis__Account__r.Email_Address__c, genesis__Account__r.Phone,
-				genesis__Account__r.EIN__c,
+				genesis__Account__r.EIN__c, Dealer_Invoice_Date__c, Dealer_Invoice_Number__c,
 				(SELECT Id
 				FROM genesis__Application_Parties__r
 				WHERE genesis__Party_Type__c != NULL
@@ -189,6 +209,8 @@ public without sharing class FMZ_ApplicationController {
 					result[i] = String.isNotBlank(app.Contract_Signer__c)
 						&& String.isNotBlank(app.Contract_Signer_Last_Name__c)
 						&& String.isNotBlank(app.Contract_Signer_Title__c)
+						&& String.isNotBlank(app.Dealer_Invoice_Number__c)
+						&& app.Dealer_Invoice_Date__c != null
 						&& !app.Attachments.isEmpty();
 				} when else {
 					result[i] = false;
@@ -203,6 +225,16 @@ public without sharing class FMZ_ApplicationController {
 	@AuraEnabled
 	public static void moveToOFACCheck(String appId){
 		update new genesis__Applications__c(Id = appId, genesis__Status__c = 'APPROVED - DOCUMENT CHECK');
+	}
+
+	@AuraEnabled
+	public static genesis__Applications__c getApplication(Id applicationId){
+		return [
+				SELECT Id, Name, Lease_Number__c, genesis__Status__c
+				FROM genesis__Applications__c
+				WHERE Id =: applicationId
+				LIMIT 1
+		];
 	}
 
 }

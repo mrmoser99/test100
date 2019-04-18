@@ -16,7 +16,7 @@
                     sections[y].columns = [
                         {label: sections[y].linkColTitle, fieldName: 'link', type: 'url', typeAttributes: {label: { fieldName: 'name'}},sortable:false},
                         {label: sections[y].infoColTitle, fieldName: 'info', type: 'text',sortable:false},
-                        {label: 'Action', type: 'button', initialWidth: 150, typeAttributes: { label: sections[y].actionLabel, name: sections[y].name}}
+                        {label: 'Action', type: 'button', initialWidth: 150, typeAttributes: { variant: 'brand', label: sections[y].actionLabel, name: sections[y].name}}
                     ];
                 }
                 component.set('v.processing', false);
