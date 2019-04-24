@@ -5,7 +5,7 @@ declare module "@salesforce/apex/PM_Controller.__sfdc_searchResults" {
   export default function __sfdc_searchResults(): Promise<any>;
 }
 declare module "@salesforce/apex/PM_Controller.searchPortfolio" {
-  export default function searchPortfolio(param: {customerName: any, customerNumber: any, assetSerialNumber: any, choice: any, size: any, sortOrder: any, assetDetail: any, intOffSet: any}): Promise<any>;
+  export default function searchPortfolio(param: {customerName: any, customerNumber: any, assetSerialNumber: any, size: any, sortOrder: any, assetDetail: any, page: any}): Promise<any>;
 }
 declare module "@salesforce/apex/PM_Controller.getLeaseDetails" {
   export default function getLeaseDetails(param: {leaseNumber: any}): Promise<any>;

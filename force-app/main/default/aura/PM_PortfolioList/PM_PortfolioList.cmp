@@ -5,25 +5,48 @@
     
     <aura:attribute name="data" type="List" default="[]"/>
     <aura:attribute name="columns" type="List"/>
-   
-  
- 
-
-    <!-- handlers-->
+    <aura:attribute name="contractEquipmentMap" type="Map" />
+    <aura:attribute name="columnsEquip" type="List"/>
+    <aura:attribute name="page" type="Integer" />
+    <aura:attribute name="isLoading" type="Boolean" default="true"/>
+    <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+     
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
 
-    <!-- the container element determine the height of the datatable -->
-    <div style="height: 600px">
-        
- 
-        <lightning:datatable
+    <lightning:card title="Search Parms" iconName="standard:search">
+       
+        <lightning:messages /> 
+        <lightning:layout>
+            <lightning:layoutItem size="2" >
+                <div class="slds-p-around_medium">
+                    <lightning:input aura:id="customerName" name="customerName" label="Customer Name" type="search" />
+                    <lightning:input aura:id="customerNumber" name="customerNumber" label="Customer Number" type="search" />
+                    <lightning:input aura:id="assetSerialNumber" name="serialNumber" label="Equipment Serial Number" type="search" />
+                </div> 
+            </lightning:layoutItem>
+        </lightning:layout>               
+       
+        <div class="slds-p-around_medium">
+            <lightning:button class="slds-m-top_large" label="Search" onclick="{!c.handleSearch}"/>
+        </div>
+       
+    </lightning:card>
+    <div style="height: 800px">
+    <lightning:datatable
                 keyField="id"
                 data="{! v.data }"
                 columns="{! v.columns }"
-                enableInfiniteLoading="true"
-                hideCheckboxColumn="true"
-                onloadmore="{! c.loadMoreData }" 
-                />
+                enableInfiniteLoading="{! v.enableInfiniteLoading}"
+                hideCheckboxColumn="true" 
+                showRowNumberColumn="false" 
+                onloadmore="{!c.loadMoreData}"  
+              
+        
+    />
     </div>
+    {! v.loadMoreStatus }
+    
+      <!-- attributes  //onloadmore="{!c.loadMoreData}"   " -->
+    
  
 </aura:component>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>assetAddressLine2</fullName>
+    <fullName>assetAddressLine2__c</fullName>
     <externalId>false</externalId>
     <label>assetAddressLine2</label>
     <length>100</length>

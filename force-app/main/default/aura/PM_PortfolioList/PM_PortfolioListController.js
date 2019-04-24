@@ -1,30 +1,44 @@
 ({
     init: function (component, event, helper) {
-       
-        //helper.initHelper(component, event, helper);   
+        component.set('v.page',0);
 
         component.set('v.columns', [
-            {label: 'Account', fieldName: 'customerName', type: 'text'},
-            {label: 'Lease', fieldName: 'leaseNumber', type: 'text'},
-            {label: 'Postal Code', fieldName: 'postalCode', type: 'text'},
-            {label: 'Start', fieldName: 'contractStartDate', type: 'date'},
-            {label: 'Term', fieldName: 'term', type: 'text'},
-            {label: 'Remaining Payments', fieldName: 'remainingPayments', type: 'text'},
-            {label: 'Equipment', fieldName: 'equipmentDescription', type: 'text'},
-            {label: 'Cost', fieldName: 'originalCost', type: 'currency'},
-            {label: 'Payment', fieldName: 'basePayment', type: 'currency'},
-            {label: 'Type', fieldName: 'type', type: 'text'},
+            {label: 'Account', fieldName: 'customerName', type: 'text', initialWidth: 250},
+            {label: 'Lease', fieldName: 'contractNumber', type: 'text'},
+            {label: 'Postal Code', fieldName: 'customerZipCode', type: 'text'},
+            {label: 'Start', fieldName: 'contractStartDate', type: 'text'},
+            {label: 'Term', fieldName: 'contractTerm', type: 'text'},
+            {label: 'Remaining Payments', fieldName: 'numberOfRemainingPayments', type: 'text'},
+            {label: 'Equipment', fieldName: 'equipmentDescription', type: 'text',  initialWidth: 250},
+            {label: 'Cost', fieldName: 'contractOriginalCost', type: 'currency', typeAttributes: { currencyCode: 'USD'}},
+            {label: 'Payment', fieldName: 'contractPayment', type: 'currency', typeAttributes: { currencyCode: 'USD'}},
+            {label: 'Type', fieldName: 'contractType', type: 'text'},
             {label: 'Newco Ready?', fieldName: 'newcoReady', type: 'boolean'},
-            {label: 'Action', type: 'button', initialWidth: 135, typeAttributes: { label: 'Quote', name: 'genQuote', title: 'Action'}},
+            {label: 'Action', type: 'button', initialWidth: 135, typeAttributes: { label: 'Quote', name: 'genQuote', title: 'Action'}}
 
         ]);
 
-        helper.fetchAccounts(component,event, 0);
    
     },
     
     loadMoreData: function (component, event, helper) {
+        
+        event.getSource().set("v.isLoading", true);        
+        component.set('v.loadMoreStatus', 'Loading');
+
+        var page = component.get('v.page');
+        page = page + 1;
+        component.set('v.page',page);
        
-        helper.fetchAccounts(component, event, component.get('v.data').length);
+        helper.fetchRecords(component, event, page);
+    },
+    
+    handleSearch: function (component, event, helper) {
+
+        component.set('v.data',[]);
+        helper.fetchRecords(component, event, 0);
+        
     }
-})
+    
+}) 
+        

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>assetCity__c</fullName>
+    <fullName>assetSequenceNumber__c</fullName>
     <externalId>false</externalId>
-    <label>assetCity</label>
+    <label>assetSequenceNumber</label>
     <length>100</length>
     <required>false</required>
     <trackTrending>false</trackTrending>

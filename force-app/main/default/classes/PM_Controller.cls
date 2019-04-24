@@ -1,29 +1,28 @@
 public with sharing class PM_Controller {
      
+   
     @AuraEnabled
     public static String searchResults {get;set;} 
     /********************************************************************************************
-   	* Search
+   	* Search 
    	* 
    	********************************************************************************************/
     @AuraEnabled
-    public static String searchPortfolio(String customerName
+    public static PMUtility.ServiceContractData searchPortfolio(String customerName
                                     , String customerNumber
                                     , String assetSerialNumber
-                                    , String choice
                                     , Integer size
                                     , String sortOrder
                                     , Boolean assetDetail
-                                    , Integer intOffSet){   
+                                    , Integer page){   
         
         return PMUtility.searchPortfolio(customerName
                                         ,customerNumber
                                         ,assetSerialNumber
-                                        ,choice
                                         ,size
                                         ,sortOrder
                                         ,assetDetail
-                                        ,intOffSet);
+                                        ,page);
         
     }
 
