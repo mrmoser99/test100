@@ -41,11 +41,11 @@ public with sharing class PM_Controller {
    	* 
    	********************************************************************************************/
     @AuraEnabled
-    public static String generateQuotes(String leaseNumber){   
+    public static PMUtility.TerminationQuoteResponse generateQuotes(String leaseNumber){   
         
         return PMUtility.generateQuotes(leaseNumber);
         
-        
+         
     } 
 
     /********************************************************************************************

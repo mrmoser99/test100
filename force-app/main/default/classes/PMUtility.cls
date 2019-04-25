@@ -119,46 +119,35 @@ public with sharing class PMUtility {
 
     }
 
+     public class TerminationQuoteResponse{
 
+        @AuraEnabled public String partnerTransactionReference;
+        @AuraEnabled public String contractNumber;
+        @AuraEnabled public List<Quote> quotes;
+    }
 
 
     //wrapper classs for detail of a single quote
 
-    public class quoteDetail{
+    public class Quote{
+
+        @AuraEnabled public String terminationQuoteType;
+        @AuraEnabled public String quoteValidityDate;
+        @AuraEnabled public String quoteMessage;
         @AuraEnabled public String quoteNumber;
-        @AuraEnabled public String type;
-        @AuraEnabled public String quoteAmount;
-         /* 
-        field 1
-        field 2
-        field 3
-        ...
-        field n
-        */
-
-
-        public quoteDetail(String quoteNumber){
-            this.quoteNumber = quoteNumber;
-        }
-
-    }
-
-     //wrapper classs for detail of a single quote
-
-    public class quoteSummary{
-        @AuraEnabled public String quoteNumber;
-        @AuraEnabled public String type;
-        @AuraEnabled public String amount;
+        @AuraEnabled public String quoteCalculationDescription;
+        @AuraEnabled public Decimal remainingRentalPayments;
+        @AuraEnabled public Decimal discount;
+        @AuraEnabled public Decimal equipmentPrice;
+        @AuraEnabled public Decimal salesTax;
+        @AuraEnabled public Decimal propertyTax;
+        @AuraEnabled public Decimal leaseCharges;
+        @AuraEnabled public Decimal securityDeposit;
+        @AuraEnabled public Decimal amount;
         
-
-        public quoteSummary(String quoteNumber){
-            
-            this.quoteNumber = quoteNumber;
-           
-
-        }
-
     }
+
+    
 
     /************************************************************************************************************************************************************
     *
@@ -381,17 +370,56 @@ public with sharing class PMUtility {
         return JSON.serialize(response); 
 
     }
-     /************************************************************************************************************************************************************
+    /************************************************************************************************************************************************************
     *   generateQuotes
     *************************************************************************************************************************************************************/
-
-    public static String generateQuotes(String leaseNumber){
+    public static TerminationQuoteResponse generateQuotes(String leaseNumber){
         
-        String response; 
+        TerminationQuoteResponse response = new TerminationQuoteResponse(); 
+        Integer second = datetime.now().second();
 
-        List<quoteSummary> qsList = new List<quoteSummary>();
+        List<Quote> qList = new List<Quote>();
 
-        return JSON.serialize(response);  
+        response.partnerTransactionReference = string.valueOf(system.now());
+        response.contractNumber = leaseNumber;
+        
+        Quote q = new Quote();
+        q.quoteCalculationDescription = 'Trade-up Quote';
+        q.quoteNumber = 'QT-001212211' + string.valueOf(second);
+        q.terminationQuoteType = 'MRMType2';
+        q.quoteValidityDate = '2019-10-31';
+        q.quoteMessage = 'Hello2';
+        q.remainingRentalPayments = 9;
+        q.discount = 0.00;
+        q.equipmentPrice = 564.88;
+        q.salesTax = 50.01;
+        q.propertyTax = 5.00;
+        q.leaseCharges = 13003.11;
+        q.securityDeposit = 100.00;
+        
+
+        q.amount = (second * 1000) * 1.02;
+        qList.add(q);
+
+        q = new Quote();
+        q.quoteCalculationDescription = 'Trade-up with Return Quote';
+        q.quoteNumber = 'QT-001212299' + string.valueOf(second + 20);
+        q.terminationQuoteType = 'MRMType3';
+        q.quoteValidityDate = '2019-10-31';
+        q.quoteMessage = 'Hello 3';
+        q.remainingRentalPayments = 9;
+        q.discount = 0.00;
+        q.equipmentPrice = 64.88;
+        q.salesTax = 5.01;
+        q.propertyTax = 1.00;
+        q.leaseCharges = 133.11;
+        q.securityDeposit = 10.00;
+       q.amount = (second * 2000) * 1.02;
+        qList.add(q);
+
+        response.quotes = qList;
+        
+        return response;  
 
     }
     
@@ -403,9 +431,7 @@ public with sharing class PMUtility {
         
         String response;
 
-        quoteDetail qd = new quoteDetail(quoteNumber);
-        
-        return JSON.serialize(response);  
+        return response;  
 
     }
 

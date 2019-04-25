@@ -4,7 +4,9 @@
     <!-- attributes -->
     
     <aura:attribute name="data" type="List" default="[]"/>
+    <aura:attribute name="quoteData" type="List" default="[]"/>
     <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="quoteColumns" type="List"/>
     <aura:attribute name="contractEquipmentMap" type="Map" />
     <aura:attribute name="columnsEquip" type="List"/>
     <aura:attribute name="page" type="Integer" />
@@ -12,7 +14,9 @@
     <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
      
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
 
+    
     <lightning:card title="Search Parms" iconName="standard:search">
        
         <lightning:messages /> 
@@ -23,14 +27,27 @@
                     <lightning:input aura:id="customerNumber" name="customerNumber" label="Customer Number" type="search" />
                     <lightning:input aura:id="assetSerialNumber" name="serialNumber" label="Equipment Serial Number" type="search" />
                 </div> 
+                <div class="slds-p-around_medium">
+                        <lightning:button class="slds-m-top_large" label="Search" onclick="{!c.handleSearch}"/>
+                </div>
+                   
             </lightning:layoutItem>
-        </lightning:layout>               
-       
-        <div class="slds-p-around_medium">
-            <lightning:button class="slds-m-top_large" label="Search" onclick="{!c.handleSearch}"/>
-        </div>
-       
+            <lightning:layoutItem>
+                    <div style="height: 125px">
+                            <lightning:datatable
+                                        keyField="id"
+                                        data="{! v.quoteData }"
+                                        columns="{! v.quoteColumns }"
+                                      
+                            />
+                        </div>
+            </lightning:layoutItem>
+        </lightning:layout>     
+        
+        
     </lightning:card>
+
+    
     <div style="height: 800px">
     <lightning:datatable
                 keyField="id"
@@ -40,7 +57,8 @@
                 hideCheckboxColumn="true" 
                 showRowNumberColumn="false" 
                 onloadmore="{!c.loadMoreData}"  
-              
+                onrowaction="{! c.handleRowAction}" 
+               
         
     />
     </div>

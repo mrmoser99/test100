@@ -184,7 +184,7 @@
             }
         );
     },
-    handleRowAction: function (component, event, hleper) {
+    handleRowAction: function (component, event, helper) {
       
         var rows = component.get('v.adjList');
         var action = component.get("c.deleteAdj");
