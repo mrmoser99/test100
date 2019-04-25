@@ -42,13 +42,13 @@
                 
                 /* display the equipment list in the log */
                 
-                /*
+                
                 for (var i in records.data){
                     console.log(records.data[i].contractNumber);
                     console.log(records.data[i].assetDetail);
                     
                 }
-                */
+                
                  
 
                 //var equipMap = component.get('v.contractEquipmentMap');

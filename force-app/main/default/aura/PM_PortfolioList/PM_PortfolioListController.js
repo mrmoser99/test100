@@ -3,7 +3,8 @@
         component.set('v.page',0);
 
         var actions = [
-            { label: 'Get Quote', name: 'quote' }
+            { label: 'Get Quote', name: 'quote' },
+            { label: 'Equipment Detail', name: 'equipment' }
         ];
 
         component.set('v.columns', [
@@ -23,15 +24,32 @@
 
         ]);
 
-
+        var actions2 = [
+            { label: 'Quote Detail', name: 'quoteDetail' } 
+        ];
         component.set('v.quoteColumns', [
             {label: 'Type', fieldName: 'quoteCalculationDescription', type: 'text', initialWidth: 250},
             {label: 'Quote Amount', fieldName: 'amount',  initialWidth: 150, type: 'currency', typeAttributes: { currencyCode: 'USD'}},
-            {label: 'Quote Number', fieldName: 'quoteNumber', type: 'text', initialWidth: 150}
+            {label: 'Quote Number', fieldName: 'quoteNumber', type: 'text', initialWidth: 150},
+            {type: 'action', typeAttributes: { rowActions: actions2 } }
+           
 
         ]);
 
-   
+        component.set('v.equipmentColumns', [
+            {label: 'Seq Nbr', fieldName: 'assetSequenceNumber', type: 'number'},
+            {label: 'Make', fieldName: 'assetMake', type: 'text'},
+            {label: 'Model', fieldName: 'assetModel', type: 'text'},
+            {label: 'Desc', fieldName: 'assetDescription', type: 'text'},
+            {label: 'Mfg', fieldName: 'assetManufacturer', type: 'text'},
+            {label: 'Addr Line 1', fieldName: 'assetAddressLine1', type: 'text'},
+            {label: 'Addr Line 2', fieldName: 'assetAddressLine2', type: 'text'},
+            {label: 'City', fieldName: 'assetCity', type: 'text'},
+            {label: 'State', fieldName: 'assetState', type: 'text'},
+            {label: 'Zip Code', fieldName: 'assetZipCode', type: 'text'},
+            {label: 'Payment', fieldName: 'assetPayment', type: 'currency'}
+        ]);
+
     },
     
     loadMoreData: function (component, event, helper) {
@@ -59,7 +77,8 @@
         var rowAction = event.getParam('action');
         var row = event.getParam('row');
         component.set('v.quoteData',[]);
-        
+        component.set('v.equipmentData',[]);
+       
         switch (rowAction.name) {
             case 'quote':
                 var action = component.get("c.generateQuotes");
@@ -73,7 +92,9 @@
                     if (state === "SUCCESS") {
                         var records = response.getReturnValue();
                         console.log(records.quotes);
-                        
+                        component.set('v.records',records);
+                        component.set('v.recordList',records.quotes);
+
                         component.set('v.quoteData', records.quotes);
 
                         var msg='Quotes Generated!';
@@ -89,9 +110,55 @@
                 });
                 
                 $A.enqueueAction(action);
+                break;
+
+            case 'quoteDetail':
+                let modalBody;
+                var quoteDataToPass = component.get('v.quoteData');
+                var recordsToPass = component.get('v.records');
+                $A.createComponent('c:PM_QuoteDetail', {records :recordsToPass, recordList: component.get('v.quoteData'), selectedQuoteNumber : row.quoteNumber},
+                function(content, status, errorMessage) {
+                    if (status === 'SUCCESS') {
+                        modalBody = content;
+                        component.find('overlayLib').showCustomModal({
+                            body: modalBody,
+                            showCloseButton: true,
+                            cssClass: 'mymodal', 
+                            closeCallback: function() {
+                                
+                            }
+                        })
+                    } else if (status === 'ERROR') {
+                        let toast = $A.get('e.force:showToast');
+                        toast.setParams({
+                            title: 'Error',
+                            message: errorMessage,
+                            type: 'error'
+                        });
+                        toast.fire();
+                    }
+                }
+                );
+                break;
+            case 'equipment':
+                console.log('************************ start');
+                console.log(row.assetDetail);
+                component.set('v.equipmentData', []);
+                component.set('v.equipmentData', row.assetDetail);
+
+                
+                for (var i in row.assetDetail){
+                    console.log(row.assetDetail[i].assetSequenceNumber);
+                    console.log(row.assetDetail[i].assetMake);
+                    
+                    
+                }
+                console.log('end');
+                 
+
+                break;
                 
         }
     }     
     
-}) 
-        
+})

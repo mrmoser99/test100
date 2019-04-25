@@ -1,10 +1,30 @@
-public with sharing class PM_Controller {
+/********************************************************************************************
+* 
+*
+*  PM_Controller Class - interface for fortimize to call tradup apis
+* 
+*  Change Log:
+*
+*  3/21/19 - MRM Created
+*  4/25/19 - MRM Status Update
+    searchResults - ready
+    generateQuotes - ready with message returned
+    generateQuotesSOQL - ready with list of lease_olm_quote__c returned
+    getQuoteDetail - ready with a return type of lease_olm_quote__c
+    getLeaseDetails - working on it
+
+*
+*
+* 
+********************************************************************************************/
+
+public without sharing class PM_Controller {
      
    
     @AuraEnabled
     public static String searchResults {get;set;} 
     /********************************************************************************************
-   	* Search 
+   	* Search  
    	* 
    	********************************************************************************************/
     @AuraEnabled
@@ -37,7 +57,7 @@ public with sharing class PM_Controller {
     } 
 
     /********************************************************************************************
-   	* Quote List - high level info about generated quotes.
+   	* Quote List - high level info about generated quotes.  Returns message.
    	* 
    	********************************************************************************************/
     @AuraEnabled
@@ -47,13 +67,25 @@ public with sharing class PM_Controller {
         
          
     } 
+    /********************************************************************************************
+   	* Quote List - high level info about generated quotes except list of quotes returned instead
+    *       of message
+   	* 
+   	********************************************************************************************/
+    @AuraEnabled
+    public static List<Lease_OLM_Quote__c> generateQuotesSOQL(String leaseNumber){   
+        
+        return PMUtility.generateQuotesSOQL(leaseNumber);
+        
+         
+    } 
 
     /********************************************************************************************
    	* Quote Detail - detail inquiry information for a single quote
    	* 
    	********************************************************************************************/
     @AuraEnabled
-    public static String getQuoteDetail(String quoteNumber){   
+    public static Lease_OLM_Quote__c getQuoteDetail(String quoteNumber){   
         
         return PMUtility.getQuoteDetail(quoteNumber);
     } 

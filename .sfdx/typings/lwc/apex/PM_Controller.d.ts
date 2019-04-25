@@ -13,6 +13,9 @@ declare module "@salesforce/apex/PM_Controller.getLeaseDetails" {
 declare module "@salesforce/apex/PM_Controller.generateQuotes" {
   export default function generateQuotes(param: {leaseNumber: any}): Promise<any>;
 }
+declare module "@salesforce/apex/PM_Controller.generateQuotesSOQL" {
+  export default function generateQuotesSOQL(param: {leaseNumber: any}): Promise<any>;
+}
 declare module "@salesforce/apex/PM_Controller.getQuoteDetail" {
   export default function getQuoteDetail(param: {quoteNumber: any}): Promise<any>;
 }

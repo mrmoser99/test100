@@ -1,0 +1,159 @@
+<aura:component description="Quote Detail Page" implements="force:lightningQuickActionWithoutHeader" access="global">  
+    
+
+    <aura:attribute name="records" type="String" access="public"/>
+    <aura:attribute name="recordList" type="List" access="public"/>
+    <aura:attribute name="selectedQuoteNumber" type="String"  access="public"/>
+
+   
+    <aura:attribute name="remainingRentalPayments" type="Integer"/>
+    <aura:attribute name="discount" type="Currency"/>
+    <aura:attribute name="equipmentPrice" type="Currency"/>
+    <aura:attribute name="salesTax" type="Currency"/>
+    <aura:attribute name="propertyTax" type="Currency"/>
+    <aura:attribute name="pastDueService" type="Currency"/>
+    <aura:attribute name="leaseCharges" type="Currency"/>
+    <aura:attribute name="securityDeposit" type="Currency"/>
+    <aura:attribute name="amount" type="Currency"/>
+
+    <aura:attribute name="quoteCalculationDescription" type="String"/>
+    <aura:attribute name="quoteMessage" type="String"/>
+    <aura:attribute name="terminationQuoteType" type="String"/>
+    <aura:attribute name="quoteValidityDate" type="Date"/>
+  
+
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>  
+            
+    <lightning:card title="Quote Details" iconName="utility:moneybag" >
+           
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="quoteNumber">Selected Quote Number</p>
+                            <p>{!v.selectedQuoteNumber}</p> 
+                        </div>
+                        
+                    </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="quoteDate">Quote Validity Date</p>
+                            <ui:outputDate aura:id="oDate" value="{!v.quoteValidityDate}"/>
+                        </div>
+                        
+                    </lightning:layoutItem>
+            </lightning:layout>
+          
+          
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="quoteCalculationDescription">Quote Calc Description</p>
+                            <p>{!v.quoteCalculationDescription}</p> 
+                        </div>
+                        
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="quoteNumber">Quote Message</p>
+                            <p>{!v.quoteMessage}</p> 
+                        </div>
+                        
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="quoteNumber">Quote Type</p>
+                            <p>{!v.terminationQuoteType}</p> 
+                        </div>
+                        
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="quoteNumber">Remaining Lease Payments</p>
+                            <ui:outputCurrency value="{!v.remainingRentalPayments}" format="###"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="discount">Trade-up Discount with Purchase</p>
+                            <ui:outputCurrency value="{!v.discount}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="equipmentPrice">Equipment Price</p>
+                            <ui:outputCurrency value="{!v.equipmentPrice}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="salesTax">Sales Tax</p>
+                            <ui:outputCurrency value="{!v.salesTax}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="propertyTax">Property Tax Reimbursement</p>
+                            <ui:outputCurrency value="{!v.propertyTax}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="pastDueService">Past Due Service + Meter Overage</p>
+                            <ui:outputCurrency value="{!v.pastDueService}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="leaseCharges">Outstanding Lease Charges</p>
+                            <ui:outputCurrency value="{!v.leaseCharges}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="securityDeposit">Less Security Deposit</p>
+                            <ui:outputCurrency value="{!v.securityDeposit}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                    <lightning:layoutItem padding="around-small">
+                        <div class="header-column">
+                            <p class="field-title" title="quoteNumber">Net Trade-up Amount</p>
+                            <ui:outputCurrency value="{!v.amount}" format="$##,##,###,###.00"/>
+                        </div>
+                    </lightning:layoutItem>
+            </lightning:layout>
+
+            
+            
+    </lightning:card>
+
+   
+</aura:component>

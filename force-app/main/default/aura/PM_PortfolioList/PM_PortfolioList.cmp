@@ -5,23 +5,27 @@
     
     <aura:attribute name="data" type="List" default="[]"/>
     <aura:attribute name="quoteData" type="List" default="[]"/>
+    <aura:attribute name="equipmentData" type="List" default="[]"/>
     <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="equipmentColumns" type="List"/>
     <aura:attribute name="quoteColumns" type="List"/>
     <aura:attribute name="contractEquipmentMap" type="Map" />
     <aura:attribute name="columnsEquip" type="List"/>
     <aura:attribute name="page" type="Integer" />
     <aura:attribute name="isLoading" type="Boolean" default="true"/>
     <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
-     
+    <aura:attribute name="records" type="String"/>
+
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     <lightning:notificationsLibrary aura:id="notifLib"/>
-
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    
     
     <lightning:card title="Search Parms" iconName="standard:search">
        
         <lightning:messages /> 
         <lightning:layout>
-            <lightning:layoutItem size="2" >
+            <lightning:layoutItem size="3" >
                 <div class="slds-p-around_medium">
                     <lightning:input aura:id="customerName" name="customerName" label="Customer Name" type="search" />
                     <lightning:input aura:id="customerNumber" name="customerNumber" label="Customer Number" type="search" />
@@ -33,11 +37,24 @@
                    
             </lightning:layoutItem>
             <lightning:layoutItem>
-                    <div style="height: 125px">
+                    <div style="height: 125px" class="slds-p-around_small">
                             <lightning:datatable
                                         keyField="id"
                                         data="{! v.quoteData }"
                                         columns="{! v.quoteColumns }"
+                                        onrowaction="{! c.handleRowAction}" 
+                                        hideCheckboxColumn="true" 
+                                      
+                            />
+                        </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem>
+                    <div style="height: auto" class="slds-p-around_small">
+                            <lightning:datatable
+                                        keyField="id"
+                                        data="{! v.equipmentData }"
+                                        columns="{! v.equipmentColumns }"
+                                        hideCheckboxColumn="true" 
                                       
                             />
                         </div>

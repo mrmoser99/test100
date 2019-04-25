@@ -7,7 +7,7 @@
 *   4/17/19 - Started mapping for all services
 *
 ********************************************************************************************************************/
-public with sharing class PMUtility {
+public without sharing class PMUtility {
     
     //wrapper classs or search results
 
@@ -64,6 +64,7 @@ public with sharing class PMUtility {
         @AuraEnabled public String contractSigner;
         @AuraEnabled public String contractSignerTitle;
         @AuraEnabled public String equipmentDescription;
+        @AuraEnabled public Integer nbrOfAssets;
         @AuraEnabled public String leaseSignerTitle;
         @AuraEnabled public String numberOfRemainingPayments;
         @AuraEnabled public String lastPaymentReceivedDate;
@@ -143,6 +144,7 @@ public with sharing class PMUtility {
         @AuraEnabled public Decimal propertyTax;
         @AuraEnabled public Decimal leaseCharges;
         @AuraEnabled public Decimal securityDeposit;
+        @AuraEnabled public Decimal pastDueService;
         @AuraEnabled public Decimal amount;
         
     }
@@ -202,6 +204,10 @@ public with sharing class PMUtility {
                             ,assetSerialNumber__c
                             ,assetState__c
                             ,assetZipCode__c
+                            ,assetAddressLine1__c
+                            ,assetAddressLine2__c
+                            ,assetCity__c
+
                     from Portfolio_Equipment__c
                     where assetSerialNumber__c = :assetSerialNumber
                     ];
@@ -268,8 +274,12 @@ public with sharing class PMUtility {
                             ,assetSerialNumber__c
                             ,assetState__c
                             ,assetZipCode__c
+                            ,assetAddressLine1__c
+                            ,assetAddressLine2__c
+                            ,assetCity__c
                     from Portfolio_Equipment__c
                     where Portfolio_Contract__c in :contractSet
+                    order by assetSequenceNumber__c
             ];
             
             for (Portfolio_Equipment__c e:eList){
@@ -316,6 +326,7 @@ public with sharing class PMUtility {
             d.contractPayment = c.contractPayment__c;
             d.contractType = c.contractType__c;
             d.newcoReady = true;
+            d.nbrOfAssets = integer.valueOf(c.nbrOfAssets__c);
             d.equipmentDescription = 'Equipment Count: ' + c.nbrOfAssets__c;
 
 
@@ -333,12 +344,12 @@ public with sharing class PMUtility {
                     a.assetMake = e.assetMake__c;
                     a.assetModel = e.assetModel__c;
                     a.assetSerialNumber = e.assetSerialNumber__c;
-                    a.assetAddressLine1 = null;
-                    a.assetAddressLine2 = null;
-                    a.assetCity = null;
+                    a.assetAddressLine1 = e.assetAddressLine1__c;
+                    a.assetAddressLine2 = e.assetAddressLine2__c;
+                    a.assetCity = e.assetCity__c;
                     a.assetState = e.assetState__c;
                     a.assetZipCode = e.assetZipCode__c;
-                    a.assetPayment =null;
+                    a.assetPayment = 121.12;
                    
                     aList.add(a);
                 }
@@ -371,12 +382,13 @@ public with sharing class PMUtility {
 
     }
     /************************************************************************************************************************************************************
-    *   generateQuotes
+    *   generateQuotes - message format
     *************************************************************************************************************************************************************/
     public static TerminationQuoteResponse generateQuotes(String leaseNumber){
         
         TerminationQuoteResponse response = new TerminationQuoteResponse(); 
-        Integer second = datetime.now().second();
+       
+        List<Lease_OLM_Quote__c> newQuotes = new List<Lease_OLM_Quote__c>();
 
         List<Quote> qList = new List<Quote>();
 
@@ -385,7 +397,8 @@ public with sharing class PMUtility {
         
         Quote q = new Quote();
         q.quoteCalculationDescription = 'Trade-up Quote';
-        q.quoteNumber = 'QT-001212211' + string.valueOf(second);
+        Integer randomNumber = Integer.valueof((Math.random() * 10000000));
+        q.quoteNumber = 'QT-' + randomNumber;
         q.terminationQuoteType = 'MRMType2';
         q.quoteValidityDate = '2019-10-31';
         q.quoteMessage = 'Hello2';
@@ -396,14 +409,30 @@ public with sharing class PMUtility {
         q.propertyTax = 5.00;
         q.leaseCharges = 13003.11;
         q.securityDeposit = 100.00;
-        
-
-        q.amount = (second * 1000) * 1.02;
+        q.amount = randomNumber * .76;
         qList.add(q);
+
+        Lease_OLM_Quote__c lq = new Lease_OLM_Quote__c();
+        lq.quote_calculation_description__c = q.quoteCalculationDescription;
+        lq.name = q.quoteNumber;
+        lq.termination_quote_type__c = q.terminationQuoteType;
+        lq.quote_validity_date__c = date.valueOf(q.quoteValidityDate);
+        lq.quote_message__c = q.quoteMessage;
+        lq.remaining_rental_payments__c = q.remainingRentalPayments;
+        lq.discount__c = q.discount;
+        lq.equipment_price__c = q.equipmentPrice;
+        lq.sales_tax__c = q.salesTax;
+        lq.property_tax__c = q.propertyTax;      
+        lq.lease_charges__c = q.leaseCharges;
+        lq.security_deposit__c = q.securityDeposit;
+        lq.amount__c = q.amount;
+        lq.contract_number__c = response.contractNumber;
+        newQuotes.add(lq);
 
         q = new Quote();
         q.quoteCalculationDescription = 'Trade-up with Return Quote';
-        q.quoteNumber = 'QT-001212299' + string.valueOf(second + 20);
+        randomNumber = Integer.valueof((Math.random() * 10000000));
+        q.quoteNumber = 'QT-' + randomNumber;
         q.terminationQuoteType = 'MRMType3';
         q.quoteValidityDate = '2019-10-31';
         q.quoteMessage = 'Hello 3';
@@ -414,24 +443,178 @@ public with sharing class PMUtility {
         q.propertyTax = 1.00;
         q.leaseCharges = 133.11;
         q.securityDeposit = 10.00;
-       q.amount = (second * 2000) * 1.02;
+        q.amount = randomNumber * .56;
         qList.add(q);
+
+        
+        lq = new Lease_OLM_Quote__c();
+        lq.quote_calculation_description__c = q.quoteCalculationDescription;
+        lq.name = q.quoteNumber;
+        lq.termination_quote_type__c = q.terminationQuoteType;
+        lq.quote_validity_date__c = date.valueOf(q.quoteValidityDate);
+        lq.quote_message__c = q.quoteMessage;
+        lq.remaining_rental_payments__c = q.remainingRentalPayments;
+        lq.discount__c = q.discount;
+        lq.equipment_price__c = q.equipmentPrice;
+        lq.sales_tax__c = q.salesTax;
+        lq.property_tax__c = q.propertyTax;      
+        lq.lease_charges__c = q.leaseCharges;
+        lq.security_deposit__c = q.securityDeposit;
+        lq.amount__c = q.amount;
+        lq.contract_number__c = response.contractNumber;
+        newQuotes.add(lq);
+ 
+        insert newQuotes;
 
         response.quotes = qList;
         
         return response;  
 
     }
+
+    /************************************************************************************************************************************************************
+    *   generateQuotes - message format
+    *************************************************************************************************************************************************************/
+    public static List<Lease_OLM_Quote__c> generateQuotesSOQL(String leaseNumber){
+        
+        TerminationQuoteResponse response = new TerminationQuoteResponse(); 
+       
+        List<Lease_OLM_Quote__c> newQuotes = new List<Lease_OLM_Quote__c>();
+        List<Lease_OLM_Quote__c> newQuoteResponse = new List<Lease_OLM_Quote__c>();
+
+        List<Quote> qList = new List<Quote>();
+
+        response.partnerTransactionReference = string.valueOf(system.now());
+        response.contractNumber = leaseNumber;
+        
+        Quote q = new Quote();
+        q.quoteCalculationDescription = 'Trade-up Quote';
+        Integer randomNumber = Integer.valueof((Math.random() * 10000000));
+        q.quoteNumber = 'QT-' + randomNumber;
+        q.terminationQuoteType = 'MRMType2';
+        q.quoteValidityDate = '2019-10-31';
+        q.quoteMessage = 'Hello2';
+        q.remainingRentalPayments = 9;
+        q.discount = 0.00;
+        q.equipmentPrice = 564.88;
+        q.salesTax = 50.01;
+        q.propertyTax = 5.00;
+        q.leaseCharges = 13003.11;
+        q.securityDeposit = 100.00;
+        q.amount = randomNumber * .76;
+        qList.add(q);
+
+        Lease_OLM_Quote__c lq = new Lease_OLM_Quote__c();
+        lq.quote_calculation_description__c = q.quoteCalculationDescription;
+        lq.name = q.quoteNumber;
+        lq.termination_quote_type__c = q.terminationQuoteType;
+        lq.quote_validity_date__c = date.valueOf(q.quoteValidityDate);
+        lq.quote_message__c = q.quoteMessage;
+        lq.remaining_rental_payments__c = q.remainingRentalPayments;
+        lq.discount__c = q.discount;
+        lq.equipment_price__c = q.equipmentPrice;
+        lq.sales_tax__c = q.salesTax;
+        lq.property_tax__c = q.propertyTax;      
+        lq.lease_charges__c = q.leaseCharges;
+        lq.security_deposit__c = q.securityDeposit;
+        lq.amount__c = q.amount;
+        lq.contract_number__c = response.contractNumber;
+        newQuotes.add(lq);
+
+        q = new Quote();
+        q.quoteCalculationDescription = 'Trade-up with Return Quote';
+        randomNumber = Integer.valueof((Math.random() * 10000000));
+        q.quoteNumber = 'QT-' + randomNumber;
+        q.terminationQuoteType = 'MRMType3';
+        q.quoteValidityDate = '2019-10-31';
+        q.quoteMessage = 'Hello 3';
+        q.remainingRentalPayments = 9;
+        q.discount = 0.00;
+        q.equipmentPrice = 64.88;
+        q.salesTax = 5.01;
+        q.propertyTax = 1.00;
+        q.leaseCharges = 133.11;
+        q.securityDeposit = 10.00;
+        q.amount = randomNumber * .56;
+        qList.add(q);
+
+        
+        lq = new Lease_OLM_Quote__c();
+        lq.quote_calculation_description__c = q.quoteCalculationDescription;
+        lq.name = q.quoteNumber;
+        lq.termination_quote_type__c = q.terminationQuoteType;
+        lq.quote_validity_date__c = date.valueOf(q.quoteValidityDate);
+        lq.quote_message__c = q.quoteMessage;
+        lq.remaining_rental_payments__c = q.remainingRentalPayments;
+        lq.discount__c = q.discount;
+        lq.equipment_price__c = q.equipmentPrice;
+        lq.sales_tax__c = q.salesTax;
+        lq.property_tax__c = q.propertyTax;      
+        lq.lease_charges__c = q.leaseCharges;
+        lq.security_deposit__c = q.securityDeposit;
+        lq.amount__c = q.amount;
+        lq.contract_number__c = response.contractNumber;
+        newQuotes.add(lq);
+ 
+        insert newQuotes;
+        Set<ID> newQuoteSet = new Set<ID>();
+
+        for (Lease_OLM_Quote__c l:newQuotes){
+            newQuoteSet.add(l.id);
+        }
+
+        response.quotes = qList;
+        
+        newQuoteResponse = [SELECT Amount__c,Contract_Number__c,CreatedById,CreatedDate,Discount__c,Equipment_Price__c
+                            ,Id,IsDeleted,LastActivityDate,LastModifiedById,LastModifiedDate,LastReferencedDate,LastViewedDate,Lease_Charges__c,LS_Contract__c,Name,OwnerId,Past_Due_Service__c,Property_Tax__c,Quote_Calculation_Description__c,Quote_Message__c,Quote_Validity_Date__c,Remaining_Rental_Payments__c,Sales_Tax__c,Security_Deposit__c,SystemModstamp,Termination_Quote_Type__c 
+                            FROM Lease_OLM_Quote__c
+                            where id in :newQuoteSet
+        ];
+
+        return newQuoteResponse;  
+
+    }
+    
     
     /************************************************************************************************************************************************************
     *   getQuotes
     *************************************************************************************************************************************************************/
 
-    public static String getQuoteDetail(String quoteNumber){
+    public static Lease_OLM_Quote__c getQuoteDetail(String quoteNumber){
         
-        String response;
+        Lease_OLM_Quote__c q = [SELECT 
+                                 Amount__c
+                                ,Contract_Number__c
+                                ,CreatedById
+                                ,CreatedDate
+                                ,Discount__c
+                                ,Equipment_Price__c
+                                ,Id
+                                ,IsDeleted
+                                ,LastActivityDate
+                                ,LastModifiedById
+                                ,LastModifiedDate
+                                ,LastReferencedDate
+                                ,LastViewedDate
+                                ,Lease_Charges__c
+                                ,LS_Contract__c
+                                ,Name
+                                ,OwnerId
+                                ,Past_Due_Service__c
+                                ,Property_Tax__c
+                                ,Quote_Calculation_Description__c
+                                ,Quote_Message__c
+                                ,Quote_Validity_Date__c
+                                ,Remaining_Rental_Payments__c
+                                ,Sales_Tax__c
+                                ,Security_Deposit__c
+                                ,SystemModstamp
+                                ,Termination_Quote_Type__c 
+                                FROM Lease_OLM_Quote__c
+                                where name = :quoteNumber
+                                ];
 
-        return response;  
+        return q;  
 
     }
 

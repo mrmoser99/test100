@@ -11,6 +11,7 @@
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
     <tabs>Portfolio_Contract__c</tabs>
+    <tabs>PM_Tester</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Portfolio_Management_UtilityBar</utilityBar>
 </CustomApplication>
