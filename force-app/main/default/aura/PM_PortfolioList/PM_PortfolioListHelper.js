@@ -9,6 +9,9 @@
         if (searchCustomerName != '' || searchCustomerNumber != '' || searchSerial != ''){
             component.set('v.enableInfiniteLoading',false);
         }
+        else{
+            component.set('v.enableInfiniteLoading',true);
+        }
 
         var action = component.get("c.searchPortfolio");
         action.setParams({
