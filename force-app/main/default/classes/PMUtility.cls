@@ -49,6 +49,8 @@ public without sharing class PMUtility {
 
     public class Data{
         
+        /* portfolio */
+
         @AuraEnabled public String contractNumber;
         @AuraEnabled public String contractType;
         @AuraEnabled public String contractTerm;
@@ -63,6 +65,7 @@ public without sharing class PMUtility {
         @AuraEnabled public String contractAverageDaysToPay;
         @AuraEnabled public String contractSigner;
         @AuraEnabled public String contractSignerTitle;
+        @AuraEnabled public String daysPastDue; //next sprint
         @AuraEnabled public String equipmentDescription;
         @AuraEnabled public Integer nbrOfAssets;
         @AuraEnabled public String leaseSignerTitle;
@@ -71,6 +74,7 @@ public without sharing class PMUtility {
         @AuraEnabled public String businessSegment;
         @AuraEnabled public String subBusinessSegment;
         @AuraEnabled public String customerName;
+        @AuraEnabled public String olmCustomerNumber;  //next sprint
         @AuraEnabled public String customerNumber;
         @AuraEnabled public String customerAddressLine1;
         @AuraEnabled public String customerAddressline2;
@@ -93,14 +97,90 @@ public without sharing class PMUtility {
         @AuraEnabled public String vendorState;
         @AuraEnabled public String vendorZipCode;
         @AuraEnabled public Boolean newcoReady;
+        
+        
+        /* Contract Inquiry */
 
+        @AuraEnabled public String Arrears;
+        @AuraEnabled public String Assignable_Yn;
+        @AuraEnabled public String Bank_Account_Num;
+        @AuraEnabled public String Billing_Group_Id;
+        @AuraEnabled public String Billing_Group_Name;
+        @AuraEnabled public String Billing_Group_Number;
+        @AuraEnabled public String Code_Sales_Rep;
+        @AuraEnabled public String Contract_Number;
+        @AuraEnabled public String Contract_Status;
+        @AuraEnabled public String x_Currency;
+        @AuraEnabled public String Cust_Address;
+        @AuraEnabled public String Cust_City;
+        @AuraEnabled public String Cust_Country;
+        @AuraEnabled public String Cust_County;
+        @AuraEnabled public String Cust_First_Name;
+        @AuraEnabled public String Cust_Last_Name;
+        @AuraEnabled public String Cust_Legal_Name;
+        @AuraEnabled public String Cust_Middle_Name;
+        @AuraEnabled public String Cust_Postal_Code;
+        @AuraEnabled public String Cust_State;
+        @AuraEnabled public String Cust_Title;
+        @AuraEnabled public String Customer_Id;
+        @AuraEnabled public String Customer_Name;
+        @AuraEnabled public String Customer_Number;
+        @AuraEnabled public String Description;
+        @AuraEnabled public String Discount_Rate;
+        @AuraEnabled public String Effective_Date;
+        @AuraEnabled public String Email_Address;
+        @AuraEnabled public String End_Date;
+        @AuraEnabled public String External_Contract_Number;
+        @AuraEnabled public String Implicit_Rate;
+        @AuraEnabled public String Lp_Program;
+        @AuraEnabled public String Maximum_Due_Date;
+        @AuraEnabled public String Number_Unbilled_Streams;
+        @AuraEnabled public String Olm_Program;
+        @AuraEnabled public String Op_Unit;
+        @AuraEnabled public String Party_Id;
+        @AuraEnabled public String Passive_Rate;
+        @AuraEnabled public String Payment_Method;
+        @AuraEnabled public String Periodicity;
+        @AuraEnabled public String Print_Lead_Days;
+        @AuraEnabled public String Product;
+        @AuraEnabled public String Reference_Lessee;
+        @AuraEnabled public String Remaining_Pymnts;
+        @AuraEnabled public String Sb_Unit;
+        @AuraEnabled public String Start_Date;
+        @AuraEnabled public String Syndicated_Flag;
+        @AuraEnabled public String Term;
+        @AuraEnabled public String Termination_Date;
+        @AuraEnabled public String Total_Fin_Amnt;
+
+        /* general contract info call  can be merged into contract select with ecs in source system */
+
+        @AuraEnabled public String Financialproduct;
+        @AuraEnabled public String Purchaseoption;
+        @AuraEnabled public String Numberofassets;
+        @AuraEnabled public String Statetax;
+        @AuraEnabled public String Countytax;
+        @AuraEnabled public String Citytax;
+        @AuraEnabled public String Districttax;
+        @AuraEnabled public String Totalassetpayment;
+        @AuraEnabled public String Paymentfrequency;
+        @AuraEnabled public String Dayspastdue;
+
+
+        /* end contract Extension */
+
+        /* contract search */
+        @AuraEnabled public String PaymentReceivedDate;
+        @AuraEnabled public String PaymentAmountReceived;
+        @AuraEnabled public String PaymentNumber;  //check number
+
+
+        /* end contract search */
 
         @AuraEnabled public List<assetDetail> assetDetail;
 
        
     }
     
-
      //wrapper classs for detail of a single asset
 
     public class assetDetail{
@@ -117,6 +197,53 @@ public without sharing class PMUtility {
         @AuraEnabled public String assetState;
         @AuraEnabled public String assetZipCode;
         @AuraEnabled public Decimal assetPayment;
+
+        /* contract select  */
+        @AuraEnabled public String Asset_Category;
+        @AuraEnabled public String Asset_Cndtn;
+        @AuraEnabled public String Asset_Number;
+        @AuraEnabled public String Asset_Status;
+        @AuraEnabled public String Billing_City;
+        @AuraEnabled public String Billing_Country;
+        @AuraEnabled public String Billing_County;
+        @AuraEnabled public String Billing_Group_Id;
+        @AuraEnabled public String Billing_Location;
+        @AuraEnabled public String Billing_State;
+        @AuraEnabled public String Billing_Zip;
+        @AuraEnabled public String Calc_Residual_Amnt;
+        @AuraEnabled public String Calc_Residual_Prcnt;
+        @AuraEnabled public String Cost_Center;
+        @AuraEnabled public String Description;
+        @AuraEnabled public String First_Payment_Date;
+        @AuraEnabled public String Guaranteed_Amount;
+        @AuraEnabled public String Guarantor_Name;
+        @AuraEnabled public String Install_City;
+        @AuraEnabled public String Install_Country;
+        @AuraEnabled public String Install_County;
+        @AuraEnabled public String Install_Date;
+        @AuraEnabled public String Install_Location;
+        @AuraEnabled public String Install_Site_Id;
+        @AuraEnabled public String Install_State;
+        @AuraEnabled public String Install_Zip;
+        @AuraEnabled public String Inventory_Item_Id;
+        @AuraEnabled public String Item;
+        @AuraEnabled public String Licence_Number;
+        @AuraEnabled public String Manufacturer;
+        @AuraEnabled public String Modal;
+        @AuraEnabled public String Mtp_Rep_Ven_Site;
+        @AuraEnabled public String Mtp_Rep_Vendor;
+        @AuraEnabled public String Number_Of_Assets;
+        @AuraEnabled public String Organization_Id;
+        @AuraEnabled public String Parent_Asset_Num;
+        @AuraEnabled public String Payment_Amount;
+        @AuraEnabled public String Po_Number;
+        @AuraEnabled public String Residual_Amnt;
+        @AuraEnabled public String Residual_Prcnt;
+        @AuraEnabled public String Uba_Flag;
+        @AuraEnabled public String Unit_Cost;
+        @AuraEnabled public String Units;
+
+        /* end asset extension */
 
     }
 
@@ -146,6 +273,25 @@ public without sharing class PMUtility {
         @AuraEnabled public Decimal securityDeposit;
         @AuraEnabled public Decimal pastDueService;
         @AuraEnabled public Decimal amount;
+        
+    }
+
+
+    public class Receivables {
+        /* receivables */
+        @AuraEnabled public String Assetnumber;
+        @AuraEnabled public String Receivabletype;
+        @AuraEnabled public String Arconsolidatedinvoicenumber;
+        @AuraEnabled public String Duedate;
+        @AuraEnabled public String Amountdue;
+        @AuraEnabled public String Amountreceived;
+        @AuraEnabled public String Latechargesdue;
+        @AuraEnabled public String Latechargesreceived;
+        @AuraEnabled public String Financechargesdue;
+        @AuraEnabled public String Financechargesreceived;
+        @AuraEnabled public String Balancedue;
+        @AuraEnabled public String Adjustment;
+
         
     }
 
